@@ -79,7 +79,7 @@ function formatScript(text: string) {
 function parseBulkText(text: string): Partial<Contact>[] {
   return text.split("\n").map(line => line.trim()).filter(Boolean).map(line => {
     const parts = line.split(/[,\t]+/).map(p => p.trim());
-    return { name: parts[0]||"", phone: parts[1]||"", email: parts[2]||"", relationship:"other", homeStatus:"unknown", stage:"not-contacted", notes:"", touchpoints:[] };
+    return { name: parts[0]||"", phone: parts[1]||"", email: parts[2]||"", relationship:"other" as Relationship, homeStatus:"unknown" as HomeStatus, stage:"not-contacted" as ContactStage, notes:"", touchpoints:[] };
   }).filter(c => c.name);
 }
 
