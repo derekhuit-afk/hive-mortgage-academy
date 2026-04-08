@@ -20,8 +20,8 @@ const plans = [
   },
   {
     name: "ACCELERATOR",
-    monthly: 197,
-    annual: 1597,
+    monthly: 297,
+    annual: 2397,
     desc: "For LOs who want to close their first deal in 30 days or less.",
     features: [
       "Everything in Foundation",
@@ -37,8 +37,8 @@ const plans = [
   },
   {
     name: "ELITE",
-    monthly: 497,
-    annual: 3997,
+    monthly: 697,
+    annual: 5597,
     desc: "For serious LOs who want direct access to Derek's playbook.",
     features: [
       "Everything in Accelerator",
