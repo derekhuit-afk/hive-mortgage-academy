@@ -1,5 +1,5 @@
 export const NOTIFY_EMAIL = "derekhuit@gmail.com";
-export const FROM_EMAIL   = "Hive Mortgage Academy <noreply@hivemortgageacademy.com>";
+export const FROM_EMAIL   = "Hive Mortgage Academy <academy@huit.ai>";
 
 async function getResend() {
   const { Resend } = await import("resend");
