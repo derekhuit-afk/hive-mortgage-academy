@@ -267,7 +267,7 @@ export default function LaunchKitPage() {
                     <div style={{ fontSize: 13, fontWeight: 700, color: "var(--honey)", marginBottom: 3 }}>Ready to execute this plan on Derek's team?</div>
                     <div style={{ fontSize: 12, color: "var(--text-secondary)" }}>Join and get the full Huit.AI platform behind your 90-day launch.</div>
                   </div>
-                  <a href="/apply" style={{ background: "linear-gradient(135deg,#F5A623,#D4881A)", color: "#0A0A0B", padding: "10px 20px", borderRadius: 8, fontSize: 12, fontWeight: 700, textDecoration: "none", whiteSpace: "nowrap" }}>Apply to the Team →</a>
+
                 </div>
               </div>
             ) : (

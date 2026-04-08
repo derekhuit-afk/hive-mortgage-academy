@@ -160,11 +160,19 @@ function Dashboard() {
             <div style={{ fontSize: 14, fontWeight: 700, color: "var(--text-primary)" }}>🤖 Ask Your AI Coach</div>
             <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 4 }}>Unlimited · Built from $1B production</div>
           </div>
-          <a href="/apply" style={{ background: "var(--charcoal)", border: "1px solid var(--border)", borderRadius: 14, padding: "18px 20px", textDecoration: "none" }}>
-            <div style={{ fontSize: 11, color: "var(--honey)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 6 }}>Career Path</div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: "var(--text-primary)" }}>🏔️ Apply to Derek's Team</div>
-            <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 4 }}>Full Huit.AI platform from Day 1</div>
-          </a>
+          {completedCount >= 6 ? (
+            <a href="/apply" style={{ background: "var(--charcoal)", border: "1px solid rgba(245,166,35,0.35)", borderRadius: 14, padding: "18px 20px", textDecoration: "none" }}>
+              <div style={{ fontSize: 11, color: "var(--honey)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 6 }}>🔓 Unlocked at Module 6</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: "var(--text-primary)" }}>🏔️ Apply to Derek's Team</div>
+              <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 4 }}>Full Huit.AI platform from Day 1</div>
+            </a>
+          ) : (
+            <div style={{ background: "var(--charcoal)", border: "1px solid var(--border)", borderRadius: 14, padding: "18px 20px", opacity: 0.5 }}>
+              <div style={{ fontSize: 11, color: "var(--text-muted)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 6 }}>🔒 Locked</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: "var(--text-muted)" }}>Career Path</div>
+              <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 4 }}>Complete Module 6 to unlock</div>
+            </div>
+          )}
         </div>
         <style>{`@media(max-width:768px){.actions-grid{grid-template-columns:1fr!important}.progress-card{grid-template-columns:1fr!important}}`}</style>
 

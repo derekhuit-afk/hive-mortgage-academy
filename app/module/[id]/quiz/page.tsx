@@ -68,8 +68,8 @@ export default function QuizPage() {
   async function handleContinue() {
     if (passed) {
       const nextId = moduleId + 1;
-      if (nextId <= 6) router.push(`/module/${nextId}`);
-      else router.push("/certificate");
+      if (nextId <= 12) router.push(`/module/${nextId}`);
+      else router.push("/graduation");
     } else {
       setSubmitted(false);
       setAnswers({});
@@ -142,7 +142,7 @@ export default function QuizPage() {
             </h1>
             <div style={{ fontSize: 72, fontWeight: 900, fontFamily: "'Playfair Display',serif", color: passed ? "#10B981" : "#EF4444", margin: "16px 0" }}>{score}%</div>
             <p style={{ color: "var(--text-secondary)", fontSize: 15, marginBottom: 32 }}>
-              {passed ? `You passed with ${score}%. ${moduleId < 6 ? "Ready for the next module." : "You've completed the full course!"}` : `You need 80% to pass. You scored ${score}%. Review the material and try again.`}
+              {passed ? `You passed with ${score}%. ${moduleId < 12 ? "Ready for the next module." : "You've completed the full Academy!"}` : `You need 80% to pass. You scored ${score}%. Review the material and try again.`}
             </p>
 
             {/* Question review */}
@@ -171,12 +171,30 @@ export default function QuizPage() {
               </div>
             )}
 
+            {/* MODULE 6 UNLOCK — first team mention */}
+            {passed && moduleId === 6 && (
+              <div style={{ background: "linear-gradient(135deg,rgba(245,166,35,0.1),rgba(245,166,35,0.04))", border: "1px solid rgba(245,166,35,0.4)", borderRadius: 18, padding: 28, marginBottom: 28, textAlign: "left" }}>
+                <div style={{ fontSize: 11, color: "var(--honey)", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 10 }}>🔓 You've unlocked something</div>
+                <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: 20, fontWeight: 900, color: "var(--text-primary)", marginBottom: 10 }}>You just finished Module 6.</h2>
+                <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7, marginBottom: 18 }}>
+                  Most new LOs never get here. You've covered the full foundation — product knowledge, borrower conversations, PaymentFirst, and credit. That puts you ahead of 90% of the people who started where you did.
+                </p>
+                <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7, marginBottom: 20 }}>
+                  For the first time, there's now a path available to you — the option to join Derek Huit's team directly at Cardinal Financial. LOs on this team get the full Huit.AI platform from Day 1. No ramp-up guessing. No figuring it out alone.
+                </p>
+                <p style={{ fontSize: 13, color: "var(--text-muted)", lineHeight: 1.7, marginBottom: 20 }}>
+                  There's no pressure and no deadline. Keep going through the curriculum. But if you're ready to have the conversation, the door is open.
+                </p>
+                <a href="/apply" style={{ display: "inline-block", background: "linear-gradient(135deg,#F5A623,#D4881A)", color: "#0A0A0B", padding: "13px 28px", borderRadius: 10, fontSize: 14, fontWeight: 700, textDecoration: "none" }}>Learn About Joining the Team →</a>
+              </div>
+            )}
+
             <button onClick={handleContinue} style={{
               background: "linear-gradient(135deg,#F5A623,#D4881A)", color: "#0A0A0B",
               border: "none", borderRadius: 12, padding: "16px 40px",
               fontSize: 16, fontWeight: 700, cursor: "pointer",
             }}>
-              {passed ? (moduleId < 6 ? "Next Module →" : "Get My Certificate 🏆") : "Retry Quiz →"}
+              {passed ? (moduleId < 12 ? "Next Module →" : "Get My HivePass™ 🏆") : "Retry Quiz →"}
             </button>
           </div>
         )}

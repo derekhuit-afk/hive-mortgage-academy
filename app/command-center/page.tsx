@@ -310,7 +310,7 @@ export default function CommandCenterPage() {
                   { label:"New Pre-Approval Letter",         href:"/approval-letter",emoji:"📄",color:"#3B82F6" },
                   { label:"Generate Credit Plan",            href:"/credit-path",   emoji:"🎯", color:"#8B5CF6" },
                   { label:"Check Equity Portfolio",          href:"/equity-pulse",  emoji:"📈", color:"#10B981" },
-                  { label:"Apply to Derek's Team",           href:"/apply",         emoji:"🏔️", color:"#F5A623" },
+                  ...(stats.modules >= 6 ? [{ label:"Apply to Derek's Team", href:"/apply", emoji:"🏔️", color:"#F5A623" }] : []),
                 ].map(q=>(
                   <a key={q.label} href={q.href} style={{ display:"flex", alignItems:"center", gap:10, padding:"10px 12px", borderRadius:10, background:"var(--slate)", border:"1px solid var(--border)", textDecoration:"none", transition:"border-color 0.2s" }}
                     onMouseEnter={e=>(e.currentTarget.style.borderColor=`${q.color}50`)}
@@ -323,7 +323,8 @@ export default function CommandCenterPage() {
               </div>
             </div>
 
-            {/* Recruiting Funnel */}
+            {/* Recruiting Funnel — only shows after Module 6 */}
+            {moduleProgress >= 6 ? (
             <div style={{ background:"linear-gradient(135deg,rgba(245,166,35,0.08),rgba(245,166,35,0.03))", border:"1px solid rgba(245,166,35,0.25)", borderRadius:18, padding:22 }}>
               <div style={{ fontSize:13, fontWeight:700, color:"var(--honey)", marginBottom:8 }}>🏔️ Built from Alaska</div>
               <p style={{ fontSize:12, color:"var(--text-secondary)", lineHeight:1.6, marginBottom:14 }}>
@@ -334,6 +335,12 @@ export default function CommandCenterPage() {
                 <a href="/graduation" style={{ display:"block", textAlign:"center", background:"rgba(245,166,35,0.1)", border:"1px solid rgba(245,166,35,0.3)", color:"var(--honey)", padding:"10px", borderRadius:10, fontSize:12, fontWeight:600, textDecoration:"none" }}>View Your HivePass™</a>
               </div>
             </div>
+            ) : (
+            <div style={{ background:"var(--charcoal)", border:"1px solid var(--border)", borderRadius:18, padding:22, opacity:0.6 }}>
+              <div style={{ fontSize:13, fontWeight:700, color:"var(--text-muted)", marginBottom:8 }}>🔒 Complete Module 6 to Unlock</div>
+              <p style={{ fontSize:12, color:"var(--text-muted)", lineHeight:1.6 }}>You're building the foundation. Finish Module 6 and a new path opens up.</p>
+            </div>
+            )}
 
             {/* LO Identity Card */}
             <div style={{ background:"var(--charcoal)", border:"1px solid var(--border)", borderRadius:18, padding:20 }}>
