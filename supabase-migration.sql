@@ -62,3 +62,12 @@ CREATE TABLE IF NOT EXISTS hma_applications (
   created_at timestamptz DEFAULT now()
 );
 ALTER TABLE hma_applications DISABLE ROW LEVEL SECURITY;
+
+-- Add Stripe columns to hma_students (run if not already present)
+ALTER TABLE hma_students 
+  ADD COLUMN IF NOT EXISTS stripe_customer_id text,
+  ADD COLUMN IF NOT EXISTS stripe_subscription_id text;
+
+-- Index for faster lookups
+CREATE INDEX IF NOT EXISTS hma_students_email_idx ON hma_students(email);
+CREATE INDEX IF NOT EXISTS hma_students_stripe_sub_idx ON hma_students(stripe_subscription_id);

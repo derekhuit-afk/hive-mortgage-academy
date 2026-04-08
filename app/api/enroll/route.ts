@@ -1,20 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { createHash } from "crypto";
+import { notifyNewRegistration, sendWelcomeEmail } from "@/lib/email";
 
 function hashPassword(password: string): string {
-  return createHash("sha256").update(password + process.env.PASSWORD_SALT || "hma_salt_2026").digest("hex");
+  return createHash("sha256").update(password + (process.env.PASSWORD_SALT || "hma_salt_2026")).digest("hex");
 }
 
 export async function POST(req: NextRequest) {
   try {
     const { name, email, nmls, password, plan, billing } = await req.json();
 
-    if (!name || !email || !nmls || !password || !plan) {
-      return NextResponse.json({ error: "All fields are required." }, { status: 400 });
+    if (!name || !email || !password) {
+      return NextResponse.json({ error: "Name, email, and password are required." }, { status: 400 });
+    }
+    if (password.length < 8) {
+      return NextResponse.json({ error: "Password must be at least 8 characters." }, { status: 400 });
     }
 
-    // Check if email already exists
     const { data: existing } = await supabaseAdmin
       .from("hma_students")
       .select("id")
@@ -30,10 +33,10 @@ export async function POST(req: NextRequest) {
       .insert({
         name: name.trim(),
         email: email.toLowerCase().trim(),
-        nmls_number: nmls.trim(),
+        nmls_number: nmls?.trim() || "",
         password_hash: hashPassword(password),
-        plan,
-        billing_cycle: billing,
+        plan: plan || "free",
+        billing_cycle: billing || "monthly",
       })
       .select()
       .single();
@@ -42,6 +45,10 @@ export async function POST(req: NextRequest) {
       console.error("Enroll error:", error);
       return NextResponse.json({ error: "Failed to create account. Please try again." }, { status: 500 });
     }
+
+    // Fire emails (non-blocking)
+    notifyNewRegistration({ name: data.name, email: data.email, nmls: data.nmls_number, plan: data.plan, billing: data.billing_cycle });
+    sendWelcomeEmail({ name: data.name, email: data.email, plan: data.plan });
 
     const student = { id: data.id, name: data.name, email: data.email, nmls_number: data.nmls_number, plan: data.plan };
     return NextResponse.json({ student });
