@@ -84,6 +84,7 @@ function Dashboard() {
             <div style={{ fontSize: 11, color: TIER_COLOR[tier], fontWeight: 600 }}>{TIER_LABEL[tier]} Tier</div>
           </div>
           <button onClick={logout} style={{ background: "none", border: "1px solid var(--border)", borderRadius: 8, color: "var(--text-muted)", fontSize: 12, padding: "6px 14px", cursor: "pointer" }}>Sign Out</button>
+          <a href="/command-center" style={{ background: "linear-gradient(135deg,#F5A623,#D4881A)", color: "#0A0A0B", borderRadius: 8, fontSize: 12, fontWeight: 700, padding: "6px 14px", textDecoration: "none" }}>⚡ Command Center</a>
         </div>
       </nav>
 
