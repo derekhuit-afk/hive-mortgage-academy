@@ -40,20 +40,21 @@ export async function POST(req: NextRequest) {
         payment_method_types: ["card", "link"],
         save_default_payment_method: "on_subscription",
       },
-      expand: ["latest_invoice.payment_intent"],
+      // Do NOT expand here — retrieve invoice separately for reliable client_secret access
       metadata: { plan, billing: billing || "monthly", hma_name: name, hma_email: email },
     });
 
-    // Extract client_secret from expanded invoice.payment_intent
-    const latestInvoice = subscription.latest_invoice as any;
-    const clientSecret =
-      latestInvoice?.payment_intent?.client_secret ||
-      latestInvoice?.payment_intent ||
-      null;
+    // Retrieve the latest invoice explicitly and expand the payment_intent
+    const invoiceId = typeof subscription.latest_invoice === "string"
+      ? subscription.latest_invoice
+      : (subscription.latest_invoice as any)?.id;
 
-    if (!clientSecret) {
-      console.error("No client_secret found. Invoice:", JSON.stringify(latestInvoice)?.slice(0,300));
-    }
+    const invoice = await stripe.invoices.retrieve(invoiceId, {
+      expand: ["payment_intent"],
+    });
+
+    const clientSecret = (invoice.payment_intent as any)?.client_secret || null;
+    if (!clientSecret) console.error("No client_secret for invoice:", invoiceId);
 
     // Store pending registration with hashed password — never expose plaintext
     const password_hash = await hashPassword(password);
