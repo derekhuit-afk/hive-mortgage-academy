@@ -8,7 +8,7 @@ import { Suspense } from "react";
 const TIER_LABEL: Record<string, string> = { free: "Free", foundation: "Foundation", accelerator: "Accelerator", elite: "Elite" };
 const TIER_COLOR: Record<string, string> = { free: "#10B981", foundation: "#3B82F6", accelerator: "#8B5CF6", elite: "#F5A623" };
 const NEXT_TIER: Record<string, { name: string; href: string }> = {
-  free: { name: "Foundation ($97/mo)", href: "/enroll?tier=foundation" },
+  free: { name: "Foundation ($97/mo) — unlock 9 modules", href: "/enroll?tier=foundation" },
   foundation: { name: "Accelerator ($297/mo)", href: "/enroll?tier=accelerator" },
   accelerator: { name: "Elite ($697/mo)", href: "/enroll?tier=elite" },
   elite: { name: "", href: "" },

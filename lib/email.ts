@@ -14,9 +14,9 @@ const TIER_LABEL: Record<string,string> = {
   accelerator: "Accelerator — $297/mo", elite: "Elite — $697/mo",
 };
 const TIER_ACCESS: Record<string,string> = {
-  free: "Modules 1–3 unlocked + unlimited AI Coach.",
-  foundation: "Modules 1–6 fully unlocked.",
-  accelerator: "Modules 1–10 fully unlocked.",
+  free: "Modules 1–6 unlocked + unlimited AI Coach.",
+  foundation: "Modules 1–9 fully unlocked.",
+  accelerator: "Modules 1–11 fully unlocked.",
   elite: "All 12 modules + full platform access.",
 };
 const NEXT_TIER: Record<string,{ label:string; price:string; href:string }> = {
@@ -117,9 +117,9 @@ export async function sendModuleCompleteEmail({ name, email, moduleNumber, plan 
   { name: string; email: string; moduleNumber: number; plan: string }) {
   const moduleName = MODULE_NAMES[moduleNumber] || `Module ${moduleNumber}`;
   const nextUp = NEXT_MODULE[moduleNumber];
-  const isLastInTier = (plan === "free" && moduleNumber === 3) ||
-    (plan === "foundation" && moduleNumber === 6) ||
-    (plan === "accelerator" && moduleNumber === 10) ||
+  const isLastInTier = (plan === "free" && moduleNumber === 6) ||
+    (plan === "foundation" && moduleNumber === 9) ||
+    (plan === "accelerator" && moduleNumber === 11) ||
     (plan === "elite" && moduleNumber === 12);
 
   try {

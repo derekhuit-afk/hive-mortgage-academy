@@ -5,111 +5,101 @@ import { useRouter } from "next/navigation";
 export default function GraduationPage() {
   const router = useRouter();
   const [student, setStudent] = useState<any>(null);
+  const [certNumber, setCertNumber] = useState("");
+  const [completedCount, setCompletedCount] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [eligible, setEligible] = useState(false);
+
+  const TIER_LIMITS: Record<string,number> = { free:6, foundation:9, accelerator:11, elite:12 };
 
   useEffect(() => {
     const raw = localStorage.getItem("hma_student");
     if (!raw) { router.push("/login"); return; }
-    setStudent(JSON.parse(raw));
+    const s = JSON.parse(raw);
+    setStudent(s);
+
+    const token = localStorage.getItem("hma_token") || "";
+    // Check completion
+    fetch(`/api/progress?studentId=${s.id}`, { headers:{ Authorization:`Bearer ${token}` } })
+      .then(r=>r.json()).then(async progress => {
+        const limit = TIER_LIMITS[s.plan] || 3;
+        const done = progress.filter((p:any) => p.completed && p.module_number <= limit).length;
+        setCompletedCount(done);
+        const isEligible = done >= limit;
+        setEligible(isEligible);
+
+        if (isEligible) {
+          const res = await fetch("/api/certificate", { method:"POST", headers:{"Content-Type":"application/json", Authorization:`Bearer ${token}`}, body: JSON.stringify({ studentId: s.id }) });
+          const data = await res.json();
+          setCertNumber(data.certificate_number || data.certificateNumber || "");
+        }
+        setLoading(false);
+      }).catch(() => setLoading(false));
   }, []);
 
+  if (loading) return <main style={{ minHeight:"100vh", background:"var(--obsidian)", display:"flex", alignItems:"center", justifyContent:"center" }}><div style={{ color:"var(--honey)", fontSize:16 }}>Verifying your completion...</div></main>;
   if (!student) return null;
 
-  return (
-    <main style={{ minHeight: "100vh", background: "var(--obsidian)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "80px 24px" }}>
-      {/* Confetti-style top */}
-      <div style={{ position: "fixed", inset: 0, pointerEvents: "none", overflow: "hidden", zIndex: 0 }}>
-        {Array.from({ length: 20 }).map((_, i) => (
-          <div key={i} style={{ position: "absolute", width: 6, height: 6, borderRadius: "50%", background: ["#F5A623","#10B981","#3B82F6","#8B5CF6"][i % 4], left: `${(i * 5.2) % 100}%`, top: `${(i * 7.3) % 80}%`, opacity: 0.3 }} />
-        ))}
+  const tierLimit = TIER_LIMITS[student.plan] || 3;
+
+  if (!eligible) return (
+    <main style={{ minHeight:"100vh", background:"var(--obsidian)", display:"flex", alignItems:"center", justifyContent:"center", padding:24 }}>
+      <div style={{ maxWidth:480, textAlign:"center" }}>
+        <div style={{ fontSize:64, marginBottom:16 }}>🎓</div>
+        <h1 style={{ fontFamily:"'Playfair Display',serif", fontSize:28, fontWeight:900, color:"var(--text-primary)", marginBottom:12 }}>Not quite yet.</h1>
+        <p style={{ fontSize:15, color:"var(--text-secondary)", lineHeight:1.7, marginBottom:20 }}>You've completed {completedCount} of {tierLimit} modules required for your {student.plan} tier HivePass™. Keep going — you're close.</p>
+        <div style={{ background:"var(--charcoal)", border:"1px solid var(--border)", borderRadius:12, padding:"14px 20px", marginBottom:24 }}>
+          <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:4 }}>
+            {Array.from({length:tierLimit}).map((_,i)=>(
+              <div key={i} style={{ width:24, height:8, borderRadius:4, background: i < completedCount ? "#10B981" : "var(--slate)" }} />
+            ))}
+          </div>
+          <div style={{ fontSize:12, color:"var(--text-muted)", marginTop:8 }}>{completedCount}/{tierLimit} modules complete</div>
+        </div>
+        <a href="/dashboard" style={{ background:"linear-gradient(135deg,#F5A623,#D4881A)", color:"#0A0A0B", padding:"13px 28px", borderRadius:10, fontSize:14, fontWeight:700, textDecoration:"none", display:"inline-block" }}>← Continue Training</a>
       </div>
+    </main>
+  );
 
-      <div style={{ maxWidth: 700, width: "100%", position: "relative", zIndex: 1 }}>
-        {/* HivePass Badge */}
-        <div style={{ background: "var(--charcoal)", border: "2px solid rgba(245,166,35,0.5)", borderRadius: 24, padding: "40px 48px", textAlign: "center", marginBottom: 40, boxShadow: "0 0 80px rgba(245,166,35,0.12)" }}>
-          <div style={{ fontSize: 64, marginBottom: 16 }}>🐝</div>
-          <div style={{ fontSize: 12, color: "var(--honey)", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", marginBottom: 8 }}>Hive Mortgage Academy</div>
-          <div style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(28px,5vw,42px)", fontWeight: 900, color: "var(--text-primary)", marginBottom: 8 }}>HivePass™</div>
-          <div style={{ fontSize: 15, color: "var(--text-secondary)", marginBottom: 24 }}>This certifies that</div>
-          <div style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(24px,4vw,36px)", fontWeight: 900, color: "var(--honey)", marginBottom: 8 }}>{student.name}</div>
-          {student.nmls_number && <div style={{ fontSize: 14, color: "var(--text-muted)", marginBottom: 20 }}>NMLS #{student.nmls_number}</div>}
-          <div style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7, marginBottom: 28, maxWidth: 480, margin: "0 auto 28px" }}>
-            has completed the Hive Mortgage Academy curriculum and demonstrated mastery of loan origination, borrower consultation, compliance, and the payment-first methodology.
+  const tierLabel: Record<string,string> = { free:"Free", foundation:"Foundation", accelerator:"Accelerator", elite:"Elite" };
+
+  return (
+    <main style={{ minHeight:"100vh", background:"var(--obsidian)", padding:"80px 24px" }}>
+      <div style={{ maxWidth:700, margin:"0 auto" }}>
+        <div style={{ background:"var(--charcoal)", border:"2px solid rgba(245,166,35,0.5)", borderRadius:24, padding:"40px 48px", textAlign:"center", marginBottom:40, boxShadow:"0 0 80px rgba(245,166,35,0.12)" }}>
+          <div style={{ fontSize:64, marginBottom:16 }}>🐝</div>
+          <div style={{ fontSize:12, color:"var(--honey)", fontWeight:700, letterSpacing:"0.25em", textTransform:"uppercase", marginBottom:8 }}>Hive Mortgage Academy</div>
+          <div style={{ fontFamily:"'Playfair Display',serif", fontSize:"clamp(28px,5vw,42px)", fontWeight:900, color:"var(--text-primary)", marginBottom:8 }}>HivePass™</div>
+          <div style={{ fontSize:15, color:"var(--text-secondary)", marginBottom:24 }}>This certifies that</div>
+          <div style={{ fontFamily:"'Playfair Display',serif", fontSize:"clamp(24px,4vw,36px)", fontWeight:900, color:"var(--honey)", marginBottom:8 }}>{student.name}</div>
+          {student.nmls_number && <div style={{ fontSize:14, color:"var(--text-muted)", marginBottom:8 }}>NMLS #{student.nmls_number}</div>}
+          <div style={{ fontSize:13, color:"var(--text-muted)", marginBottom:20 }}>{tierLabel[student.plan]} Tier · {tierLimit} Modules Completed</div>
+          <div style={{ fontSize:14, color:"var(--text-secondary)", lineHeight:1.7, marginBottom:28, maxWidth:480, margin:"0 auto 28px" }}>has completed the Hive Mortgage Academy curriculum and demonstrated mastery of loan origination, borrower consultation, compliance, and the payment-first methodology.</div>
+          {certNumber && <div style={{ fontSize:12, color:"var(--text-muted)", marginBottom:20 }}>Certificate {certNumber} · {new Date().getFullYear()}</div>}
+          <div style={{ display:"flex", justifyContent:"center", gap:32, padding:"20px 0", borderTop:"1px solid var(--border)", borderBottom:"1px solid var(--border)", marginBottom:24 }}>
+            {[["⬡ Huit.AI","Platform"],["🏔️","Built from Alaska"],["✓ Verified",`${tierLimit} Modules`]].map(([v,l])=>(<div key={l} style={{ textAlign:"center" }}><div style={{ fontSize:16, fontWeight:900, color:"var(--honey)", fontFamily:"'Playfair Display',serif" }}>{v}</div><div style={{ fontSize:10, color:"var(--text-muted)", textTransform:"uppercase", letterSpacing:"0.1em" }}>{l}</div></div>))}
           </div>
-          <div style={{ display: "flex", justifyContent: "center", gap: 32, padding: "20px 0", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", marginBottom: 20 }}>
-            <div style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 22, fontWeight: 900, color: "var(--honey)", fontFamily: "'Playfair Display',serif" }}>2026</div>
-              <div style={{ fontSize: 11, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Year Completed</div>
-            </div>
-            <div style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 22, fontWeight: 900, color: "var(--honey)", fontFamily: "'Playfair Display',serif" }}>⬡ Huit.AI</div>
-              <div style={{ fontSize: 11, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Powered By</div>
-            </div>
-            <div style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 22, fontWeight: 900, color: "var(--honey)", fontFamily: "'Playfair Display',serif" }}>🏔️</div>
-              <div style={{ fontSize: 11, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Built from Alaska</div>
-            </div>
-          </div>
-          <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-            <button onClick={() => window.print()} style={{ background: "var(--slate)", border: "1px solid var(--border)", color: "var(--text-primary)", padding: "10px 20px", borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: "pointer" }}>🖨️ Print Certificate</button>
-            <a href={`/hivepass/${student.id}`} target="_blank" style={{ background: "rgba(245,166,35,0.1)", border: "1px solid rgba(245,166,35,0.3)", color: "var(--honey)", padding: "10px 20px", borderRadius: 8, fontSize: 13, fontWeight: 600, textDecoration: "none" }}>🔗 Share HivePass</a>
+          <div style={{ display:"flex", gap:12, justifyContent:"center", flexWrap:"wrap" }}>
+            <button onClick={() => window.print()} style={{ background:"var(--slate)", border:"1px solid var(--border)", color:"var(--text-primary)", padding:"10px 20px", borderRadius:8, fontSize:13, fontWeight:600, cursor:"pointer" }}>🖨️ Print Certificate</button>
+            <a href={`/hivepass/${student.id}`} target="_blank" style={{ background:"rgba(245,166,35,0.1)", border:"1px solid rgba(245,166,35,0.3)", color:"var(--honey)", padding:"10px 20px", borderRadius:8, fontSize:13, fontWeight:600, textDecoration:"none" }}>🔗 Share HivePass</a>
           </div>
         </div>
-
-        {/* 3-Path CTA */}
-        <div style={{ textAlign: "center", marginBottom: 32 }}>
-          <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(22px,4vw,32px)", fontWeight: 900, color: "var(--text-primary)", marginBottom: 12 }}>You've Earned It. Now Choose Your Path.</h2>
-          <p style={{ fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.7 }}>
-            You have three doors in front of you. All three are the right answer. Pick the one that fits where you are right now.
-          </p>
+        <div style={{ textAlign:"center", marginBottom:32 }}>
+          <h2 style={{ fontFamily:"'Playfair Display',serif", fontSize:"clamp(22px,4vw,32px)", fontWeight:900, color:"var(--text-primary)", marginBottom:12 }}>You've Earned It. Now Choose Your Path.</h2>
         </div>
-
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16 }} className="cta-grid">
-          {[
-            {
-              icon: "🏔️",
-              title: "Join Derek's Team",
-              subtitle: "Cardinal Financial — Nationwide",
-              desc: "Apply to join Derek Huit's team directly. The full Huit.AI platform stack from Day 1. LOs on this platform close faster, earn more, and have the tools no other team offers.",
-              cta: "Apply Now →",
-              href: "/apply",
-              color: "#F5A623",
-              primary: true,
-            },
-            {
-              icon: "📅",
-              title: "Book a Strategy Call",
-              subtitle: "30 min · No cost · No pressure",
-              desc: "Talk through your market, your goals, and whether the Huit.AI platform is a fit for where you want to take your career. No pitch, no pressure.",
-              cta: "Book a Call →",
-              href: "mailto:derekhuit@gmail.com?subject=Strategy Call Request — HivePass Graduate",
-              color: "#3B82F6",
-              primary: false,
-            },
-            {
-              icon: "⬡",
-              title: "Unlock Huit.AI Platform",
-              subtitle: "The tools that power Huit LOs",
-              desc: "Access CRMEX, APEX, VoiceAgent, PaymentFirst™, and 46 other products. The platform that makes failure nearly impossible when you're doing the work.",
-              cta: "See the Platform →",
-              href: "https://huit.ai",
-              color: "#8B5CF6",
-              primary: false,
-            },
-          ].map(path => (
-            <div key={path.title} style={{ background: path.primary ? "linear-gradient(135deg,rgba(245,166,35,0.1),rgba(245,166,35,0.04))" : "var(--charcoal)", border: `1px solid ${path.primary ? "rgba(245,166,35,0.4)" : "var(--border)"}`, borderRadius: 16, padding: 24, textAlign: "center" }}>
-              <div style={{ fontSize: 36, marginBottom: 12 }}>{path.icon}</div>
-              <div style={{ fontSize: 15, fontWeight: 700, color: "var(--text-primary)", marginBottom: 4 }}>{path.title}</div>
-              <div style={{ fontSize: 11, color: path.color, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 12 }}>{path.subtitle}</div>
-              <p style={{ fontSize: 12, color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 16 }}>{path.desc}</p>
-              <a href={path.href} target={path.href.startsWith("http") ? "_blank" : "_self"} rel="noopener noreferrer" style={{ display: "block", textAlign: "center", background: path.primary ? "linear-gradient(135deg,#F5A623,#D4881A)" : `${path.color}20`, color: path.primary ? "#0A0A0B" : path.color, border: `1px solid ${path.primary ? "transparent" : path.color + "40"}`, padding: "11px 20px", borderRadius: 10, fontSize: 13, fontWeight: 700, textDecoration: "none" }}>{path.cta}</a>
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:16 }} className="cta-grid">
+          {[{ icon:"🏔️", title:"Join Derek's Team", desc:"Apply to join Derek Huit's team at Cardinal Financial. Full Huit.AI platform from Day 1.", cta:"Apply Now →", href:"/apply", color:"#F5A623" },
+            { icon:"📅", title:"Book a Strategy Call", desc:"Not ready to commit? Book a free 30-minute call with Derek first.", cta:"Book a Call →", href:"https://calendly.com/derekhuit", color:"#3B82F6" },
+            { icon:"🔓", title:"Unlock More", desc:"Upgrade your plan and continue with advanced modules.", cta:"Upgrade →", href:"/enroll", color:"#8B5CF6" }].map(c=>(
+            <div key={c.title} style={{ background:"var(--charcoal)", border:`1px solid ${c.color}30`, borderRadius:16, padding:"20px 18px", textAlign:"center" }}>
+              <div style={{ fontSize:32, marginBottom:10 }}>{c.icon}</div>
+              <div style={{ fontFamily:"'Playfair Display',serif", fontSize:15, fontWeight:900, color:"var(--text-primary)", marginBottom:8 }}>{c.title}</div>
+              <p style={{ fontSize:12, color:"var(--text-secondary)", lineHeight:1.6, marginBottom:14 }}>{c.desc}</p>
+              <a href={c.href} style={{ display:"block", background:`${c.color}15`, border:`1px solid ${c.color}40`, color:c.color, padding:"9px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none" }}>{c.cta}</a>
             </div>
           ))}
         </div>
-        <style>{`@media(max-width:768px){.cta-grid{grid-template-columns:1fr!important}}`}</style>
-
-        <div style={{ textAlign: "center", marginTop: 32 }}>
-          <button onClick={() => router.push("/dashboard")} style={{ background: "none", border: "none", color: "var(--text-muted)", fontSize: 13, cursor: "pointer", textDecoration: "underline" }}>← Back to Dashboard</button>
-        </div>
+        <style>{`@media(max-width:600px){.cta-grid{grid-template-columns:1fr!important}}`}</style>
       </div>
     </main>
   );

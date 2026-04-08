@@ -56,11 +56,11 @@ export default function Home() {
                 Hive Mortgage Academy fixes that. <strong style={{ color: "var(--honey)" }}>12 modules. AI coaching. Real curriculum. Start free today.</strong>
               </p>
               <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-                <a href="/enroll" style={{ background: "linear-gradient(135deg,#F5A623,#D4881A)", color: "#0A0A0B", padding: "16px 32px", borderRadius: 10, fontSize: 16, fontWeight: 700, textDecoration: "none" }}>Start Free — Modules 1–3 Unlocked →</a>
+                <a href="/enroll" style={{ background: "linear-gradient(135deg,#F5A623,#D4881A)", color: "#0A0A0B", padding: "16px 32px", borderRadius: 10, fontSize: 16, fontWeight: 700, textDecoration: "none" }}>Start Free — Modules 1–6 Unlocked →</a>
                 <a href="#modules" style={{ border: "1px solid var(--border)", color: "var(--text-primary)", padding: "16px 32px", borderRadius: 10, fontSize: 16, fontWeight: 600, textDecoration: "none" }}>View Curriculum</a>
               </div>
               <div style={{ marginTop: 24, display: "flex", gap: 24, flexWrap: "wrap" }}>
-                {[["✓","3 free modules unlocked instantly"],["✓","Unlimited AI Coach — no limit"],["✓","No credit card required"]].map(([icon,text],i) => (
+                {[["✓","6 free modules unlocked instantly"],["✓","Unlimited AI Coach — no limit"],["✓","No credit card required"]].map(([icon,text],i) => (
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: 6 }}>
                     <span style={{ color: "#10B981", fontWeight: 700, fontSize: 13 }}>{icon}</span>
                     <span style={{ fontSize: 13, color: "var(--text-secondary)" }}>{text}</span>
@@ -72,7 +72,7 @@ export default function Home() {
               <div style={{ background: "var(--charcoal)", border: "1px solid var(--border)", borderRadius: 20, padding: 32, maxWidth: 400, width: "100%", boxShadow: "0 0 60px rgba(245,166,35,0.08)" }}>
                 <div style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.2)", borderRadius: 12, padding: "14px 18px", marginBottom: 20 }}>
                   <div style={{ fontSize: 11, color: "#10B981", fontWeight: 700, marginBottom: 4, textTransform: "uppercase", letterSpacing: "0.1em" }}>Free Tier — Start Today</div>
-                  <div style={{ fontSize: 13, color: "var(--text-secondary)" }}>Modules 1–3 fully unlocked + unlimited AI Coach</div>
+                  <div style={{ fontSize: 13, color: "var(--text-secondary)" }}>Modules 1–6 fully unlocked + unlimited AI Coach</div>
                 </div>
                 {[["🎓","12 Total Modules","Full LO journey, Day 1 to $1M/yr"],["🤖","AI Mortgage Coach","24/7, trained on $1B+ production"],["🏔️","HivePass™ Certificate","Graduate + get your credential badge"],["⬡","Huit.AI Platform Preview","See the tools top LOs use"]].map(([icon,title,sub],i) => (
                   <div key={i} style={{ display: "flex", alignItems: "center", gap: 14, padding: "11px 0", borderBottom: i < 3 ? "1px solid var(--border)" : "none" }}>
@@ -191,7 +191,7 @@ export default function Home() {
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20 }} className="price-grid">
             {[
-              { tier: "FREE", label: "Free", price: 0, suffix: "forever", color: "#10B981", features: ["Modules 1–3 fully unlocked","Unlimited AI Coach","Progress tracking","Mobile access"], cta: "Start Free", href: "/enroll?tier=free", popular: false },
+              { tier: "FREE", label: "Free", price: 0, suffix: "forever", color: "#10B981", features: ["Modules 1–6 fully unlocked","Unlimited AI Coach","Progress tracking","Mobile access"], cta: "Start Free", href: "/enroll?tier=free", popular: false },
               { tier: "FOUNDATION", label: "Foundation", price: price(97), suffix: "/mo", color: "#3B82F6", features: ["Everything in Free","Modules 4–6 unlocked","Lesson completion certificates","Email support"], cta: "Start Foundation", href: "/enroll?tier=foundation", popular: false },
               { tier: "ACCELERATOR", label: "Accelerator", price: price(297), suffix: "/mo", color: "#8B5CF6", features: ["Everything in Foundation","Modules 7–10 unlocked","AI role-play simulations","Live group coaching","Derek's Pipeline Playbook PDF"], cta: "Start Accelerator", href: "/enroll?tier=accelerator", popular: true },
               { tier: "ELITE", label: "Elite", price: price(697), suffix: "/mo", color: "#F5A623", features: ["Everything in Accelerator","All 12 modules unlocked","Monthly 1:1 with Derek","Huit.AI platform preview access","HivePass™ graduation badge","Priority AI Coach"], cta: "Start Elite", href: "/enroll?tier=elite", popular: false },

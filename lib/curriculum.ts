@@ -19,9 +19,9 @@ export function clearSession() {
 export type Tier = "free" | "foundation" | "accelerator" | "elite";
 
 export const TIER_LIMITS: Record<Tier, number> = {
-  free: 3,
-  foundation: 6,
-  accelerator: 10,
+  free: 6,
+  foundation: 9,
+  accelerator: 11,
   elite: 12,
 };
 
@@ -132,9 +132,9 @@ export const MODULES: Module[] = [
     title: "Your First Borrower Conversation",
     subtitle: "From hello to pre-approval in one call",
     duration: "50 min",
-    badge: "Foundation",
-    badgeColor: "#3B82F6",
-    tier: "foundation",
+    badge: "FREE",
+    badgeColor: "#10B981",
+    tier: "free",
     lessons: [
       { title: "Pre-Qual vs. Pre-Approval — The Difference That Matters", duration: "12 min" },
       { title: "Reading a Credit Report Live", duration: "13 min" },
@@ -154,9 +154,9 @@ export const MODULES: Module[] = [
     title: "Payment-First — Not Max Qualification",
     subtitle: "The philosophy that builds client trust for life",
     duration: "46 min",
-    badge: "Foundation",
-    badgeColor: "#3B82F6",
-    tier: "foundation",
+    badge: "FREE",
+    badgeColor: "#10B981",
+    tier: "free",
     lessons: [
       { title: "Why Payment-First Changes Everything", duration: "12 min" },
       { title: "The 3-Scenario Consultation Framework", duration: "12 min" },
@@ -176,9 +176,9 @@ export const MODULES: Module[] = [
     title: "Credit Reports & Qualification Deep Dive",
     subtitle: "Read numbers like a pro, advise like a mentor",
     duration: "52 min",
-    badge: "Foundation",
-    badgeColor: "#3B82F6",
-    tier: "foundation",
+    badge: "FREE",
+    badgeColor: "#10B981",
+    tier: "free",
     lessons: [
       { title: "Reading a Tri-Merge Credit Report", duration: "14 min" },
       { title: "DTI, LTV, and the Numbers That Gate Every Loan", duration: "13 min" },
@@ -198,9 +198,9 @@ export const MODULES: Module[] = [
     title: "CRM + Tech Stack for New LOs",
     subtitle: "Build the system that closes loans while you sleep",
     duration: "44 min",
-    badge: "Accelerator",
-    badgeColor: "#8B5CF6",
-    tier: "accelerator",
+    badge: "Foundation",
+    badgeColor: "#3B82F6",
+    tier: "foundation",
     lessons: [
       { title: "Why Your Tech Stack Is Your Pipeline", duration: "11 min" },
       { title: "The Huit.AI Platform — What LOs on the Platform Get", duration: "11 min" },
@@ -220,9 +220,9 @@ export const MODULES: Module[] = [
     title: "Moving the Loan: App to Clear to Close",
     subtitle: "Own the process so nothing kills your deal",
     duration: "56 min",
-    badge: "Accelerator",
-    badgeColor: "#8B5CF6",
-    tier: "accelerator",
+    badge: "Foundation",
+    badgeColor: "#3B82F6",
+    tier: "foundation",
     lessons: [
       { title: "The Loan Process From 30,000 Feet", duration: "14 min" },
       { title: "What Underwriters Actually Look For", duration: "14 min" },
@@ -242,9 +242,9 @@ export const MODULES: Module[] = [
     title: "Agent Relationships — Give & Receive Referrals",
     subtitle: "Turn one agent into a referral machine",
     duration: "50 min",
-    badge: "Accelerator",
-    badgeColor: "#8B5CF6",
-    tier: "accelerator",
+    badge: "Foundation",
+    badgeColor: "#3B82F6",
+    tier: "foundation",
     lessons: [
       { title: "The Agent Partnership Value Proposition", duration: "12 min" },
       { title: "Co-Marketing That Works (and Stays Compliant)", duration: "13 min" },
@@ -265,7 +265,7 @@ export const MODULES: Module[] = [
     subtitle: "Know the rules before you break them",
     duration: "38 min",
     badge: "Accelerator",
-    badgeColor: "#8B5CF6",
+    badgeColor: "#3B82F6",
     tier: "accelerator",
     lessons: [
       { title: "RESPA, TRID, and the Disclosure Timeline", duration: "10 min" },
@@ -286,9 +286,9 @@ export const MODULES: Module[] = [
     title: "Post-Closing: Reviews, Referrals & Refi Watch",
     subtitle: "Your closed loans are your best marketing asset",
     duration: "48 min",
-    badge: "Elite",
-    badgeColor: "#F5A623",
-    tier: "elite",
+    badge: "Accelerator",
+    badgeColor: "#8B5CF6",
+    tier: "accelerator",
     lessons: [
       { title: "The 30-60-90 Day Post-Close System", duration: "12 min" },
       { title: "Getting Reviews That Actually Build Your Pipeline", duration: "12 min" },

@@ -285,7 +285,7 @@ export default function CommandCenterPage() {
                 <div style={{ height:"100%", width:`${(moduleProgress/12)*100}%`, background:`linear-gradient(90deg,${tierColors[tier]},${tierColors[tier]}cc)`, borderRadius:100, transition:"width 0.5s" }} />
               </div>
               <div style={{ display:"flex", gap:8, marginBottom:14 }}>
-                {[{t:"free",l:"Free",mod:3},{t:"foundation",l:"Foundation",mod:6},{t:"accelerator",l:"Accel.",mod:10},{t:"elite",l:"Elite",mod:12}].map(tt=>(
+                {[{t:"free",l:"Free",mod:6},{t:"foundation",l:"Foundation",mod:9},{t:"accelerator",l:"Accel.",mod:11},{t:"elite",l:"Elite",mod:12}].map(tt=>(
                   <div key={tt.t} style={{ flex:1, textAlign:"center", padding:"6px 4px", borderRadius:8, background:tier===tt.t?`${tierColors[tt.t]}15`:"transparent", border:`1px solid ${tier===tt.t?tierColors[tt.t]:"var(--border)"}` }}>
                     <div style={{ fontSize:10, fontWeight:700, color:tier===tt.t?tierColors[tt.t]:"var(--text-muted)" }}>{tt.l}</div>
                     <div style={{ fontSize:9, color:"var(--text-muted)" }}>{tt.mod} mod</div>
