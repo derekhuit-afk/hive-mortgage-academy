@@ -310,8 +310,7 @@ export default function CommandCenterPage() {
                   { label:"New Pre-Approval Letter",         href:"/approval-letter",emoji:"📄",color:"#3B82F6" },
                   { label:"Generate Credit Plan",            href:"/credit-path",   emoji:"🎯", color:"#8B5CF6" },
                   { label:"Check Equity Portfolio",          href:"/equity-pulse",  emoji:"📈", color:"#10B981" },
-                  ...(stats.modules >= 6 ? [{ label:"Apply to Derek's Team", href:"/apply", emoji:"🏔️", color:"#F5A623" }] : []),
-                ].map(q=>(
+                ].concat(moduleProgress >= 6 ? [{ label:"Apply to Derek's Team", href:"/apply", emoji:"🏔️", color:"#F5A623" }] : []).map(q=>(
                   <a key={q.label} href={q.href} style={{ display:"flex", alignItems:"center", gap:10, padding:"10px 12px", borderRadius:10, background:"var(--slate)", border:"1px solid var(--border)", textDecoration:"none", transition:"border-color 0.2s" }}
                     onMouseEnter={e=>(e.currentTarget.style.borderColor=`${q.color}50`)}
                     onMouseLeave={e=>(e.currentTarget.style.borderColor="var(--border)")}>
