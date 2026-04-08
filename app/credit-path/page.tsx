@@ -94,10 +94,10 @@ export default function CreditPathPage() {
         {step === 1 && (
           <div style={{ background: "var(--charcoal)", border: "1px solid var(--border)", borderRadius: 20, padding: 28 }}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16, marginBottom: 24 }} className="score-grid">
-              {[["Current Credit Score", currentScore, setCurrentScore, "e.g. 620"], ["Target Score", targetScore, setTargetScore, "e.g. 680"], ["Timeline (months)", timeline, setTimeline, "e.g. 6"]].map(([l, v, set, p]) => (
-                <div key={String(l)}>
+              {([["Current Credit Score", currentScore, setCurrentScore, "e.g. 620"], ["Target Score", targetScore, setTargetScore, "e.g. 680"], ["Timeline (months)", timeline, setTimeline, "e.g. 6"]] as [string, string, (v: string) => void, string][]).map(([l, v, set, p]) => (
+                <div key={l}>
                   <label style={{ fontSize: 11, fontWeight: 700, color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8, display: "block" }}>{l}</label>
-                  <input type="number" placeholder={String(p)} value={String(v)} onChange={e => (set as any)(e.target.value)} style={{ width: "100%", background: "var(--slate)", border: "1px solid var(--border)", borderRadius: 8, padding: "12px 14px", color: "var(--text-primary)", fontSize: 16, fontWeight: 700, outline: "none", textAlign: "center", boxSizing: "border-box" }} />
+                  <input type="number" placeholder={p} value={v} onChange={e => set(e.target.value)} style={{ width: "100%", background: "var(--slate)", border: "1px solid var(--border)", borderRadius: 8, padding: "12px 14px", color: "var(--text-primary)", fontSize: 16, fontWeight: 700, outline: "none", textAlign: "center", boxSizing: "border-box" }} />
                 </div>
               ))}
             </div>
