@@ -603,7 +603,7 @@ function HomeContent() {
             </div>
           </div>
           <div id="legal" style={{ marginTop:40, paddingTop:28, borderTop:"1px solid var(--border)" }}>
-            <div style={{ fontSize:10, fontWeight:700, color:"#374151", letterSpacing:"0.15em", textTransform:"uppercase", marginBottom:12 }}>Legal &amp; Compliance Disclosure</div>
+            <div style={{ fontSize:10, fontWeight:700, color:"#374151", letterSpacing:"0.15em", textTransform:"uppercase", marginBottom:12 }}>Legal & Compliance Disclosure</div>
             <p style={{ fontSize:11, color:"#374151", lineHeight:1.7, marginBottom:10 }}>
               Hive Mortgage Academy is an independent educational platform operated by Huit.AI, Inc. and is not affiliated with, endorsed by, or required by any mortgage lender, broker, or employer. Enrollment and completion of any curriculum does not satisfy NMLS pre-licensing, continuing education, or state-specific licensing requirements. All content is provided for general informational and educational purposes only and does not constitute legal, financial, compliance, or professional advice.
             </p>
