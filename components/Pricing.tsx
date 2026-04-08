@@ -135,7 +135,7 @@ export default function Pricing() {
                 ))}
               </div>
 
-              <a href="mailto:derekhuit@gmail.com?subject=Hive Mortgage Academy Enrollment" style={{
+              <a href="/enroll" style={{
                 display: "block", textAlign: "center",
                 background: plan.highlight ? "linear-gradient(135deg, #F5A623, #D4881A)" : "var(--slate)",
                 color: plan.highlight ? "#0A0A0B" : "var(--text-primary)",

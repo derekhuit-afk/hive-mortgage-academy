@@ -58,7 +58,7 @@ export default function Hero() {
             </p>
 
             <div className="fade-up fade-up-4" style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-              <a href="#pricing" style={{
+              <a href="/enroll" style={{
                 background: "linear-gradient(135deg, #F5A623, #D4881A)",
                 color: "#0A0A0B", padding: "16px 32px", borderRadius: 10,
                 fontSize: 16, fontWeight: 700, textDecoration: "none",
