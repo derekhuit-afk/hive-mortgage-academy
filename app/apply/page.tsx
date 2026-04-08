@@ -30,6 +30,7 @@ export default function ApplyPage() {
           <div style={{ fontSize: 13, color: "var(--text-secondary)", marginTop: 8, lineHeight: 1.7 }}>1. Derek reviews your application<br />2. You receive a calendar link for a 30-min call<br />3. If it's a fit, you get a detailed onboarding plan</div>
         </div>
         <a href="/dashboard" style={{ background: "linear-gradient(135deg,#F5A623,#D4881A)", color: "#0A0A0B", padding: "13px 28px", borderRadius: 10, fontSize: 14, fontWeight: 700, textDecoration: "none", display: "inline-block" }}>← Back to Dashboard</a>
+        <p style={{ fontSize:11, color:"var(--text-muted)", marginTop:24, lineHeight:1.6, maxWidth:480, margin:"24px auto 0" }}>This application is for informational purposes only. Submitting this form does not guarantee employment or a position on Derek Huit's team. Hive Mortgage Academy and Huit.AI, Inc. are independent of Cardinal Financial (NMLS #203980). Individual hiring decisions are separate from Academy enrollment.</p>
       </div>
     </main>
   );

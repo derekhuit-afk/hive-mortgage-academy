@@ -109,6 +109,7 @@ function EnrollContent() {
           </button>
           {tier!=="free"&&<div style={{ display:"flex", justifyContent:"center", gap:16, fontSize:12, color:"var(--text-muted)" }}><span>🍎 Apple Pay</span><span>💳 All Cards</span><span>🔒 ZenoPay.ai</span></div>}
           <p style={{ fontSize:12, color:"var(--text-muted)", textAlign:"center", marginTop:14 }}>Already have an account? <a href="/login" style={{ color:"var(--honey)", textDecoration:"none" }}>Sign in →</a></p>
+          <p style={{ fontSize:11, color:"var(--text-muted)", textAlign:"center", marginTop:16, lineHeight:1.6 }}>Hive Mortgage Academy is an independent educational platform. Not affiliated with or required by any employer. Individual results vary.<br />Instructor: Derek Huit · NMLS #1739818 · Cardinal Financial (NMLS #203980) · Equal Housing Opportunity</p>
         </div>
       </div>
     </main>

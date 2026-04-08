@@ -51,7 +51,9 @@ const header = (emoji: string, title: string, subtitle: string) => `
 
 const footer = () => `
   <hr style="border:none;border-top:1px solid #1E1E24;margin:24px 0">
-  <p style="color:#4B5563;font-size:12px;margin:0">Hive Mortgage Academy · Built from Alaska · <a href="${BASE_URL}" style="color:#F5A623">${BASE_URL}</a></p>`;
+  <p style="color:#4B5563;font-size:12px;margin:0 0 8px">Hive Mortgage Academy · Built from Alaska · <a href="${BASE_URL}" style="color:#F5A623">${BASE_URL}</a></p>
+  <p style="color:#374151;font-size:10px;line-height:1.6;margin:0 0 4px">For educational purposes only. Not affiliated with or required by any employer. Individual results vary. Content does not constitute legal, financial, or compliance advice.</p>
+  <p style="color:#374151;font-size:10px;line-height:1.6;margin:0">Instructor: Derek Huit · NMLS #1739818 · Licensed in AK, WA, MT · Cardinal Financial (NMLS #203980) · Equal Housing Opportunity</p>`;
 
 const btn = (text: string, href: string) =>
   `<div style="text-align:center;margin:24px 0"><a href="${href}" style="display:inline-block;background:linear-gradient(135deg,#F5A623,#D4881A);color:#0A0A0B;padding:14px 32px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none">${text}</a></div>`;
