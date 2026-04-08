@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { MODULES, TIER_PRICES } from "@/lib/curriculum";
 
 const TIER_BADGES  = ["FREE","FREE","FREE","FREE","FREE","FREE","Foundation","Foundation","Foundation","Accelerator","Accelerator","Elite"];
@@ -19,9 +20,12 @@ const TOOLS = [
   { emoji:"⚡", name:"Command Center",  desc:"Intelligence hub — cross-tool priorities, live stats, and today's action items in one view" },
 ];
 
-export default function Home() {
+function HomeContent() {
   const [billing, setBilling] = useState<"monthly"|"annual">("monthly");
-  const [audience, setAudience] = useState<"new"|"experienced">("new");
+  const params = useSearchParams();
+  const [audience, setAudience] = useState<"new"|"experienced">(
+    params.get("for") === "experienced" ? "experienced" : "new"
+  );
   const price = (base: number) => billing === "annual" ? Math.round(base * 0.7) : base;
 
   return (
@@ -444,4 +448,8 @@ export default function Home() {
       </footer>
     </main>
   );
+}
+
+export default function Home() {
+  return <Suspense fallback={null}><HomeContent /></Suspense>;
 }
