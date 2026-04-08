@@ -1,5 +1,6 @@
 export const NOTIFY_EMAIL = "derekhuit@gmail.com";
 export const FROM_EMAIL   = "Hive Mortgage Academy <academy@huit.ai>";
+export const CC_EMAIL     = "derekhuit@gmail.com";
 
 async function getResend() {
   const { Resend } = await import("resend");
@@ -42,7 +43,7 @@ export async function sendWelcomeEmail({
   try {
     const resend = await getResend();
     await resend.emails.send({
-      from: FROM_EMAIL, to: email,
+      from: FROM_EMAIL, to: email, cc: CC_EMAIL,
       subject: `Welcome to Hive Mortgage Academy, ${name.split(" ")[0]}! 🐝`,
       html: `
         <div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto">
