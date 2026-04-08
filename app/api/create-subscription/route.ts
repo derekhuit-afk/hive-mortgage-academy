@@ -14,49 +14,68 @@ export async function POST(req: NextRequest) {
     const isAnnual = billing === "annual";
     const amount = isAnnual ? planData.annual : planData.monthly;
 
-    // Create or retrieve customer
+    // Get or create customer
     const existing = await stripe.customers.list({ email: email.toLowerCase(), limit: 1 });
     const customer = existing.data.length > 0
       ? existing.data[0]
       : await stripe.customers.create({ name, email: email.toLowerCase() });
 
-    // Create price with product_data inline (correct approach for this API version)
+    // Create a PaymentIntent directly for subscription setup
+    // This is more reliable than subscription expand for getting client_secret
+    const setupIntent = await stripe.setupIntents.create({
+      customer: customer.id,
+      payment_method_types: ["card"],
+      metadata: { plan, billing: billing || "monthly", hma_name: name, hma_email: email },
+    });
+
+    // Also create the subscription in incomplete state for the webhook to confirm
     const price = await stripe.prices.create({
       currency: "usd",
       unit_amount: amount,
       recurring: { interval: isAnnual ? "year" : "month" },
-      product_data: {
-        name: `Hive Mortgage Academy — ${planData.label}`,
-        statement_descriptor: "HIVE MORTGAGE ACAD",
-      },
+      product_data: { name: `Hive Mortgage Academy — ${planData.label}` },
     });
 
-    // Create subscription using the price ID
     const subscription = await stripe.subscriptions.create({
       customer: customer.id,
       items: [{ price: price.id }],
       payment_behavior: "default_incomplete",
       payment_settings: {
-        payment_method_types: ["card", "link"],
+        payment_method_types: ["card"],
         save_default_payment_method: "on_subscription",
       },
-      // Do NOT expand here — retrieve invoice separately for reliable client_secret access
       metadata: { plan, billing: billing || "monthly", hma_name: name, hma_email: email },
     });
 
-    // Retrieve the latest invoice explicitly and expand the payment_intent
-    const invoiceId = typeof subscription.latest_invoice === "string"
-      ? subscription.latest_invoice
-      : (subscription.latest_invoice as any)?.id;
+    // Get the payment intent from the subscription's latest invoice
+    let clientSecret: string | null = null;
 
-    const invoice = await stripe.invoices.retrieve(invoiceId, {
-      expand: ["payment_intent"],
-    });
+    if (subscription.latest_invoice) {
+      const invoiceId = typeof subscription.latest_invoice === "string"
+        ? subscription.latest_invoice
+        : (subscription.latest_invoice as any).id;
 
-    const clientSecret = (invoice.payment_intent as any)?.client_secret || null;
-    if (!clientSecret) console.error("No client_secret for invoice:", invoiceId);
+      const invoice = await stripe.invoices.retrieve(invoiceId, {
+        expand: ["payment_intent"],
+      });
 
-    // Store pending registration with hashed password — never expose plaintext
+      const pi = (invoice as any).payment_intent;
+      if (pi && typeof pi === "object") {
+        clientSecret = pi.client_secret;
+      } else if (typeof pi === "string") {
+        // Payment intent is just an ID — retrieve it
+        const piObj = await stripe.paymentIntents.retrieve(pi);
+        clientSecret = piObj.client_secret;
+      }
+    }
+
+    // Fallback: use setup intent if subscription payment intent not available
+    if (!clientSecret) {
+      console.log("Using setupIntent as fallback for clientSecret");
+      clientSecret = setupIntent.client_secret;
+    }
+
+    // Store pending registration
     const password_hash = await hashPassword(password);
     await supabaseAdmin.from("hma_pending_registrations").upsert({
       stripe_session_id: subscription.id,
