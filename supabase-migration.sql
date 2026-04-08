@@ -46,3 +46,19 @@ ALTER TABLE hma_students DISABLE ROW LEVEL SECURITY;
 ALTER TABLE hma_module_progress DISABLE ROW LEVEL SECURITY;
 ALTER TABLE hma_quiz_attempts DISABLE ROW LEVEL SECURITY;
 ALTER TABLE hma_certificates DISABLE ROW LEVEL SECURITY;
+
+-- Applications table for recruiting funnel
+CREATE TABLE IF NOT EXISTS hma_applications (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  name text NOT NULL,
+  email text NOT NULL,
+  phone text,
+  nmls_number text,
+  market text,
+  production text,
+  experience text,
+  why text,
+  status text DEFAULT 'pending',
+  created_at timestamptz DEFAULT now()
+);
+ALTER TABLE hma_applications DISABLE ROW LEVEL SECURITY;
