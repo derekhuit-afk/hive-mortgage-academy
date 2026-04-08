@@ -162,6 +162,7 @@ function HomeContent() {
         </div>
         <p style={{ textAlign:"center", fontSize:11, color:"var(--text-muted)", marginTop:16 }}>* Reflects instructor's individual career production. Individual results vary and are not a guarantee of future performance.</p>
         <style>{`@media(max-width:768px){.stats-grid{grid-template-columns:repeat(3,1fr)!important}}@media(max-width:480px){.stats-grid{grid-template-columns:repeat(2,1fr)!important}}`}</style>
+      </section>
 
       {/* INSTRUCTOR */}
       <section style={{ padding:"80px 24px", background:"var(--obsidian)" }}>
