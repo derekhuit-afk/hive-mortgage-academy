@@ -44,8 +44,16 @@ export async function POST(req: NextRequest) {
       metadata: { plan, billing: billing || "monthly", hma_name: name, hma_email: email },
     });
 
-    const invoice = subscription.latest_invoice as any;
-    const paymentIntent = invoice?.payment_intent as any;
+    // Extract client_secret from expanded invoice.payment_intent
+    const latestInvoice = subscription.latest_invoice as any;
+    const clientSecret =
+      latestInvoice?.payment_intent?.client_secret ||
+      latestInvoice?.payment_intent ||
+      null;
+
+    if (!clientSecret) {
+      console.error("No client_secret found. Invoice:", JSON.stringify(latestInvoice)?.slice(0,300));
+    }
 
     // Store pending registration with hashed password — never expose plaintext
     const password_hash = await hashPassword(password);
@@ -57,7 +65,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       subscriptionId: subscription.id,
-      clientSecret: paymentIntent?.client_secret,
+      clientSecret,
       customerId: customer.id,
     });
   } catch (err: any) {
