@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import MobileNav from "@/lib/MobileNav";
 import { useRouter, useSearchParams } from "next/navigation";
 import { MODULES, canAccessModule, TIER_LIMITS } from "@/lib/curriculum";
 import type { Tier } from "@/lib/curriculum";
@@ -83,8 +84,9 @@ function Dashboard() {
             <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>{student.name}</div>
             <div style={{ fontSize: 11, color: TIER_COLOR[tier], fontWeight: 600 }}>{TIER_LABEL[tier]} Tier</div>
           </div>
-          <button onClick={logout} style={{ background: "none", border: "1px solid var(--border)", borderRadius: 8, color: "var(--text-muted)", fontSize: 12, padding: "6px 14px", cursor: "pointer" }}>Sign Out</button>
-          <a href="/command-center" style={{ background: "linear-gradient(135deg,#F5A623,#D4881A)", color: "#0A0A0B", borderRadius: 8, fontSize: 12, fontWeight: 700, padding: "6px 14px", textDecoration: "none" }}>⚡ Command Center</a>
+          <button onClick={logout} style={{ background: "none", border: "1px solid var(--border)", borderRadius: 8, color: "var(--text-muted)", fontSize: 12, padding: "6px 14px", cursor: "pointer" }} className="hide-mobile">Sign Out</button>
+          <a href="/command-center" style={{ background: "linear-gradient(135deg,#F5A623,#D4881A)", color: "#0A0A0B", borderRadius: 8, fontSize: 12, fontWeight: 700, padding: "6px 14px", textDecoration: "none" }} className="hide-mobile">⚡ Command Center</a>
+          <MobileNav studentName={student?.name} onLogout={logout} />
         </div>
       </nav>
 
@@ -160,6 +162,11 @@ function Dashboard() {
             <div style={{ fontSize: 14, fontWeight: 700, color: "var(--text-primary)" }}>🤖 Ask Your AI Coach</div>
             <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 4 }}>Unlimited · Built from $1B production</div>
           </div>
+          <a href="/invite" style={{ background: "var(--charcoal)", border: "1px solid var(--border)", borderRadius: 14, padding: "18px 20px", textDecoration: "none" }}>
+            <div style={{ fontSize: 11, color: "#3B82F6", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 6 }}>Share the Platform</div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: "var(--text-primary)" }}>✉️ Invite a Colleague</div>
+            <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 4 }}>Send a personal invite — 6 modules free</div>
+          </a>
           {completedCount >= 6 ? (
             <a href="/apply" style={{ background: "var(--charcoal)", border: "1px solid rgba(245,166,35,0.35)", borderRadius: 14, padding: "18px 20px", textDecoration: "none" }}>
               <div style={{ fontSize: 11, color: "var(--honey)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 6 }}>🔓 Unlocked at Module 6</div>
@@ -174,7 +181,7 @@ function Dashboard() {
             </div>
           )}
         </div>
-        <style>{`@media(max-width:768px){.actions-grid{grid-template-columns:1fr!important}.progress-card{grid-template-columns:1fr!important}}`}</style>
+        <style>{`@media(max-width:768px){.actions-grid{grid-template-columns:1fr!important}.progress-card{grid-template-columns:1fr!important}.hide-mobile{display:none!important}}`}</style>
 
         {/* AI Coach Panel */}
         {showCoach && (

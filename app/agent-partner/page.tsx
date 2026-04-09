@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { saveAndSync, loadTool } from "@/lib/hooks/useToolSync";
 import { useRouter } from "next/navigation";
 
 type Stage = "cold"|"contacted"|"met"|"partner"|"active";

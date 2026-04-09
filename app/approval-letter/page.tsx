@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { saveAndSync } from "@/lib/hooks/useToolSync";
 import { useRouter } from "next/navigation";
 
 type Letter = {
@@ -37,7 +38,7 @@ export default function ApprovalLetterPage() {
     if (saved) setLetters(JSON.parse(saved));
   }, []);
 
-  function save(u: Letter[]) { setLetters(u); localStorage.setItem("hma_letters", JSON.stringify(u)); }
+  function save(u: Letter[]) { setLetters(u); saveAndSync("hma_letters", "letters", u); }
 
   function create() {
     if (!form.borrowerName || !form.maxPrice) return;

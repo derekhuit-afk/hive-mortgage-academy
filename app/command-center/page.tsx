@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import MobileNav from "@/lib/MobileNav";
 import { useRouter } from "next/navigation";
 
 // ─── Intelligence Engine ───────────────────────────────────────────────────
@@ -181,7 +182,8 @@ export default function CommandCenterPage() {
             <div style={{ fontSize:11, padding:"2px 10px", borderRadius:100, background:`${tierColors[tier]}15`, color:tierColors[tier], border:`1px solid ${tierColors[tier]}40`, fontWeight:700 }}>{tierLabels[tier]}</div>
           </div>
           <button onClick={() => router.push("/dashboard")} style={{ background:"none", border:"1px solid var(--border)", borderRadius:8, color:"var(--text-muted)", fontSize:12, padding:"6px 12px", cursor:"pointer" }}>Academy →</button>
-          <button onClick={() => { localStorage.removeItem("hma_student"); router.push("/"); }} style={{ background:"none", border:"none", color:"var(--text-muted)", fontSize:12, cursor:"pointer" }}>Sign Out</button>
+          <button onClick={() => { localStorage.removeItem("hma_student"); router.push("/"); }} style={{ background:"none", border:"none", color:"var(--text-muted)", fontSize:12, cursor:"pointer" }} className="hide-mobile-cc">Sign Out</button>
+          <MobileNav studentName={student?.name} onLogout={() => { localStorage.removeItem("hma_student"); router.push("/"); }} />
         </div>
       </nav>
 
@@ -309,6 +311,7 @@ export default function CommandCenterPage() {
                   { label:"Add Sphere Contact",              href:"/sphere",        emoji:"🌐", color:"#3B82F6" },
                   { label:"New Pre-Approval Letter",         href:"/approval-letter",emoji:"📄",color:"#3B82F6" },
                   { label:"Generate Credit Plan",            href:"/credit-path",   emoji:"🎯", color:"#8B5CF6" },
+                  { label:"Invite a Colleague",               href:"/invite",        emoji:"✉️", color:"#3B82F6" },
                   { label:"Check Equity Portfolio",          href:"/equity-pulse",  emoji:"📈", color:"#10B981" },
                 ].concat(moduleProgress >= 6 ? [{ label:"Apply to Derek's Team", href:"/apply", emoji:"🏔️", color:"#F5A623" }] : []).map(q=>(
                   <a key={q.label} href={q.href} style={{ display:"flex", alignItems:"center", gap:10, padding:"10px 12px", borderRadius:10, background:"var(--slate)", border:"1px solid var(--border)", textDecoration:"none", transition:"border-color 0.2s" }}
@@ -366,7 +369,7 @@ export default function CommandCenterPage() {
             </div>
           </div>
         </div>
-        <style>{`@media(max-width:1024px){.main-grid{grid-template-columns:1fr!important}}`}</style>
+        <style>{`@media(max-width:1024px){.main-grid{grid-template-columns:1fr!important}}@media(max-width:768px){.hide-mobile-cc{display:none!important}}`}</style>
       </div>
     </main>
   );

@@ -5,6 +5,7 @@ type NavLink = { label: string; href: string; emoji: string };
 
 const TOOLS: NavLink[] = [
   { label:"Command Center", href:"/command-center", emoji:"⚡" },
+  { label:"Invite a Colleague", href:"/invite", emoji:"✉️" },
   { label:"Dashboard", href:"/dashboard", emoji:"🎓" },
   { label:"PaymentFirst™", href:"/payment-first", emoji:"💰" },
   { label:"SphereEngine™", href:"/sphere", emoji:"🌐" },

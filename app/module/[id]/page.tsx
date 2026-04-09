@@ -54,7 +54,26 @@ export default function ModulePage() {
   const allRead = mod.lessons.every((_, i) => read.has(i));
 
   async function markRead() {
-    setRead(prev => new Set([...prev, activeLesson]));
+    const newRead = new Set([...read, activeLesson]);
+    setRead(newRead);
+    
+    // Track lesson-level progress in DB (non-blocking)
+    if (student) {
+      const token = localStorage.getItem("hma_token") || "";
+      fetch("/api/progress", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+        body: JSON.stringify({
+          studentId: student.id,
+          moduleNumber: moduleId,
+          completed: false,
+          lessonIndex: activeLesson,
+          lessonsRead: newRead.size,
+          totalLessons: mod!.lessons.length,
+        }),
+      }).catch(() => {});
+    }
+
     if (activeLesson < mod!.lessons.length - 1) {
       setActiveLesson(prev => prev + 1);
     }
@@ -64,10 +83,11 @@ export default function ModulePage() {
     if (!student || !allRead) return;
     setMarking(true);
     try {
+      const token = localStorage.getItem("hma_token") || "";
       await fetch("/api/progress", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ studentId: student.id, moduleNumber: moduleId }),
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+        body: JSON.stringify({ studentId: student.id, moduleNumber: moduleId, completed: true }),
       });
       router.push(`/module/${moduleId}/quiz`);
     } catch { /* silent */ } finally { setMarking(false); }

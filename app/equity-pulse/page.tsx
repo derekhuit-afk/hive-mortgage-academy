@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { saveAndSync, loadTool } from "@/lib/hooks/useToolSync";
 import { useRouter } from "next/navigation";
 
 type Client = {
@@ -73,7 +74,7 @@ export default function EquityPulsePage() {
     }
   }, []);
 
-  function save(u: Client[]) { setClients(u); localStorage.setItem("hma_equity_clients", JSON.stringify(u)); }
+  function save(u: Client[]) { setClients(u); saveAndSync("hma_equity_clients", "equity", u); }
 
   function addClient() {
     if (!form.name || !form.originalPrice) return;

@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { saveAndSync } from "@/lib/hooks/useToolSync";
 import { useRouter } from "next/navigation";
 
 export type Milestone = {

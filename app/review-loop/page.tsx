@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { saveAndSync, loadTool } from "@/lib/hooks/useToolSync";
 import { useRouter } from "next/navigation";
 
 type ReviewStatus = "pending"|"day3-sent"|"day10-sent"|"day30-sent"|"reviewed"|"declined";
