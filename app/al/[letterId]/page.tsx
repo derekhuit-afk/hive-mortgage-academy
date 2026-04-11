@@ -13,14 +13,14 @@ export default function PublicLetterPage() {
     async function load() {
       // Try Supabase first
       try {
-        const res = await fetch(`/api/letters?id=${params.letterId}`);
+        const res = await fetch(`/api/letters?id=${params?.letterId}`);
         if (res.ok) { const data = await res.json(); setLetter(data); return; }
       } catch {}
       // Fallback to localStorage (same device)
       try {
         const saved = localStorage.getItem("hma_letters");
         if (saved) {
-          const found = JSON.parse(saved).find((l: any) => l.id === params.letterId);
+          const found = JSON.parse(saved).find((l: any) => l.id === params?.letterId);
           if (found) { setLetter(found); return; }
         }
       } catch {}
