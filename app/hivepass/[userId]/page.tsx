@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 
 export default function PublicHivePassPage() {
-  const params = useParams();
+  const params = useParams()!;
   const [cert, setCert] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 

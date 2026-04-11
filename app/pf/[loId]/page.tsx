@@ -50,7 +50,7 @@ function calcScenario(payment: number, downPct: number, rate: number, state: str
 const fmt = (n:number) => "$"+n.toLocaleString();
 
 export default function BorrowerPaymentFirst() {
-  const params = useParams();
+  const params = useParams()!;
   const [lo, setLo] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [payment, setPayment] = useState("2000");

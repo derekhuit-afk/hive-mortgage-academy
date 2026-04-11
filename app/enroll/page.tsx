@@ -12,7 +12,7 @@ type Tier = keyof typeof TIER_INFO;
 
 function EnrollContent() {
   const router = useRouter();
-  const params = useSearchParams();
+  const params = useSearchParams()!;
   const initTier = (params.get("tier") || "free") as Tier;
   const [tier, setTier] = useState<Tier>(initTier in TIER_INFO ? initTier : "free");
   const [billing, setBilling] = useState<"monthly"|"annual">("monthly");

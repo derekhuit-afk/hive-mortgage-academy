@@ -22,7 +22,7 @@ const TOOLS = [
 
 function HomeContent() {
   const [billing, setBilling] = useState<"monthly"|"annual">("monthly");
-  const params = useSearchParams();
+  const params = useSearchParams()!;
   const [audience, setAudience] = useState<"new"|"experienced">(
     params.get("for") === "experienced" ? "experienced" : "new"
   );

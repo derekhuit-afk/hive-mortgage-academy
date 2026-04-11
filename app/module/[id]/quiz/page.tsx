@@ -5,7 +5,7 @@ import { MODULES } from "@/lib/curriculum";
 
 export default function QuizPage() {
   const router = useRouter();
-  const params = useParams();
+  const params = useParams()!;
   const moduleId = parseInt(params.id as string);
   const mod = MODULES.find(m => m.id === moduleId);
 

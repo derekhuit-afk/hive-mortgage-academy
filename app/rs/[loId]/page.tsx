@@ -39,7 +39,7 @@ function fmtPlan(text:string) {
 }
 
 export default function ReadyScorePage() {
-  const params = useParams();
+  const params = useParams()!;
   const loId = params.loId as string;
   const [lo, setLo] = useState<any>(null);
   const [step, setStep] = useState(0); // 0=intro, 1-8=questions, 9=results

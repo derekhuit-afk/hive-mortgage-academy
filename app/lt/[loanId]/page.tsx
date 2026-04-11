@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 const MILESTONES = ["Application","Processing","Appraisal","Underwriting","Conditional Approval","Clear to Close","Closing","Funded"];
 
 export default function BorrowerPortalPage() {
-  const params = useParams();
+  const params = useParams()!;
   const [loan, setLoan] = useState<any>(null);
   const [notFound, setNotFound] = useState(false);
 

@@ -6,7 +6,7 @@ import type { Tier } from "@/lib/curriculum";
 
 export default function ModulePage() {
   const router = useRouter();
-  const params = useParams();
+  const params = useParams()!;
   const moduleId = parseInt(params.id as string);
   const mod = MODULES.find(m => m.id === moduleId);
   const [student, setStudent] = useState<any>(null);

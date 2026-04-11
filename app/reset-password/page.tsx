@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 function ResetContent() {
   const router = useRouter();
-  const params = useSearchParams();
+  const params = useSearchParams()!;
   const token = params.get("token") || "";
   const [form, setForm] = useState({ password:"", confirm:"" });
   const [loading, setLoading] = useState(false);
