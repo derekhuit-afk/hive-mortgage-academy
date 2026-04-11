@@ -27,7 +27,7 @@ export default function PublicLetterPage() {
       setNotFound(true);
     }
     load();
-  }, [params.letterId]);
+  }, [params?.letterId]);
 
   if (notFound) return (
     <main style={{ minHeight:"100vh", background:"#f0f0f0", display:"flex", alignItems:"center", justifyContent:"center", padding:24 }}>
