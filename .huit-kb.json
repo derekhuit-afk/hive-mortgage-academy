@@ -1,0 +1,9 @@
+{
+  "huit_kb_version": "1.0",
+  "applied_date": "2026-04-11",
+  "frameworks": ["hallucination_guard", "nist_csf", "responsible_ai", "data_analytics", "marketing_funnel", "smart_pm"],
+  "audit_score_baseline": 35,
+  "audit_score_target": 80,
+  "remediation_wave": 2,
+  "note": "Knowledge base module available at lib/huit_kb — import and inject into system prompts"
+}
