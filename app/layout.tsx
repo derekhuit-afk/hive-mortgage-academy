@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         {children}
-        <script src="https://ase.huit.ai/widget.js" data-product="DEFAULT" defer></script>
+        <script src="https://huit-ase-huitai.vercel.app/widget.js" data-product="DEFAULT" defer></script>
       </body>
     </html>
   );
