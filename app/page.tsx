@@ -584,7 +584,7 @@ function HomeContent() {
                 <div style={{ fontFamily:"'Playfair Display',serif", fontWeight:700, fontSize:15, color:"var(--text-primary)" }}>Hive Mortgage Academy</div>
               </div>
               <p style={{ fontSize:13, color:"var(--text-muted)", lineHeight:1.7, maxWidth:340, marginBottom:12 }}>Training, tools, and AI coaching for loan officers at every stage. Built from 18+ years and $1B+ in career mortgage production.*</p>
-              <p style={{ fontSize:11, color:"#374151", lineHeight:1.6, maxWidth:340, marginBottom:16 }}>Instructor: Derek Huit · NMLS #1739818 · Licensed in AK, WA, MT · Cardinal Financial (NMLS #203980)</p>
+              <p style={{ fontSize:11, color:"#374151", lineHeight:1.6, maxWidth:340, marginBottom:16 }}>Instructor: Derek Huit · NMLS #203980 · Licensed in AK, WA, MT</p>
               <div style={{ display:"inline-flex", alignItems:"center", gap:6, background:"var(--muted)", borderRadius:8, padding:"6px 12px", border:"1px solid var(--border)" }}>
                 <span style={{ fontSize:11, color:"var(--text-muted)" }}>Powered by</span>
                 <span style={{ fontSize:11, color:"var(--text-secondary)", fontWeight:600 }}>⬡ Huit.AI</span>
@@ -612,10 +612,14 @@ function HomeContent() {
               Production figures, income ranges, and business outcome examples referenced throughout this platform reflect the individual historical results of the instructor and/or general industry observations. They are not a guarantee, projection, or promise of future results. Individual results will vary based on market conditions, effort, experience, licensing, and other factors outside the control of Hive Mortgage Academy or Huit.AI, Inc.
             </p>
             <p style={{ fontSize:11, color:"#374151", lineHeight:1.7, marginBottom:20 }}>
-              Mortgage lending is a regulated industry. Students are responsible for understanding and complying with all applicable federal, state, and local laws, regulations, and licensing requirements in their jurisdiction. Equal Housing Opportunity. Instructor: Derek Huit, NMLS #1739818, licensed in AK, WA, MT. Cardinal Financial, NMLS #203980.
+              Mortgage lending is a regulated industry. Students are responsible for understanding and complying with all applicable federal, state, and local laws, regulations, and licensing requirements in their jurisdiction. Equal Housing Opportunity. Instructor: Derek Huit, NMLS #203980, licensed in AK, WA, MT.
             </p>
             <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:12 }}>
-              <div style={{ fontSize:11, color:"#374151" }}>© 2026 Hive Mortgage Academy · Huit.AI, Inc. All rights reserved.</div>
+              <div style={{ fontSize:11, color:"#374151" }}>
+                © 2026 Hive Mortgage Academy · Huit.AI, Inc. All rights reserved. ·{" "}
+                <a href="/terms" style={{ color:"#374151", textDecoration:"underline" }}>Terms</a>{" · "}
+                <a href="/privacy" style={{ color:"#374151", textDecoration:"underline" }}>Privacy</a>
+              </div>
               <div style={{ fontSize:11, color:"#374151" }}>Built from Alaska 🏔️</div>
             </div>
           </div>

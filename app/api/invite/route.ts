@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
               <a href="https://hivemortgageacademy.com/enroll" style="display:inline-block;background:linear-gradient(135deg,#F5A623,#D4881A);color:#0A0A0B;padding:14px 32px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none">Start Free →</a>
             </div>
             <hr style="border:none;border-top:1px solid #1E1E24;margin:20px 0">
-            <p style="color:#4B5563;font-size:11px;line-height:1.6;margin:0">Hive Mortgage Academy · hivemortgageacademy.com · For educational purposes only. Not affiliated with or required by any employer. Individual results vary. Instructor: Derek Huit · NMLS #1739818 · Cardinal Financial (NMLS #203980)</p>
+            <p style="color:#4B5563;font-size:11px;line-height:1.6;margin:0">Hive Mortgage Academy · hivemortgageacademy.com · For educational purposes only. Not affiliated with or required by any employer. Individual results vary. Instructor: Derek Huit · NMLS #203980</p>
           </div>
         </div>`,
     });
