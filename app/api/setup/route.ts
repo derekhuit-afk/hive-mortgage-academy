@@ -113,7 +113,10 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const poolerUrl = process.env.SUPABASE_DB_URL || "";
+  const poolerUrlRaw = process.env.SUPABASE_DB_URL || "";
+  // Strip any ?sslmode=... from the URL so we can control SSL via pg Pool options only.
+  // Supabase pooler uses a self-signed cert chain; pg's default tls settings reject it.
+  const poolerUrl = poolerUrlRaw.replace(/[?&]sslmode=[^&]*/g, "").replace(/\?&/, "?").replace(/\?$/, "");
   const directUrl = buildDirectUrl(poolerUrl);
 
   // Try direct connection first, then pooler
@@ -123,7 +126,8 @@ export async function GET(req: NextRequest) {
   for (const connUrl of urls) {
     const pool = new Pool({
       connectionString: connUrl,
-      ssl: { rejectUnauthorized: false },
+      // require=true + rejectUnauthorized=false accepts Supabase's self-signed chain
+      ssl: { require: true, rejectUnauthorized: false } as any,
       connectionTimeoutMillis: 15000,
       idleTimeoutMillis: 10000,
       max: 1,
