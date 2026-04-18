@@ -70,6 +70,26 @@ ALTER TABLE hma_applications DISABLE ROW LEVEL SECURITY;
 ALTER TABLE hma_students ADD COLUMN IF NOT EXISTS stripe_customer_id text;
 ALTER TABLE hma_students ADD COLUMN IF NOT EXISTS stripe_subscription_id text;
 CREATE INDEX IF NOT EXISTS hma_students_email_idx ON hma_students(email);
+
+CREATE TABLE IF NOT EXISTS hma_consent_log (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  email text NOT NULL,
+  name text,
+  product text NOT NULL DEFAULT 'hive-mortgage-academy',
+  tier text,
+  billing text,
+  terms_version text,
+  privacy_version text,
+  agreed_at timestamptz NOT NULL,
+  ip_address inet,
+  user_agent text,
+  created_at timestamptz DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS hma_consent_log_email_idx ON hma_consent_log(email);
+CREATE INDEX IF NOT EXISTS hma_consent_log_agreed_at_idx ON hma_consent_log(agreed_at DESC);
+ALTER TABLE hma_consent_log ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "service_role_all" ON hma_consent_log;
+CREATE POLICY "service_role_all" ON hma_consent_log FOR ALL TO service_role USING (true) WITH CHECK (true);
 `;
 
 function buildDirectUrl(poolerUrl: string): string {

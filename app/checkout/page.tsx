@@ -29,6 +29,7 @@ function CheckoutContent() {
   const [elements, setElements] = useState<any>(null);
   const [loadingPayment, setLoadingPayment] = useState(true);
   const [paying, setPaying] = useState(false);
+  const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState("");
   const [initError, setInitError] = useState("");
   const [step, setStep] = useState<"password"|"payment">("password");
@@ -89,7 +90,25 @@ function CheckoutContent() {
 
   async function handlePay() {
     if (!stripeJs || !elements) return;
+    if (!agreed) { setError("Please agree to the Terms of Service and Privacy Policy to continue."); return; }
     setPaying(true); setError("");
+    // Record consent audit trail (required by CA ARL §17602(a)(6) — retain 3 years)
+    try {
+      await fetch("/api/consent", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: emailP,
+          name: nameP,
+          product: "hive-mortgage-academy",
+          tier: plan,
+          billing,
+          terms_version: "2026-04-17",
+          privacy_version: "2026-04-17",
+          agreed_at: new Date().toISOString(),
+          user_agent: typeof navigator !== "undefined" ? navigator.userAgent : null,
+        }),
+      });
+    } catch {}
     try {
       await fetch("/api/create-subscription", {
         method: "POST", headers: { "Content-Type": "application/json" },
@@ -209,14 +228,39 @@ function CheckoutContent() {
             </div>
             {error && <div style={{ padding:"10px 14px", background:"rgba(239,68,68,0.08)", border:"1px solid rgba(239,68,68,0.2)", borderRadius:8, fontSize:13, color:"#EF4444", marginBottom:12 }}>{error}</div>}
             {!loadingPayment && !initError && (
-              <button onClick={handlePay} disabled={paying} style={{ width:"100%", background:paying?"#111115":"linear-gradient(135deg,#F5A623,#D4881A)", color:paying?"#2D2D35":"#0A0A0B", border:"none", borderRadius:10, padding:"16px", fontSize:15, fontWeight:700, cursor:paying?"not-allowed":"pointer", marginBottom:12 }}>
-                {paying ? (
-                  <span style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:10 }}>
-                    <div style={{ width:16, height:16, border:"2px solid #2D2D35", borderTop:"2px solid #64748B", borderRadius:"50%", animation:"spin 0.8s linear infinite" }} />
-                    Processing...
+              <>
+                {/* Terms + Privacy consent — required before Pay is enabled */}
+                <label style={{
+                  display:"flex", alignItems:"flex-start", gap:10, padding:"12px 14px",
+                  background:"rgba(245,166,35,0.04)", border:`1px solid ${agreed?"rgba(245,166,35,0.4)":"rgba(245,166,35,0.18)"}`,
+                  borderRadius:10, cursor:"pointer", marginBottom:12, transition:"all 0.15s",
+                }}>
+                  <input
+                    type="checkbox"
+                    checked={agreed}
+                    onChange={(e) => setAgreed(e.target.checked)}
+                    style={{ marginTop:3, width:16, height:16, cursor:"pointer", accentColor:"#F5A623", flexShrink:0 }}
+                  />
+                  <span style={{ fontSize:12.5, color:"#CBD5E1", lineHeight:1.55 }}>
+                    I agree to the{" "}
+                    <a href="/terms" target="_blank" rel="noopener noreferrer" style={{ color:"#F5A623", textDecoration:"underline" }}>
+                      Terms of Service
+                    </a>{" "}and{" "}
+                    <a href="/privacy" target="_blank" rel="noopener noreferrer" style={{ color:"#F5A623", textDecoration:"underline" }}>
+                      Privacy Policy
+                    </a>{" "}of Hive Mortgage Academy, and I authorize Huit.AI, Inc. to charge my payment method ${price}/{billing==="annual"?"mo billed annually":"month"} on a recurring basis until I cancel.
                   </span>
-                ) : `Pay $${price}/${billing==="annual"?"mo":"month"} →`}
-              </button>
+                </label>
+
+                <button onClick={handlePay} disabled={paying || !agreed} style={{ width:"100%", background:(paying||!agreed)?"#111115":"linear-gradient(135deg,#F5A623,#D4881A)", color:(paying||!agreed)?"#2D2D35":"#0A0A0B", border:"none", borderRadius:10, padding:"16px", fontSize:15, fontWeight:700, cursor:(paying||!agreed)?"not-allowed":"pointer", marginBottom:12 }}>
+                  {paying ? (
+                    <span style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:10 }}>
+                      <div style={{ width:16, height:16, border:"2px solid #2D2D35", borderTop:"2px solid #64748B", borderRadius:"50%", animation:"spin 0.8s linear infinite" }} />
+                      Processing...
+                    </span>
+                  ) : `Pay $${price}/${billing==="annual"?"mo":"month"} →`}
+                </button>
+              </>
             )}
             <button onClick={() => setStep("password")} style={{ background:"none", border:"none", color:"#374151", fontSize:12, cursor:"pointer", width:"100%", paddingBottom:8 }}>← Back to account setup</button>
           </div>
