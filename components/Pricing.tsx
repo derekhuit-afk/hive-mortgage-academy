@@ -153,7 +153,7 @@ export default function Pricing() {
 
         <div style={{ textAlign: "center", marginTop: 40 }}>
           <p style={{ fontSize: 12, color: "var(--text-muted)" }}>
-            Billed securely via ZenoPay.ai · Cancel anytime · Questions? <a href="mailto:derekhuit@gmail.com" style={{ color: "var(--honey)", textDecoration: "none" }}>Contact us</a>
+            Billed securely via ZenoPay.ai · <a href="/cancel" style={{ color: "var(--text-muted)", textDecoration: "underline" }}>Cancel anytime</a> · Questions? <a href="mailto:derekhuit@gmail.com" style={{ color: "var(--honey)", textDecoration: "none" }}>Contact us</a>
           </p>
         </div>
       </div>

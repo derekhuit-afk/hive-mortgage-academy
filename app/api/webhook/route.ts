@@ -15,11 +15,36 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Webhook signature failed" }, { status: 400 });
   }
 
-  // Subscription became active — ensure account exists and notify Derek
+  // Subscription became active or renewed — ensure account exists, stamp the
+  // next renewal date, and notify Derek on new accounts.
   if (event.type === "customer.subscription.updated" || event.type === "invoice.payment_succeeded") {
     const obj = event.data.object as any;
     const customerId = obj.customer || obj.subscription?.customer;
     if (!customerId) return NextResponse.json({ received: true });
+
+    // Extract the subscription's current_period_end (unix seconds → ISO).
+    // Both event types carry it, but in different places:
+    //   customer.subscription.updated  → obj.current_period_end
+    //   invoice.payment_succeeded       → obj.lines.data[0].period.end (most reliable)
+    //                                     or a fetch-by-subscription-id fallback
+    let periodEndIso: string | null = null;
+    try {
+      if (event.type === "customer.subscription.updated" && obj.current_period_end) {
+        periodEndIso = new Date(obj.current_period_end * 1000).toISOString();
+      } else if (event.type === "invoice.payment_succeeded") {
+        const linePeriodEnd = obj?.lines?.data?.[0]?.period?.end;
+        if (linePeriodEnd) {
+          periodEndIso = new Date(linePeriodEnd * 1000).toISOString();
+        } else if (obj.subscription) {
+          const sub = await stripe.subscriptions.retrieve(obj.subscription);
+          if ((sub as any).current_period_end) {
+            periodEndIso = new Date((sub as any).current_period_end * 1000).toISOString();
+          }
+        }
+      }
+    } catch (err) {
+      console.error("Webhook period_end extract failed:", err);
+    }
 
     try {
       const { data } = await supabaseAdmin
@@ -27,6 +52,15 @@ export async function POST(req: NextRequest) {
         .select("name, email, plan")
         .eq("stripe_customer_id", customerId)
         .maybeSingle();
+
+      // Stamp current_period_end regardless of notify state so the renewal
+      // reminder cron has fresh data.
+      if (periodEndIso) {
+        await supabaseAdmin
+          .from("hma_students")
+          .update({ current_period_end: periodEndIso })
+          .eq("stripe_customer_id", customerId);
+      }
 
       // If we don't have the account yet (edge case), log it
       if (!data) console.log("Webhook: no account found for customer", customerId);

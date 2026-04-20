@@ -310,3 +310,102 @@ export async function sendApplicationConfirmEmail({ name, email, market, experie
     });
   } catch (err) { console.error("Application confirm email failed:", err); }
 }
+
+// ═══════════════════════════════════════════════════════════════════════════
+// 10. RENEWAL REMINDER — pre-charge notice (FTC ROSCA / CA ARL §17602(b))
+//     Fires 12 days before monthly renewal, 30 days before annual renewal.
+//     Discloses amount, date, and provides one-click cancel link.
+// ═══════════════════════════════════════════════════════════════════════════
+export async function sendRenewalReminderEmail({
+  name, email, plan, billingCycle, renewalDate, amountCents,
+}: {
+  name: string;
+  email: string;
+  plan: string;
+  billingCycle: "monthly" | "annual";
+  renewalDate: Date;
+  amountCents: number;
+}) {
+  const firstName = name?.split(" ")[0] || "there";
+  const amount = `$${(amountCents / 100).toFixed(2)}`;
+  const dateStr = renewalDate.toLocaleDateString("en-US", {
+    weekday: "long", year: "numeric", month: "long", day: "numeric",
+  });
+  const cadence = billingCycle === "annual" ? "annual" : "monthly";
+  const cadenceNoun = billingCycle === "annual" ? "year" : "month";
+  const daysOut = billingCycle === "annual" ? 30 : 12;
+  const tierLabel = TIER_LABEL[plan] || plan;
+
+  try {
+    const resend = await getResend();
+    await resend.emails.send({
+      from: FROM_EMAIL, to: email, cc: CC_EMAIL,
+      subject: `Heads up: your Hive Mortgage Academy ${cadence} renewal is coming up`,
+      html: `${header("🔔", "Renewal reminder", "Hive Mortgage Academy")}
+        ${wrap(`
+          <p style="color:#CBD5E1;font-size:15px;line-height:1.7;margin:0 0 16px">Hey ${firstName} — quick heads up before your ${cadence} renewal. We want you to know exactly what's about to happen so there are no surprises.</p>
+
+          <div style="background:rgba(245,166,35,0.08);border:1px solid rgba(245,166,35,0.2);border-radius:10px;padding:16px 18px;margin:0 0 20px">
+            <table style="width:100%;border-collapse:collapse;font-size:13px">
+              <tr><td style="padding:5px 0;color:#94A3B8;width:140px">Plan</td><td style="padding:5px 0;color:white;font-weight:700">${tierLabel}</td></tr>
+              <tr><td style="padding:5px 0;color:#94A3B8">Billing cycle</td><td style="padding:5px 0;color:white;font-weight:700">${cadence.charAt(0).toUpperCase() + cadence.slice(1)}</td></tr>
+              <tr><td style="padding:5px 0;color:#94A3B8">Amount to be charged</td><td style="padding:5px 0;color:#F5A623;font-weight:700">${amount}</td></tr>
+              <tr><td style="padding:5px 0;color:#94A3B8">Renewal date</td><td style="padding:5px 0;color:white;font-weight:700">${dateStr}</td></tr>
+              <tr><td style="padding:5px 0;color:#94A3B8">Days from today</td><td style="padding:5px 0;color:white">~${daysOut} days</td></tr>
+            </table>
+          </div>
+
+          <p style="color:#CBD5E1;font-size:14px;line-height:1.7;margin:0 0 18px">Your card on file will be charged <strong style="color:#F5A623">${amount}</strong> on <strong style="color:white">${dateStr}</strong> for another ${cadenceNoun} of access. If you want to keep going, you don't need to do anything — it'll happen automatically.</p>
+
+          <p style="color:#CBD5E1;font-size:14px;line-height:1.7;margin:0 0 6px"><strong style="color:white">Need to cancel or pause?</strong> It's one click, no phone calls, no forms. Cancel any time before the renewal date and you won't be charged:</p>
+
+          ${btn("Cancel or Manage Subscription →", `${BASE_URL}/cancel`)}
+
+          <p style="color:#94A3B8;font-size:12px;line-height:1.6;margin:16px 0 0">If you cancel after the renewal charge, your access stays active through the end of the billing period you paid for. Questions? Just reply to this email.</p>
+        `)}`,
+    });
+  } catch (err) { console.error("Renewal reminder email failed:", err); }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// 11. CANCELLATION CONFIRMATION — sent after a student cancels
+// ═══════════════════════════════════════════════════════════════════════════
+export async function sendCancellationConfirmEmail({
+  name, email, plan, periodEnd,
+}: {
+  name: string;
+  email: string;
+  plan: string;
+  periodEnd: Date | null;
+}) {
+  const firstName = name?.split(" ")[0] || "there";
+  const tierLabel = TIER_LABEL[plan] || plan;
+  const endStr = periodEnd
+    ? periodEnd.toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })
+    : "the end of your current billing period";
+
+  try {
+    const resend = await getResend();
+    await resend.emails.send({
+      from: FROM_EMAIL, to: email, cc: CC_EMAIL,
+      subject: "Your Hive Mortgage Academy cancellation is confirmed",
+      html: `${header("✓", "Cancellation confirmed", "Hive Mortgage Academy")}
+        ${wrap(`
+          <p style="color:#CBD5E1;font-size:15px;line-height:1.7;margin:0 0 16px">Hey ${firstName} — we've received your cancellation request. Here's what happens next:</p>
+
+          <div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:10px;padding:14px 18px;margin:0 0 20px">
+            <p style="color:#10B981;font-size:13px;font-weight:700;margin:0 0 8px">Your cancellation is scheduled</p>
+            <p style="color:#CBD5E1;font-size:13px;line-height:1.6;margin:0">Your <strong style="color:white">${tierLabel}</strong> subscription will end on <strong style="color:white">${endStr}</strong>. You'll keep full access until then, and you won't be charged again.</p>
+          </div>
+
+          <p style="color:#CBD5E1;font-size:14px;line-height:1.7;margin:0 0 16px">No partial refunds are issued for unused time, but you get to use everything you paid for through the period end. After that, your account will move to the free tier — your progress, certificates, and HivePass™ stay with you.</p>
+
+          <p style="color:#CBD5E1;font-size:14px;line-height:1.7;margin:0 0 6px"><strong style="color:white">Changed your mind?</strong> You can un-cancel any time before ${endStr} from your dashboard:</p>
+
+          ${btn("Back to Dashboard →", `${BASE_URL}/dashboard`)}
+
+          <p style="color:#94A3B8;font-size:12px;line-height:1.6;margin:16px 0 0">Thanks for giving us a shot. If there was something specific that didn't work, I'd genuinely like to hear it — just reply to this email. — Derek</p>
+        `)}`,
+    });
+  } catch (err) { console.error("Cancellation confirm email failed:", err); }
+}

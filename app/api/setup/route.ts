@@ -90,6 +90,57 @@ CREATE INDEX IF NOT EXISTS hma_consent_log_agreed_at_idx ON hma_consent_log(agre
 ALTER TABLE hma_consent_log ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "service_role_all" ON hma_consent_log;
 CREATE POLICY "service_role_all" ON hma_consent_log FOR ALL TO service_role USING (true) WITH CHECK (true);
+
+-- ── Cancellation audit log (FTC ROSCA / CA ARL §17602 compliance) ──────────
+CREATE TABLE IF NOT EXISTS hma_cancellation_log (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  student_id uuid REFERENCES hma_students(id) ON DELETE SET NULL,
+  email text NOT NULL,
+  name text,
+  plan text,
+  billing_cycle text,
+  stripe_subscription_id text,
+  stripe_customer_id text,
+  cancel_at_period_end timestamptz,
+  reason text,
+  requested_at timestamptz NOT NULL DEFAULT now(),
+  ip_address inet,
+  user_agent text,
+  created_at timestamptz DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS hma_cancellation_log_email_idx ON hma_cancellation_log(email);
+CREATE INDEX IF NOT EXISTS hma_cancellation_log_student_idx ON hma_cancellation_log(student_id);
+CREATE INDEX IF NOT EXISTS hma_cancellation_log_requested_idx ON hma_cancellation_log(requested_at DESC);
+ALTER TABLE hma_cancellation_log ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "service_role_all" ON hma_cancellation_log;
+CREATE POLICY "service_role_all" ON hma_cancellation_log FOR ALL TO service_role USING (true) WITH CHECK (true);
+
+-- ── Renewal reminder log (idempotency + audit) ─────────────────────────────
+-- One row per (student, renewal_date) that a reminder was sent for. Unique
+-- constraint makes the cron idempotent: re-running the job same day, or the
+-- next day, cannot double-send for the same renewal cycle.
+CREATE TABLE IF NOT EXISTS hma_renewal_reminders (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  student_id uuid REFERENCES hma_students(id) ON DELETE CASCADE,
+  email text NOT NULL,
+  billing_cycle text NOT NULL,
+  plan text,
+  renewal_date timestamptz NOT NULL,
+  amount_cents int,
+  sent_at timestamptz NOT NULL DEFAULT now(),
+  UNIQUE (student_id, renewal_date)
+);
+CREATE INDEX IF NOT EXISTS hma_renewal_reminders_email_idx ON hma_renewal_reminders(email);
+CREATE INDEX IF NOT EXISTS hma_renewal_reminders_renewal_idx ON hma_renewal_reminders(renewal_date);
+ALTER TABLE hma_renewal_reminders ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "service_role_all" ON hma_renewal_reminders;
+CREATE POLICY "service_role_all" ON hma_renewal_reminders FOR ALL TO service_role USING (true) WITH CHECK (true);
+
+-- Column used by the billing-reminder cron to look up next renewal without
+-- an extra Stripe roundtrip per student. Populated by webhook handlers on
+-- invoice.payment_succeeded / customer.subscription.updated.
+ALTER TABLE hma_students ADD COLUMN IF NOT EXISTS current_period_end timestamptz;
+CREATE INDEX IF NOT EXISTS hma_students_period_end_idx ON hma_students(current_period_end);
 `;
 
 function buildDirectUrl(poolerUrl: string): string {

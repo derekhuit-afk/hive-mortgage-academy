@@ -555,7 +555,7 @@ function HomeContent() {
             ))}
           </div>
           <div style={{ textAlign:"center", marginTop:28 }}>
-            <p style={{ fontSize:12, color:"var(--text-muted)" }}>Billed securely via ZenoPay.ai · Cancel anytime · Questions? <a href="mailto:derekhuit@gmail.com" style={{ color:"var(--honey)", textDecoration:"none" }}>Contact us</a></p>
+            <p style={{ fontSize:12, color:"var(--text-muted)" }}>Billed securely via ZenoPay.ai · <a href="/cancel" style={{ color:"var(--text-muted)", textDecoration:"underline" }}>Cancel anytime</a> · Questions? <a href="mailto:derekhuit@gmail.com" style={{ color:"var(--honey)", textDecoration:"none" }}>Contact us</a></p>
           </div>
           <style>{`@media(max-width:1100px){.price-grid{grid-template-columns:repeat(2,1fr)!important}}@media(max-width:600px){.price-grid{grid-template-columns:1fr!important}}`}</style>
         </div>
@@ -618,7 +618,8 @@ function HomeContent() {
               <div style={{ fontSize:11, color:"#374151" }}>
                 © 2026 Hive Mortgage Academy · Huit.AI, Inc. All rights reserved. ·{" "}
                 <a href="/terms" style={{ color:"#374151", textDecoration:"underline" }}>Terms</a>{" · "}
-                <a href="/privacy" style={{ color:"#374151", textDecoration:"underline" }}>Privacy</a>
+                <a href="/privacy" style={{ color:"#374151", textDecoration:"underline" }}>Privacy</a>{" · "}
+                <a href="/cancel" style={{ color:"#374151", textDecoration:"underline" }}>Cancel</a>
               </div>
               <div style={{ fontSize:11, color:"#374151" }}>Built from Alaska 🏔️</div>
             </div>
