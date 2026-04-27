@@ -11,10 +11,7 @@ CREATE TABLE IF NOT EXISTS hma_students (
   name text NOT NULL,
   nmls_number text DEFAULT '',
   plan text NOT NULL DEFAULT 'free',
-  billing_cycle text NOT NULL DEFAULT 'monthly',
   password_hash text NOT NULL,
-  stripe_customer_id text,
-  stripe_subscription_id text,
   created_at timestamptz DEFAULT now()
 );
 ALTER TABLE hma_students DISABLE ROW LEVEL SECURITY;
@@ -67,9 +64,10 @@ CREATE TABLE IF NOT EXISTS hma_applications (
 );
 ALTER TABLE hma_applications DISABLE ROW LEVEL SECURITY;
 
-ALTER TABLE hma_students ADD COLUMN IF NOT EXISTS stripe_customer_id text;
-ALTER TABLE hma_students ADD COLUMN IF NOT EXISTS stripe_subscription_id text;
+ALTER TABLE hma_students ADD COLUMN IF NOT EXISTS recruiting_opt_in boolean DEFAULT false;
+ALTER TABLE hma_students ADD COLUMN IF NOT EXISTS state_licenses text[] DEFAULT '{}';
 CREATE INDEX IF NOT EXISTS hma_students_email_idx ON hma_students(email);
+CREATE INDEX IF NOT EXISTS hma_students_recruiting_idx ON hma_students(recruiting_opt_in) WHERE recruiting_opt_in = true;
 
 CREATE TABLE IF NOT EXISTS hma_consent_log (
   id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -83,64 +81,45 @@ CREATE TABLE IF NOT EXISTS hma_consent_log (
   agreed_at timestamptz NOT NULL,
   ip_address inet,
   user_agent text,
+  recruiting_opt_in boolean DEFAULT false,
   created_at timestamptz DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS hma_consent_log_email_idx ON hma_consent_log(email);
 CREATE INDEX IF NOT EXISTS hma_consent_log_agreed_at_idx ON hma_consent_log(agreed_at DESC);
+ALTER TABLE hma_consent_log ADD COLUMN IF NOT EXISTS recruiting_opt_in boolean DEFAULT false;
 ALTER TABLE hma_consent_log ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "service_role_all" ON hma_consent_log;
 CREATE POLICY "service_role_all" ON hma_consent_log FOR ALL TO service_role USING (true) WITH CHECK (true);
 
--- ── Cancellation audit log (FTC ROSCA / CA ARL §17602 compliance) ──────────
-CREATE TABLE IF NOT EXISTS hma_cancellation_log (
+-- ── Careers inquiries (public contact form on /careers) ───────────────────
+CREATE TABLE IF NOT EXISTS hma_careers_inquiries (
   id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
-  student_id uuid REFERENCES hma_students(id) ON DELETE SET NULL,
+  name text NOT NULL,
   email text NOT NULL,
-  name text,
-  plan text,
-  billing_cycle text,
-  stripe_subscription_id text,
-  stripe_customer_id text,
-  cancel_at_period_end timestamptz,
-  reason text,
-  requested_at timestamptz NOT NULL DEFAULT now(),
+  nmls text,
+  states_licensed text,
+  years_experience text,
+  message text,
+  source text DEFAULT '/careers',
   ip_address inet,
   user_agent text,
   created_at timestamptz DEFAULT now()
 );
-CREATE INDEX IF NOT EXISTS hma_cancellation_log_email_idx ON hma_cancellation_log(email);
-CREATE INDEX IF NOT EXISTS hma_cancellation_log_student_idx ON hma_cancellation_log(student_id);
-CREATE INDEX IF NOT EXISTS hma_cancellation_log_requested_idx ON hma_cancellation_log(requested_at DESC);
-ALTER TABLE hma_cancellation_log ENABLE ROW LEVEL SECURITY;
-DROP POLICY IF EXISTS "service_role_all" ON hma_cancellation_log;
-CREATE POLICY "service_role_all" ON hma_cancellation_log FOR ALL TO service_role USING (true) WITH CHECK (true);
+CREATE INDEX IF NOT EXISTS hma_careers_inquiries_email_idx ON hma_careers_inquiries(email);
+CREATE INDEX IF NOT EXISTS hma_careers_inquiries_created_idx ON hma_careers_inquiries(created_at DESC);
+ALTER TABLE hma_careers_inquiries ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "service_role_all" ON hma_careers_inquiries;
+CREATE POLICY "service_role_all" ON hma_careers_inquiries FOR ALL TO service_role USING (true) WITH CHECK (true);
 
--- ── Renewal reminder log (idempotency + audit) ─────────────────────────────
--- One row per (student, renewal_date) that a reminder was sent for. Unique
--- constraint makes the cron idempotent: re-running the job same day, or the
--- next day, cannot double-send for the same renewal cycle.
-CREATE TABLE IF NOT EXISTS hma_renewal_reminders (
-  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
-  student_id uuid REFERENCES hma_students(id) ON DELETE CASCADE,
-  email text NOT NULL,
-  billing_cycle text NOT NULL,
-  plan text,
-  renewal_date timestamptz NOT NULL,
-  amount_cents int,
-  sent_at timestamptz NOT NULL DEFAULT now(),
-  UNIQUE (student_id, renewal_date)
-);
-CREATE INDEX IF NOT EXISTS hma_renewal_reminders_email_idx ON hma_renewal_reminders(email);
-CREATE INDEX IF NOT EXISTS hma_renewal_reminders_renewal_idx ON hma_renewal_reminders(renewal_date);
-ALTER TABLE hma_renewal_reminders ENABLE ROW LEVEL SECURITY;
-DROP POLICY IF EXISTS "service_role_all" ON hma_renewal_reminders;
-CREATE POLICY "service_role_all" ON hma_renewal_reminders FOR ALL TO service_role USING (true) WITH CHECK (true);
-
--- Column used by the billing-reminder cron to look up next renewal without
--- an extra Stripe roundtrip per student. Populated by webhook handlers on
--- invoice.payment_succeeded / customer.subscription.updated.
-ALTER TABLE hma_students ADD COLUMN IF NOT EXISTS current_period_end timestamptz;
-CREATE INDEX IF NOT EXISTS hma_students_period_end_idx ON hma_students(current_period_end);
+-- ── Drop legacy billing/letter tables — no longer used in free model ───────
+DROP TABLE IF EXISTS hma_letters CASCADE;
+DROP TABLE IF EXISTS hma_renewal_reminders CASCADE;
+DROP TABLE IF EXISTS hma_cancellation_log CASCADE;
+ALTER TABLE hma_students DROP COLUMN IF EXISTS stripe_customer_id;
+ALTER TABLE hma_students DROP COLUMN IF EXISTS stripe_subscription_id;
+ALTER TABLE hma_students DROP COLUMN IF EXISTS current_period_end;
+ALTER TABLE hma_students DROP COLUMN IF EXISTS billing_cycle;
+DROP INDEX IF EXISTS hma_students_period_end_idx;
 `;
 
 function buildDirectUrl(poolerUrl: string): string {

@@ -2,27 +2,17 @@
 import { useState, useEffect } from "react";
 import MobileNav from "@/lib/MobileNav";
 import { useRouter, useSearchParams } from "next/navigation";
-import { MODULES, canAccessModule, TIER_LIMITS } from "@/lib/curriculum";
-import type { Tier } from "@/lib/curriculum";
+import { MODULES } from "@/lib/curriculum";
 import { Suspense } from "react";
 
-const TIER_LABEL: Record<string, string> = { free: "Free", foundation: "Foundation", accelerator: "Accelerator", elite: "Elite" };
-const TIER_COLOR: Record<string, string> = { free: "#10B981", foundation: "#3B82F6", accelerator: "#8B5CF6", elite: "#F5A623" };
-const NEXT_TIER: Record<string, { name: string; href: string }> = {
-  free: { name: "Foundation ($97/mo) — unlock 9 modules", href: "/enroll?tier=foundation" },
-  foundation: { name: "Accelerator ($297/mo)", href: "/enroll?tier=accelerator" },
-  accelerator: { name: "Elite ($697/mo)", href: "/enroll?tier=elite" },
-  elite: { name: "", href: "" },
-};
+const TOTAL_MODULES = 12;
 
 function Dashboard() {
   const router = useRouter();
   const params = useSearchParams();
-  const showUpgrade = params.get("upgrade") === "1";
   const [student, setStudent] = useState<any>(null);
   const [progress, setProgress] = useState<Record<number, { completed: boolean; score?: number }>>({});
   const [showWelcome, setShowWelcome] = useState(params.get("welcome") === "1");
-  const [showUpgradeBanner, setShowUpgradeBanner] = useState(showUpgrade);
   const [showCoach, setShowCoach] = useState(false);
   const [coachMessages, setCoachMessages] = useState<{ role: string; content: string }[]>([{ role: "assistant", content: "Welcome back! Ask me anything about loan origination, pipeline building, compliance, or your career. I'm here 24/7." }]);
   const [coachInput, setCoachInput] = useState("");
@@ -64,12 +54,9 @@ function Dashboard() {
 
   if (!student) return <div style={{ minHeight: "100vh", background: "var(--obsidian)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--honey)", fontSize: 18 }}>Loading...</div>;
 
-  const tier = (student.plan || "free") as Tier;
-  const tierLimit = TIER_LIMITS[tier];
   const completedCount = Object.values(progress).filter(p => p.completed).length;
-  const tierCompleted = Object.entries(progress).filter(([k, p]) => p.completed && parseInt(k) <= tierLimit).length;
-  const graduated = tierCompleted >= tierLimit;
-  const nextModule = MODULES.find(m => !progress[m.id]?.completed && canAccessModule(m.id, tier));
+  const graduated = completedCount >= TOTAL_MODULES;
+  const nextModule = MODULES.find(m => !progress[m.id]?.completed);
 
   return (
     <main style={{ minHeight: "100vh", background: "var(--obsidian)" }}>
@@ -82,10 +69,9 @@ function Dashboard() {
           <button onClick={() => setShowCoach(!showCoach)} style={{ background: showCoach ? "rgba(245,166,35,0.15)" : "none", border: "1px solid var(--border)", borderRadius: 8, color: "var(--honey)", fontSize: 12, fontWeight: 600, padding: "7px 14px", cursor: "pointer" }}>🤖 AI Coach</button>
           <div style={{ textAlign: "right" }}>
             <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>{student.name}</div>
-            <div style={{ fontSize: 11, color: TIER_COLOR[tier], fontWeight: 600 }}>{TIER_LABEL[tier]} Tier</div>
+            <div style={{ fontSize: 11, color: "#10B981", fontWeight: 600 }}>Free Training</div>
           </div>
           <button onClick={logout} style={{ background: "none", border: "1px solid var(--border)", borderRadius: 8, color: "var(--text-muted)", fontSize: 12, padding: "6px 14px", cursor: "pointer" }} className="hide-mobile">Sign Out</button>
-          {tier !== "free" && <a href="/cancel" style={{ background: "none", border: "1px solid var(--border)", borderRadius: 8, color: "var(--text-muted)", fontSize: 12, padding: "6px 14px", textDecoration: "none" }} className="hide-mobile">Manage billing</a>}
           <a href="/command-center" style={{ background: "linear-gradient(135deg,#F5A623,#D4881A)", color: "#0A0A0B", borderRadius: 8, fontSize: 12, fontWeight: 700, padding: "6px 14px", textDecoration: "none" }} className="hide-mobile">⚡ Command Center</a>
           <MobileNav studentName={student?.name} onLogout={logout} />
         </div>
@@ -97,28 +83,16 @@ function Dashboard() {
           <div style={{ background: "linear-gradient(135deg,rgba(245,166,35,0.1),rgba(245,166,35,0.04))", border: "1px solid rgba(245,166,35,0.25)", borderRadius: 14, padding: "18px 22px", marginBottom: 20, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div>
               <div style={{ fontSize: 15, fontWeight: 700, color: "var(--honey)", marginBottom: 4 }}>Welcome to Hive Mortgage Academy, {student.name.split(" ")[0]}! 🐝</div>
-              <div style={{ fontSize: 13, color: "var(--text-secondary)" }}>Your first 3 modules are unlocked. The AI Coach is ready. Start with Module 1.</div>
+              <div style={{ fontSize: 13, color: "var(--text-secondary)" }}>All 12 modules and 11 LO tools are unlocked. The AI Coach is ready. Start with Module 1.</div>
             </div>
             <button onClick={() => setShowWelcome(false)} style={{ background: "none", border: "none", color: "var(--text-muted)", cursor: "pointer", fontSize: 20 }}>×</button>
-          </div>
-        )}
-        {showUpgradeBanner && (
-          <div style={{ background: "rgba(139,92,246,0.08)", border: "1px solid rgba(139,92,246,0.3)", borderRadius: 14, padding: "16px 22px", marginBottom: 20, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: "#8B5CF6", marginBottom: 4 }}>Upgrade to unlock this module</div>
-              <div style={{ fontSize: 13, color: "var(--text-secondary)" }}>Your current {TIER_LABEL[tier]} tier unlocks modules 1–{tierLimit}. Upgrade to continue.</div>
-            </div>
-            <div style={{ display: "flex", gap: 10 }}>
-              {NEXT_TIER[tier]?.name && <a href={NEXT_TIER[tier].href} style={{ background: "linear-gradient(135deg,#8B5CF6,#7C3AED)", color: "white", padding: "8px 16px", borderRadius: 8, fontSize: 12, fontWeight: 700, textDecoration: "none" }}>Upgrade to {NEXT_TIER[tier].name} →</a>}
-              <button onClick={() => setShowUpgradeBanner(false)} style={{ background: "none", border: "none", color: "var(--text-muted)", cursor: "pointer", fontSize: 20 }}>×</button>
-            </div>
           </div>
         )}
         {graduated && (
           <div style={{ background: "linear-gradient(135deg,rgba(245,166,35,0.12),rgba(245,166,35,0.04))", border: "1px solid rgba(245,166,35,0.4)", borderRadius: 14, padding: "20px 24px", marginBottom: 20, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
             <div>
-              <div style={{ fontSize: 16, fontWeight: 700, color: "var(--honey)", marginBottom: 4 }}>🎉 Congratulations! You've completed your {TIER_LABEL[tier]} curriculum.</div>
-              <div style={{ fontSize: 13, color: "var(--text-secondary)" }}>Claim your HivePass™ and choose your next path.</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: "var(--honey)", marginBottom: 4 }}>🎉 Congratulations! You've completed the entire curriculum.</div>
+              <div style={{ fontSize: 13, color: "var(--text-secondary)" }}>Claim your HivePass™ and explore career opportunities.</div>
             </div>
             <a href="/graduation" style={{ background: "linear-gradient(135deg,#F5A623,#D4881A)", color: "#0A0A0B", padding: "12px 22px", borderRadius: 10, fontSize: 14, fontWeight: 700, textDecoration: "none" }}>Get Your HivePass™ →</a>
           </div>
@@ -128,18 +102,18 @@ function Dashboard() {
         <div style={{ background: "var(--charcoal)", border: "1px solid var(--border)", borderRadius: 16, padding: 24, marginBottom: 32, display: "grid", gridTemplateColumns: "1fr auto", gap: 20, alignItems: "center" }} className="progress-card">
           <div>
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-              <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-secondary)" }}>Your Progress ({TIER_LABEL[tier]} Tier)</span>
-              <span style={{ fontSize: 13, fontWeight: 700, color: TIER_COLOR[tier] }}>{tierCompleted}/{tierLimit} Modules</span>
+              <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-secondary)" }}>Your Progress</span>
+              <span style={{ fontSize: 13, fontWeight: 700, color: "#10B981" }}>{completedCount}/{TOTAL_MODULES} Modules</span>
             </div>
             <div style={{ height: 8, background: "var(--muted)", borderRadius: 100, overflow: "hidden" }}>
-              <div style={{ height: "100%", width: `${(tierCompleted / tierLimit) * 100}%`, background: `linear-gradient(90deg,${TIER_COLOR[tier]},${TIER_COLOR[tier]}cc)`, borderRadius: 100, transition: "width 0.6s ease" }} />
+              <div style={{ height: "100%", width: `${(completedCount / TOTAL_MODULES) * 100}%`, background: "linear-gradient(90deg,#10B981,#10B981cc)", borderRadius: 100, transition: "width 0.6s ease" }} />
             </div>
             <div style={{ fontSize: 11, color: "var(--text-muted)", marginTop: 6 }}>
-              {graduated ? "🎉 Tier complete! Get your HivePass™" : `${tierLimit - tierCompleted} module${tierLimit - tierCompleted !== 1 ? "s" : ""} remaining in ${TIER_LABEL[tier]}`}
+              {graduated ? "🎉 Curriculum complete! Get your HivePass™" : `${TOTAL_MODULES - completedCount} module${TOTAL_MODULES - completedCount !== 1 ? "s" : ""} remaining`}
             </div>
           </div>
           <div style={{ background: "var(--slate)", borderRadius: 10, padding: "12px 20px", textAlign: "center", minWidth: 80 }}>
-            <div style={{ fontSize: 28, fontWeight: 900, color: TIER_COLOR[tier], fontFamily: "'Playfair Display',serif" }}>{Math.round((tierCompleted / tierLimit) * 100)}%</div>
+            <div style={{ fontSize: 28, fontWeight: 900, color: "#10B981", fontFamily: "'Playfair Display',serif" }}>{Math.round((completedCount / TOTAL_MODULES) * 100)}%</div>
             <div style={{ fontSize: 10, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Complete</div>
           </div>
         </div>
@@ -154,7 +128,7 @@ function Dashboard() {
             </a>
           ) : (
             <a href="/graduation" style={{ background: "linear-gradient(135deg,rgba(245,166,35,0.1),rgba(245,166,35,0.04))", border: "1px solid rgba(245,166,35,0.25)", borderRadius: 14, padding: "18px 20px", textDecoration: "none" }}>
-              <div style={{ fontSize: 11, color: "var(--honey)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 6 }}>Tier Complete</div>
+              <div style={{ fontSize: 11, color: "var(--honey)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 6 }}>Curriculum Complete</div>
               <div style={{ fontSize: 14, fontWeight: 700, color: "var(--text-primary)" }}>Get Your HivePass™ →</div>
             </a>
           )}
@@ -166,7 +140,7 @@ function Dashboard() {
           <a href="/invite" style={{ background: "var(--charcoal)", border: "1px solid var(--border)", borderRadius: 14, padding: "18px 20px", textDecoration: "none" }}>
             <div style={{ fontSize: 11, color: "#3B82F6", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 6 }}>Share the Platform</div>
             <div style={{ fontSize: 14, fontWeight: 700, color: "var(--text-primary)" }}>✉️ Invite a Colleague</div>
-            <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 4 }}>Send a personal invite — 6 modules free</div>
+            <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 4 }}>Send a personal invite — completely free</div>
           </a>
           {completedCount >= 6 ? (
             <a href="/apply" style={{ background: "var(--charcoal)", border: "1px solid rgba(245,166,35,0.35)", borderRadius: 14, padding: "18px 20px", textDecoration: "none" }}>
@@ -215,17 +189,15 @@ function Dashboard() {
         {/* Module Grid */}
         <div style={{ marginBottom: 12 }}>
           <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 900, color: "var(--text-primary)", marginBottom: 6 }}>Your Curriculum</h2>
-          <p style={{ fontSize: 13, color: "var(--text-muted)" }}>12 modules · {TIER_LABEL[tier]} tier unlocks modules 1–{tierLimit}</p>
+          <p style={{ fontSize: 13, color: "var(--text-muted)" }}>All 12 modules unlocked · Free forever</p>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }} className="module-grid">
           {MODULES.map(m => {
-            const accessible = canAccessModule(m.id, tier);
             const done = progress[m.id]?.completed;
             const score = progress[m.id]?.score;
             return (
-              <div key={m.id} onClick={() => accessible ? router.push(`/module/${m.id}`) : setShowUpgradeBanner(true)} style={{ background: "var(--charcoal)", border: `1px solid ${done ? "rgba(16,185,129,0.3)" : accessible ? "var(--border)" : "var(--border)"}`, borderRadius: 14, padding: 20, cursor: accessible ? "pointer" : "pointer", opacity: accessible ? 1 : 0.55, position: "relative" }}>
+              <div key={m.id} onClick={() => router.push(`/module/${m.id}`)} style={{ background: "var(--charcoal)", border: `1px solid ${done ? "rgba(16,185,129,0.3)" : "var(--border)"}`, borderRadius: 14, padding: 20, cursor: "pointer", position: "relative" }}>
                 {done && <div style={{ position: "absolute", top: 12, right: 12, width: 22, height: 22, borderRadius: "50%", background: "#10B981", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, color: "white" }}>✓</div>}
-                {!accessible && <div style={{ position: "absolute", top: 12, right: 12, fontSize: 14 }}>🔒</div>}
                 <div style={{ fontSize: 10, color: m.badgeColor, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 4 }}>{m.badge}</div>
                 <div style={{ fontFamily: "'Playfair Display',serif", fontSize: 28, fontWeight: 900, color: "rgba(245,166,35,0.15)", lineHeight: 1, marginBottom: 6 }}>{String(m.id).padStart(2,"0")}</div>
                 <div style={{ fontSize: 14, fontWeight: 700, color: "var(--text-primary)", lineHeight: 1.3, marginBottom: 4 }}>{m.title}</div>

@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { validateRequest } from "@/lib/auth";
-import { sendQuizPassedEmail, sendModuleCompleteEmail, sendUpgradeEmail } from "@/lib/email";
-
-const TIER_LIMITS: Record<string,number> = { free:6, foundation:9, accelerator:11, elite:12 };
+import { sendQuizPassedEmail, sendModuleCompleteEmail } from "@/lib/email";
 
 export async function POST(req: NextRequest) {
   try {
@@ -21,8 +19,6 @@ export async function POST(req: NextRequest) {
       if (student) {
         sendQuizPassedEmail({ name: student.name, email: student.email, moduleNumber, score });
         sendModuleCompleteEmail({ name: student.name, email: student.email, moduleNumber, plan: student.plan });
-        const tierLimit = TIER_LIMITS[student.plan] || 6;
-        if (moduleNumber === tierLimit) setTimeout(() => sendUpgradeEmail({ name: student.name, email: student.email, currentPlan: student.plan }), 3000);
       }
     }
     return NextResponse.json({ ok: true });

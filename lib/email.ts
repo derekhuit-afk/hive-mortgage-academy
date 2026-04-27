@@ -9,20 +9,13 @@ async function getResend() {
   return new Resend(process.env.RESEND_API_KEY || "");
 }
 
+// All HMA students get the same access. These constants stay only so legacy
+// callers in this file (welcome email, completion email, etc.) keep working.
 const TIER_LABEL: Record<string,string> = {
-  free: "Free", foundation: "Foundation — $97/mo",
-  accelerator: "Accelerator — $297/mo", elite: "Elite — $697/mo",
+  free: "Hive Mortgage Academy — Free Training",
 };
 const TIER_ACCESS: Record<string,string> = {
-  free: "Modules 1–6 unlocked + unlimited AI Coach.",
-  foundation: "Modules 1–9 fully unlocked.",
-  accelerator: "Modules 1–11 fully unlocked.",
-  elite: "All 12 modules + full platform access.",
-};
-const NEXT_TIER: Record<string,{ label:string; price:string; href:string }> = {
-  free:        { label:"Foundation", price:"$97/mo", href:`${BASE_URL}/enroll?tier=foundation` },
-  foundation:  { label:"Accelerator",price:"$297/mo",href:`${BASE_URL}/enroll?tier=accelerator` },
-  accelerator: { label:"Elite",      price:"$697/mo",href:`${BASE_URL}/enroll?tier=elite` },
+  free: "All 12 modules and 11 LO tools fully unlocked.",
 };
 const MODULE_NAMES: Record<number,string> = {
   1:"Day 1 — You Passed. Now What?", 2:"Understanding Loan Products",
@@ -239,51 +232,7 @@ export async function sendInactiveNudgeEmail({ name, email, moduleNumber }:
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// 7. UPGRADE OPPORTUNITY — fired when free/foundation student finishes their tier
-// ═══════════════════════════════════════════════════════════════════════════
-export async function sendUpgradeEmail({ name, email, currentPlan }:
-  { name: string; email: string; currentPlan: string }) {
-  const next = NEXT_TIER[currentPlan];
-  if (!next) return;
-  const currentLabel = TIER_LABEL[currentPlan]?.split(" —")[0] || currentPlan;
-  try {
-    const resend = await getResend();
-    await resend.emails.send({
-      from: FROM_EMAIL, to: email, cc: CC_EMAIL,
-      subject: `You've maxed out ${currentLabel} — here's what's next, ${name.split(" ")[0]}`,
-      html: `${header("🚀", `You've maxed out ${currentLabel}.`, "Hive Mortgage Academy")}
-        ${wrap(`
-          <p style="color:#CBD5E1;font-size:15px;line-height:1.7;margin:0 0 16px">
-            <strong style="color:white">${name.split(" ")[0]}</strong> — you've completed every module available on your current plan. That's not nothing. Most people never get this far.
-          </p>
-          <p style="color:#CBD5E1;font-size:14px;line-height:1.7;margin:0 0 16px">
-            The next level is <strong style="color:#F5A623">${next.label}</strong> at ${next.price}. Here's what unlocks:
-          </p>
-          <div style="background:rgba(245,166,35,0.06);border:1px solid rgba(245,166,35,0.2);border-radius:10px;padding:16px 18px;margin-bottom:20px">
-            ${currentPlan === "free"
-              ? `<p style="color:#94A3B8;font-size:13px;margin:0 0 8px">✓ Modules 4–6 unlocked immediately</p>
-                 <p style="color:#94A3B8;font-size:13px;margin:0 0 8px">✓ Your First Borrower Conversation</p>
-                 <p style="color:#94A3B8;font-size:13px;margin:0 0 8px">✓ Payment-First methodology</p>
-                 <p style="color:#94A3B8;font-size:13px;margin:0">✓ Credit Reports deep dive</p>`
-              : currentPlan === "foundation"
-              ? `<p style="color:#94A3B8;font-size:13px;margin:0 0 8px">✓ Modules 7–10 unlocked immediately</p>
-                 <p style="color:#94A3B8;font-size:13px;margin:0 0 8px">✓ CRM + full Huit.AI platform walkthrough</p>
-                 <p style="color:#94A3B8;font-size:13px;margin:0 0 8px">✓ Moving the loan: app to close</p>
-                 <p style="color:#94A3B8;font-size:13px;margin:0">✓ Compliance, RESPA & fair lending</p>`
-              : `<p style="color:#94A3B8;font-size:13px;margin:0 0 8px">✓ All 12 modules unlocked</p>
-                 <p style="color:#94A3B8;font-size:13px;margin:0 0 8px">✓ Monthly 1:1 strategy session with Derek</p>
-                 <p style="color:#94A3B8;font-size:13px;margin:0">✓ HivePass™ graduation + Huit.AI platform preview</p>`
-            }
-          </div>
-          ${btn(`Upgrade to ${next.label} — ${next.price} →`, next.href)}
-          <p style="color:#4B5563;font-size:12px;text-align:center;margin:0">Cancel anytime · Secured by ZenoPay.ai</p>
-        `)}`,
-    });
-  } catch (err) { console.error("Upgrade email failed:", err); }
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// 8. APPLICATION SUBMITTED — fired when LO submits /apply form
+// 7. APPLICATION SUBMITTED — fired when LO submits /apply form
 // ═══════════════════════════════════════════════════════════════════════════
 export async function sendApplicationConfirmEmail({ name, email, market, experience }:
   { name: string; email: string; market?: string; experience?: string }) {
@@ -309,103 +258,4 @@ export async function sendApplicationConfirmEmail({ name, email, market, experie
         `)}`,
     });
   } catch (err) { console.error("Application confirm email failed:", err); }
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// 10. RENEWAL REMINDER — pre-charge notice (FTC ROSCA / CA ARL §17602(b))
-//     Fires 12 days before monthly renewal, 30 days before annual renewal.
-//     Discloses amount, date, and provides one-click cancel link.
-// ═══════════════════════════════════════════════════════════════════════════
-export async function sendRenewalReminderEmail({
-  name, email, plan, billingCycle, renewalDate, amountCents,
-}: {
-  name: string;
-  email: string;
-  plan: string;
-  billingCycle: "monthly" | "annual";
-  renewalDate: Date;
-  amountCents: number;
-}) {
-  const firstName = name?.split(" ")[0] || "there";
-  const amount = `$${(amountCents / 100).toFixed(2)}`;
-  const dateStr = renewalDate.toLocaleDateString("en-US", {
-    weekday: "long", year: "numeric", month: "long", day: "numeric",
-  });
-  const cadence = billingCycle === "annual" ? "annual" : "monthly";
-  const cadenceNoun = billingCycle === "annual" ? "year" : "month";
-  const daysOut = billingCycle === "annual" ? 30 : 12;
-  const tierLabel = TIER_LABEL[plan] || plan;
-
-  try {
-    const resend = await getResend();
-    await resend.emails.send({
-      from: FROM_EMAIL, to: email, cc: CC_EMAIL,
-      subject: `Heads up: your Hive Mortgage Academy ${cadence} renewal is coming up`,
-      html: `${header("🔔", "Renewal reminder", "Hive Mortgage Academy")}
-        ${wrap(`
-          <p style="color:#CBD5E1;font-size:15px;line-height:1.7;margin:0 0 16px">Hey ${firstName} — quick heads up before your ${cadence} renewal. We want you to know exactly what's about to happen so there are no surprises.</p>
-
-          <div style="background:rgba(245,166,35,0.08);border:1px solid rgba(245,166,35,0.2);border-radius:10px;padding:16px 18px;margin:0 0 20px">
-            <table style="width:100%;border-collapse:collapse;font-size:13px">
-              <tr><td style="padding:5px 0;color:#94A3B8;width:140px">Plan</td><td style="padding:5px 0;color:white;font-weight:700">${tierLabel}</td></tr>
-              <tr><td style="padding:5px 0;color:#94A3B8">Billing cycle</td><td style="padding:5px 0;color:white;font-weight:700">${cadence.charAt(0).toUpperCase() + cadence.slice(1)}</td></tr>
-              <tr><td style="padding:5px 0;color:#94A3B8">Amount to be charged</td><td style="padding:5px 0;color:#F5A623;font-weight:700">${amount}</td></tr>
-              <tr><td style="padding:5px 0;color:#94A3B8">Renewal date</td><td style="padding:5px 0;color:white;font-weight:700">${dateStr}</td></tr>
-              <tr><td style="padding:5px 0;color:#94A3B8">Days from today</td><td style="padding:5px 0;color:white">~${daysOut} days</td></tr>
-            </table>
-          </div>
-
-          <p style="color:#CBD5E1;font-size:14px;line-height:1.7;margin:0 0 18px">Your card on file will be charged <strong style="color:#F5A623">${amount}</strong> on <strong style="color:white">${dateStr}</strong> for another ${cadenceNoun} of access. If you want to keep going, you don't need to do anything — it'll happen automatically.</p>
-
-          <p style="color:#CBD5E1;font-size:14px;line-height:1.7;margin:0 0 6px"><strong style="color:white">Need to cancel or pause?</strong> It's one click, no phone calls, no forms. Cancel any time before the renewal date and you won't be charged:</p>
-
-          ${btn("Cancel or Manage Subscription →", `${BASE_URL}/cancel`)}
-
-          <p style="color:#94A3B8;font-size:12px;line-height:1.6;margin:16px 0 0">If you cancel after the renewal charge, your access stays active through the end of the billing period you paid for. Questions? Just reply to this email.</p>
-        `)}`,
-    });
-  } catch (err) { console.error("Renewal reminder email failed:", err); }
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// 11. CANCELLATION CONFIRMATION — sent after a student cancels
-// ═══════════════════════════════════════════════════════════════════════════
-export async function sendCancellationConfirmEmail({
-  name, email, plan, periodEnd,
-}: {
-  name: string;
-  email: string;
-  plan: string;
-  periodEnd: Date | null;
-}) {
-  const firstName = name?.split(" ")[0] || "there";
-  const tierLabel = TIER_LABEL[plan] || plan;
-  const endStr = periodEnd
-    ? periodEnd.toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })
-    : "the end of your current billing period";
-
-  try {
-    const resend = await getResend();
-    await resend.emails.send({
-      from: FROM_EMAIL, to: email, cc: CC_EMAIL,
-      subject: "Your Hive Mortgage Academy cancellation is confirmed",
-      html: `${header("✓", "Cancellation confirmed", "Hive Mortgage Academy")}
-        ${wrap(`
-          <p style="color:#CBD5E1;font-size:15px;line-height:1.7;margin:0 0 16px">Hey ${firstName} — we've received your cancellation request. Here's what happens next:</p>
-
-          <div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:10px;padding:14px 18px;margin:0 0 20px">
-            <p style="color:#10B981;font-size:13px;font-weight:700;margin:0 0 8px">Your cancellation is scheduled</p>
-            <p style="color:#CBD5E1;font-size:13px;line-height:1.6;margin:0">Your <strong style="color:white">${tierLabel}</strong> subscription will end on <strong style="color:white">${endStr}</strong>. You'll keep full access until then, and you won't be charged again.</p>
-          </div>
-
-          <p style="color:#CBD5E1;font-size:14px;line-height:1.7;margin:0 0 16px">No partial refunds are issued for unused time, but you get to use everything you paid for through the period end. After that, your account will move to the free tier — your progress, certificates, and HivePass™ stay with you.</p>
-
-          <p style="color:#CBD5E1;font-size:14px;line-height:1.7;margin:0 0 6px"><strong style="color:white">Changed your mind?</strong> You can un-cancel any time before ${endStr} from your dashboard:</p>
-
-          ${btn("Back to Dashboard →", `${BASE_URL}/dashboard`)}
-
-          <p style="color:#94A3B8;font-size:12px;line-height:1.6;margin:16px 0 0">Thanks for giving us a shot. If there was something specific that didn't work, I'd genuinely like to hear it — just reply to this email. — Derek</p>
-        `)}`,
-    });
-  } catch (err) { console.error("Cancellation confirm email failed:", err); }
 }

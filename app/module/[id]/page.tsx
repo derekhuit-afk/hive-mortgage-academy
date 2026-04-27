@@ -1,8 +1,7 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 import { useRouter, useParams } from "next/navigation";
-import { MODULES, canAccessModule, TIER_LIMITS } from "@/lib/curriculum";
-import type { Tier } from "@/lib/curriculum";
+import { MODULES } from "@/lib/curriculum";
 
 export default function ModulePage() {
   const router = useRouter();
@@ -19,12 +18,7 @@ export default function ModulePage() {
   useEffect(() => {
     const raw = localStorage.getItem("hma_student");
     if (!raw) { router.push("/login"); return; }
-    const s = JSON.parse(raw);
-    setStudent(s);
-    const tier = (s.plan || "free") as Tier;
-    if (!canAccessModule(moduleId, tier)) {
-      router.push("/dashboard?upgrade=1");
-    }
+    setStudent(JSON.parse(raw));
   }, [moduleId]);
 
   const loadAiLesson = useCallback(async (lessonIndex: number) => {

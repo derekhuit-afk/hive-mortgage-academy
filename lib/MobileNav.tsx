@@ -13,7 +13,6 @@ const TOOLS: NavLink[] = [
   { label:"LoanTrack™", href:"/loantrack", emoji:"📍" },
   { label:"ReviewLoop™", href:"/review-loop", emoji:"⭐" },
   { label:"ReadyScore™", href:"/readyscore", emoji:"🎯" },
-  { label:"ApprovalLetter+", href:"/approval-letter", emoji:"📄" },
   { label:"EquityPulse™", href:"/equity-pulse", emoji:"📈" },
   { label:"CreditPath™", href:"/credit-path", emoji:"🎯" },
   { label:"LO LaunchKit™", href:"/launchkit", emoji:"🚀" },

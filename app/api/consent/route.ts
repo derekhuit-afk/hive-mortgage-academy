@@ -4,8 +4,12 @@ import { supabaseAdmin } from "@/lib/supabase";
 /**
  * Consent audit log.
  * Records user's acceptance of Terms of Service + Privacy Policy at the moment
- * of subscription signup. California ARL §17602(a)(6) requires retention of
- * consent records for 3 years or 1 year post-termination, whichever is longer.
+ * of free-account signup. Retained as defensive documentation that the user
+ * affirmatively agreed to the policies and any optional recruiting opt-in.
+ *
+ * Note: this endpoint is currently called by legacy clients only — new
+ * enrollments via /api/enroll write directly to hma_consent_log. This route is
+ * preserved for backward compatibility and may be removed in a future cleanup.
  *
  * We log: who, when, what version of the agreement, what IP, what user agent.
  * Table: hma_consent_log

@@ -10,7 +10,7 @@ export default function GraduationPage() {
   const [loading, setLoading] = useState(true);
   const [eligible, setEligible] = useState(false);
 
-  const TIER_LIMITS: Record<string,number> = { free:6, foundation:9, accelerator:11, elite:12 };
+  const TOTAL_MODULES = 12;
 
   useEffect(() => {
     const raw = localStorage.getItem("hma_student");
@@ -22,10 +22,9 @@ export default function GraduationPage() {
     // Check completion
     fetch(`/api/progress?studentId=${s.id}`, { headers:{ Authorization:`Bearer ${token}` } })
       .then(r=>r.json()).then(async progress => {
-        const limit = TIER_LIMITS[s.plan] || 3;
-        const done = progress.filter((p:any) => p.completed && p.module_number <= limit).length;
+        const done = progress.filter((p:any) => p.completed).length;
         setCompletedCount(done);
-        const isEligible = done >= limit;
+        const isEligible = done >= TOTAL_MODULES;
         setEligible(isEligible);
 
         if (isEligible) {
@@ -40,7 +39,7 @@ export default function GraduationPage() {
   if (loading) return <main style={{ minHeight:"100vh", background:"var(--obsidian)", display:"flex", alignItems:"center", justifyContent:"center" }}><div style={{ color:"var(--honey)", fontSize:16 }}>Verifying your completion...</div></main>;
   if (!student) return null;
 
-  const tierLimit = TIER_LIMITS[student.plan] || 3;
+  const tierLimit = TOTAL_MODULES;
 
   if (!eligible) return (
     <main style={{ minHeight:"100vh", background:"var(--obsidian)", display:"flex", alignItems:"center", justifyContent:"center", padding:24 }}>
@@ -61,8 +60,6 @@ export default function GraduationPage() {
     </main>
   );
 
-  const tierLabel: Record<string,string> = { free:"Free", foundation:"Foundation", accelerator:"Accelerator", elite:"Elite" };
-
   return (
     <main style={{ minHeight:"100vh", background:"var(--obsidian)", padding:"80px 24px" }}>
       <div style={{ maxWidth:700, margin:"0 auto" }}>
@@ -73,7 +70,7 @@ export default function GraduationPage() {
           <div style={{ fontSize:15, color:"var(--text-secondary)", marginBottom:24 }}>This certifies that</div>
           <div style={{ fontFamily:"'Playfair Display',serif", fontSize:"clamp(24px,4vw,36px)", fontWeight:900, color:"var(--honey)", marginBottom:8 }}>{student.name}</div>
           {student.nmls_number && <div style={{ fontSize:14, color:"var(--text-muted)", marginBottom:8 }}>NMLS #{student.nmls_number}</div>}
-          <div style={{ fontSize:13, color:"var(--text-muted)", marginBottom:20 }}>{tierLabel[student.plan]} Tier · {tierLimit} Modules Completed</div>
+          <div style={{ fontSize:13, color:"var(--text-muted)", marginBottom:20 }}>All {tierLimit} Modules Completed</div>
           <div style={{ fontSize:14, color:"var(--text-secondary)", lineHeight:1.7, marginBottom:28, maxWidth:480, margin:"0 auto 28px" }}>has completed the Hive Mortgage Academy curriculum and demonstrated mastery of loan origination, borrower consultation, compliance, and the payment-first methodology.</div>
           {certNumber && <div style={{ fontSize:12, color:"var(--text-muted)", marginBottom:20 }}>Certificate {certNumber} · {new Date().getFullYear()}</div>}
           <div style={{ display:"flex", justifyContent:"center", gap:32, padding:"20px 0", borderTop:"1px solid var(--border)", borderBottom:"1px solid var(--border)", marginBottom:24 }}>
@@ -88,9 +85,9 @@ export default function GraduationPage() {
           <h2 style={{ fontFamily:"'Playfair Display',serif", fontSize:"clamp(22px,4vw,32px)", fontWeight:900, color:"var(--text-primary)", marginBottom:12 }}>You've Earned It. Now Choose Your Path.</h2>
         </div>
         <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:16 }} className="cta-grid">
-          {[{ icon:"🏔️", title:"Join Derek's Team", desc:"Apply to join Derek Huit's team at Cardinal Financial. Full Huit.AI platform from Day 1.", cta:"Apply Now →", href:"/apply", color:"#F5A623" },
+          {[{ icon:"🏔️", title:"Join Derek's Team", desc:"Apply to join Derek Huit's team. Full Huit.AI platform from Day 1.", cta:"Apply Now →", href:"/apply", color:"#F5A623" },
             { icon:"📅", title:"Book a Strategy Call", desc:"Not ready to commit? Book a free 30-minute call with Derek first.", cta:"Book a Call →", href:"https://calendly.com/derekhuit", color:"#3B82F6" },
-            { icon:"🔓", title:"Unlock More", desc:"Upgrade your plan and continue with advanced modules.", cta:"Upgrade →", href:"/enroll", color:"#8B5CF6" }].map(c=>(
+            { icon:"💼", title:"View Career Openings", desc:"See where Derek's team is hiring and what we're looking for.", cta:"See Roles →", href:"/careers", color:"#10B981" }].map(c=>(
             <div key={c.title} style={{ background:"var(--charcoal)", border:`1px solid ${c.color}30`, borderRadius:16, padding:"20px 18px", textAlign:"center" }}>
               <div style={{ fontSize:32, marginBottom:10 }}>{c.icon}</div>
               <div style={{ fontFamily:"'Playfair Display',serif", fontSize:15, fontWeight:900, color:"var(--text-primary)", marginBottom:8 }}>{c.title}</div>

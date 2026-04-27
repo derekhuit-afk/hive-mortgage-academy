@@ -105,7 +105,6 @@ const TOOLS = [
   { name:"LoanTrack™",       emoji:"📍", href:"/loantrack",      desc:"Borrower milestone tracker",color:"#EF4444", stat:()=>{ try{ const l=JSON.parse(localStorage.getItem("hma_loans")||"[]"); return `${l.filter((x:any)=>x.active).length} active · ${l.filter((x:any)=>!x.active).length} closed`; }catch{return "Track loan milestones"} } },
   { name:"ReviewLoop™",      emoji:"⭐", href:"/review-loop",    desc:"Post-close reviews",       color:"#F5A623", stat:()=>{ try{ const r=JSON.parse(localStorage.getItem("hma_reviews")||"[]"); return `${r.filter((x:any)=>x.status==="reviewed").length}/${r.length} reviewed`; }catch{return "Automate review requests"} } },
   { name:"ReadyScore™",      emoji:"🎯", href:"/readyscore",     desc:"Borrower assessment",      color:"#10B981", stat:()=>"Share branded link — leads auto-qualify" },
-  { name:"ApprovalLetter+",  emoji:"📄", href:"/approval-letter",desc:"Co-branded letters",       color:"#3B82F6", stat:()=>{ try{ const l=JSON.parse(localStorage.getItem("hma_letters")||"[]"); return `${l.length} letter${l.length!==1?"s":""} created`; }catch{return "Generate in 60 seconds"} } },
   { name:"EquityPulse™",     emoji:"📈", href:"/equity-pulse",   desc:"Past client equity",       color:"#F5A623", stat:()=>{ try{ const e=JSON.parse(localStorage.getItem("hma_equity_clients")||"[]"); return `${e.length} clients tracked`; }catch{return "Annual equity reviews"} } },
   { name:"CreditPath™",      emoji:"🎯", href:"/credit-path",    desc:"Credit improvement plan",  color:"#8B5CF6", stat:()=>"AI-generated paydown plan" },
   { name:"AgentContent Hub", emoji:"✍️",  href:"/agent-partner",  desc:"Co-marketing content",     color:"#10B981", stat:()=>"5 templates · one-tap copy" },
@@ -115,7 +114,7 @@ export default function CommandCenterPage() {
   const router = useRouter();
   const [student, setStudent] = useState<any>(null);
   const [priorities, setPriorities] = useState<Priority[]>([]);
-  const [stats, setStats] = useState({ loans:0, sphere:0, agents:0, reviews:0, equity:0, letters:0 });
+  const [stats, setStats] = useState({ loans:0, sphere:0, agents:0, reviews:0, equity:0 });
   const [moduleProgress, setModuleProgress] = useState(0);
   const [tier, setTier] = useState("free");
   const [time, setTime] = useState("");
@@ -138,8 +137,9 @@ export default function CommandCenterPage() {
       const agents = JSON.parse(localStorage.getItem("hma_agents")||"[]");
       const reviews = JSON.parse(localStorage.getItem("hma_reviews")||"[]");
       const equity = JSON.parse(localStorage.getItem("hma_equity_clients")||"[]");
-      const letters = JSON.parse(localStorage.getItem("hma_letters")||"[]");
-      setStats({ loans:loans.filter((l:any)=>l.active).length, sphere:sphere.length, agents:agents.length, reviews:reviews.filter((r:any)=>r.status==="reviewed").length, equity:equity.length, letters:letters.length });
+      // Cleanup: remove deprecated approval-letter localStorage from any prior session
+      try { localStorage.removeItem("hma_letters"); } catch {}
+      setStats({ loans:loans.filter((l:any)=>l.active).length, sphere:sphere.length, agents:agents.length, reviews:reviews.filter((r:any)=>r.status==="reviewed").length, equity:equity.length });
       const prog = JSON.parse(localStorage.getItem("hma_progress")||"{}");
       setModuleProgress(Object.values(prog).filter((p:any)=>p.completed).length);
     } catch {}
@@ -309,7 +309,6 @@ export default function CommandCenterPage() {
                   { label:"Run PaymentFirst™ Consultation", href:"/payment-first", emoji:"💰", color:"#F5A623" },
                   { label:"Add Agent to Pipeline",           href:"/agent-partner", emoji:"🤝", color:"#8B5CF6" },
                   { label:"Add Sphere Contact",              href:"/sphere",        emoji:"🌐", color:"#3B82F6" },
-                  { label:"New Pre-Approval Letter",         href:"/approval-letter",emoji:"📄",color:"#3B82F6" },
                   { label:"Generate Credit Plan",            href:"/credit-path",   emoji:"🎯", color:"#8B5CF6" },
                   { label:"Invite a Colleague",               href:"/invite",        emoji:"✉️", color:"#3B82F6" },
                   { label:"Check Equity Portfolio",          href:"/equity-pulse",  emoji:"📈", color:"#10B981" },

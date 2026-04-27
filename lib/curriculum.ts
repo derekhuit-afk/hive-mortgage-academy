@@ -16,24 +16,21 @@ export function clearSession() {
   localStorage.removeItem(AUTH_KEY);
 }
 
-export type Tier = "free" | "foundation" | "accelerator" | "elite";
+export type Tier = "free";
 
+// HMA is a free training program. The Tier type is preserved for backward
+// compatibility with code that still references it; there's now only one tier
+// and every student has access to all 12 modules.
 export const TIER_LIMITS: Record<Tier, number> = {
-  free: 6,
-  foundation: 9,
-  accelerator: 11,
-  elite: 12,
+  free: 12,
 };
 
 export const TIER_PRICES: Record<Tier, number> = {
   free: 0,
-  foundation: 97,
-  accelerator: 297,
-  elite: 697,
 };
 
-export function canAccessModule(moduleId: number, tier: Tier): boolean {
-  return moduleId <= TIER_LIMITS[tier];
+export function canAccessModule(_moduleId: number, _tier: Tier): boolean {
+  return true;
 }
 
 export interface Lesson {
@@ -94,7 +91,7 @@ export const MODULES: Module[] = [
     lessons: [
       { title: "FHA vs. Conventional — The Real Difference", duration: "14 min", content: `Most new LOs lead with FHA for everyone. That's a mistake that costs borrowers money.\n\n**FHA Basics**\n- Minimum 3.5% down with 580+ FICO\n- MIP (Mortgage Insurance Premium) for the life of the loan on most cases\n- More lenient on debt-to-income ratios\n- Best for: lower credit scores (580–679), higher DTI, first-time buyers with minimal savings\n\n**Conventional Basics**\n- As low as 3% down (97 LTV programs)\n- PMI cancels at 80% LTV\n- Stricter credit and DTI requirements\n- Best for: 680+ FICO, stable income, buyers who want PMI to eventually go away\n\n**The Conversation You Need to Have**\nBefore recommending a product, ask: "What's your credit score range, and how much do you have saved for down payment plus closing costs?"\n\nIf the answer is 720+ FICO and 10%+ down: run Conventional every time.\nIf the answer is 600 FICO and 5% saved: FHA is likely the right call.\nNever recommend a product before pulling credit.` },
       { title: "VA Loans — The Most Powerful Product in Mortgage", duration: "14 min", content: `If you have one veteran borrower, you need to understand VA loans better than any other product.\n\n**The Basics**\n- Zero down payment for eligible veterans and active duty\n- No PMI (the VA Funding Fee replaces it — and is financed into the loan)\n- Competitive rates — often better than conventional\n- More flexible on credit and DTI\n\n**Eligibility**\n- Active duty after 90 days of continuous service\n- Veterans who served 181 days in peacetime or 90 in wartime\n- National Guard/Reserve after 6 years\n- Surviving spouses (unremarried) of veterans who died in service\n\n**Your Most Important Question**\n"Have you ever served in the military or are you currently serving?" Ask this every time. You will miss VA eligibility if you don't.\n\n**VA Funding Fee**\nFirst-time use, no down: 2.15% of loan amount (financed in). Disability-exempt veterans: 0% — always check.` },
-      { title: "USDA and Niche Programs", duration: "13 min", content: `USDA loans are the most underutilized product in mortgage. Learn them and you'll close deals your competition misses.\n\n**USDA Rural Development (RD) Loan**\n- Zero down payment\n- Below-market interest rates\n- Geographic restriction (rural/suburban — check eligibility at usda.gov)\n- Income limits apply (usually 115% of area median income)\n- Annual guarantee fee: 0.35% (much cheaper than FHA MIP)\n\n**When to Recommend USDA**\nBorrower has stable income, decent credit (640+), is buying in a qualifying area, and has little to no down payment. This beats FHA in most cases where the property qualifies.\n\n**DPA (Down Payment Assistance) Programs**\nEvery state has them. Alaska Housing Finance Corporation (AHFC) offers programs in Alaska. HUD-approved housing counselors can direct borrowers to their state programs.` },
+      { title: "USDA and Niche Programs", duration: "13 min", content: `USDA loans are the most underutilized product in mortgage. Learn them and you'll close deals your competition misses.\n\n**USDA Rural Development (RD) Loan**\n- Zero down payment\n- Below-market interest rates\n- Geographic restriction (rural/suburban — check eligibility at usda.gov)\n- Income limits apply (usually 115% of area median income)\n- Annual guarantee fee: 0.35% (much cheaper than FHA MIP)\n\n**When to Recommend USDA**\nBorrower has stable income, decent credit (640+), is buying in a qualifying area, and has little to no down payment. This beats FHA in most cases where the property qualifies.\n\n**DPA (Down Payment Assistance) Programs**\nEvery state has them. State housing finance agencies and HUD-approved housing counselors can direct borrowers to local DPA programs in their area.` },
       { title: "How to Explain Options to Any Borrower", duration: "14 min", content: `The best LOs aren't product experts. They're translators. Your job is to make the complex feel simple.\n\n**The Three-Option Framework**\nPresent every borrower with exactly three options. Two are real. One is extreme (to anchor expectations).\n\nOption A: "Here's the most aggressive — least money down, highest payment."\nOption B: "Here's the balanced approach — moderate down, manageable payment."\nOption C: "Here's the safest — more money down, lowest payment and risk."\n\nMost people choose B. But giving them all three feels like choice, not a sales pitch.\n\n**Language That Works**\n- Never say "you qualify for X" — say "based on what you've shared, here's what I'd recommend"\n- Never say "the rate is X" — say "today's rate is X, and here's what that means for your payment"\n- Never say "I can't do that loan" — say "let me show you what we can do"\n\nYou are their advisor, not their salesperson. The difference shows in referrals.` },
     ],
     quiz: [
@@ -200,7 +197,7 @@ export const MODULES: Module[] = [
     duration: "44 min",
     badge: "Foundation",
     badgeColor: "#3B82F6",
-    tier: "foundation",
+    tier: "free",
     lessons: [
       { title: "Why Your Tech Stack Is Your Pipeline", duration: "11 min" },
       { title: "The Huit.AI Platform — What LOs on the Platform Get", duration: "11 min" },
@@ -222,7 +219,7 @@ export const MODULES: Module[] = [
     duration: "56 min",
     badge: "Foundation",
     badgeColor: "#3B82F6",
-    tier: "foundation",
+    tier: "free",
     lessons: [
       { title: "The Loan Process From 30,000 Feet", duration: "14 min" },
       { title: "What Underwriters Actually Look For", duration: "14 min" },
@@ -244,7 +241,7 @@ export const MODULES: Module[] = [
     duration: "50 min",
     badge: "Foundation",
     badgeColor: "#3B82F6",
-    tier: "foundation",
+    tier: "free",
     lessons: [
       { title: "The Agent Partnership Value Proposition", duration: "12 min" },
       { title: "Co-Marketing That Works (and Stays Compliant)", duration: "13 min" },
@@ -266,7 +263,7 @@ export const MODULES: Module[] = [
     duration: "38 min",
     badge: "Accelerator",
     badgeColor: "#3B82F6",
-    tier: "accelerator",
+    tier: "free",
     lessons: [
       { title: "RESPA, TRID, and the Disclosure Timeline", duration: "10 min" },
       { title: "Fair Lending Laws Every LO Must Know", duration: "10 min" },
@@ -288,7 +285,7 @@ export const MODULES: Module[] = [
     duration: "48 min",
     badge: "Accelerator",
     badgeColor: "#8B5CF6",
-    tier: "accelerator",
+    tier: "free",
     lessons: [
       { title: "The 30-60-90 Day Post-Close System", duration: "12 min" },
       { title: "Getting Reviews That Actually Build Your Pipeline", duration: "12 min" },
@@ -310,7 +307,7 @@ export const MODULES: Module[] = [
     duration: "60 min",
     badge: "Elite",
     badgeColor: "#F5A623",
-    tier: "elite",
+    tier: "free",
     lessons: [
       { title: "The Math of a Million-Dollar Mortgage Career", duration: "15 min" },
       { title: "The Huit.AI Platform Advantage — What Top LOs Use", duration: "15 min" },
