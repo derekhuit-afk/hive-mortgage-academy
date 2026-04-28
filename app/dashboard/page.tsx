@@ -158,6 +158,63 @@ function Dashboard() {
         </div>
         <style>{`@media(max-width:768px){.actions-grid{grid-template-columns:1fr!important}.progress-card{grid-template-columns:1fr!important}.hide-mobile{display:none!important}}`}</style>
 
+        {/* Tools section */}
+        <div style={{ marginBottom: 32 }}>
+          <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 16 }}>
+            <div>
+              <div style={{ fontSize: 11, color: "var(--honey)", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 4 }}>The Toolkit</div>
+              <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: 22, fontWeight: 800, color: "var(--text-primary)", margin: 0 }}>
+                Tools that turn the curriculum into action
+              </h2>
+            </div>
+            <a href="/tools" style={{ fontSize: 13, color: "var(--honey)", textDecoration: "none", fontWeight: 700 }}>See all →</a>
+          </div>
+
+          <div className="tools-row" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
+            <a href="/business-plan" style={dashTool}>
+              <div style={dashToolBadge("rgba(245,166,35,0.18)", "var(--honey)")}>Centerpiece</div>
+              <div style={dashToolTitle}>Business Plan Builder</div>
+              <div style={dashToolDesc}>Income → daily activity. The math most LOs never run.</div>
+            </a>
+            <a href="/fast-start" style={dashTool}>
+              <div style={dashToolBadge("rgba(59,130,246,0.18)", "#3B82F6")}>Weekly</div>
+              <div style={dashToolTitle}>Fast Start Monday</div>
+              <div style={dashToolDesc}>The 6-step kickoff that turns a plan into a focused week.</div>
+            </a>
+            <a href="/habits" style={dashTool}>
+              <div style={dashToolBadge("rgba(16,185,129,0.18)", "#10B981")}>Daily</div>
+              <div style={dashToolTitle}>Habit Tracker</div>
+              <div style={dashToolDesc}>Daily check-ins on your plan&apos;s activity targets.</div>
+            </a>
+            <a href="/pitch" style={dashTool}>
+              <div style={dashToolBadge("rgba(139,92,246,0.18)", "#8B5CF6")}>Pitch</div>
+              <div style={dashToolTitle}>Elevator Pitch Builder</div>
+              <div style={dashToolDesc}>5 fields → 3 variants. Warm, professional, direct.</div>
+            </a>
+            <a href="/objections" style={dashTool}>
+              <div style={dashToolBadge("rgba(239,68,68,0.18)", "#EF4444")}>Library</div>
+              <div style={dashToolTitle}>Objection Handler</div>
+              <div style={dashToolDesc}>Curated scenarios with responses + AI for novel ones.</div>
+            </a>
+            <a href="/disc" style={dashTool}>
+              <div style={dashToolBadge("rgba(59,130,246,0.18)", "#3B82F6")}>Style</div>
+              <div style={dashToolTitle}>Reading the Room</div>
+              <div style={dashToolDesc}>Communication-style trainer (D/I/S/C) and recognition quiz.</div>
+            </a>
+            <a href="/roleplay" style={dashTool}>
+              <div style={dashToolBadge("rgba(245,166,35,0.18)", "var(--honey)")}>Practice</div>
+              <div style={dashToolTitle}>Borrower Role-Play</div>
+              <div style={dashToolDesc}>Practice on AI borrowers with end-of-session coach scoring.</div>
+            </a>
+            <a href="/ai-derek" style={dashTool}>
+              <div style={dashToolBadge("rgba(245,166,35,0.18)", "var(--honey)")}>Coach</div>
+              <div style={dashToolTitle}>AI Derek</div>
+              <div style={dashToolDesc}>Mindset, accountability, and business strategy. Scoped tightly.</div>
+            </a>
+          </div>
+          <style>{`@media(max-width:900px){.tools-row{grid-template-columns:repeat(2,1fr)!important}}@media(max-width:560px){.tools-row{grid-template-columns:1fr!important}}`}</style>
+        </div>
+
         {/* AI Coach Panel */}
         {showCoach && (
           <div style={{ background: "var(--charcoal)", border: "1px solid rgba(245,166,35,0.3)", borderRadius: 20, marginBottom: 32, overflow: "hidden" }}>
@@ -215,4 +272,42 @@ function Dashboard() {
 
 export default function DashboardPage() {
   return <Suspense><Dashboard /></Suspense>;
+}
+
+const dashTool: React.CSSProperties = {
+  background: "var(--charcoal)",
+  border: "1px solid var(--border)",
+  borderRadius: 12,
+  padding: "16px 18px",
+  textDecoration: "none",
+  display: "block",
+};
+
+const dashToolTitle: React.CSSProperties = {
+  fontSize: 14,
+  fontWeight: 700,
+  color: "var(--text-primary)",
+  marginBottom: 4,
+  lineHeight: 1.3,
+};
+
+const dashToolDesc: React.CSSProperties = {
+  fontSize: 12,
+  color: "var(--text-muted)",
+  lineHeight: 1.45,
+};
+
+function dashToolBadge(bg: string, color: string): React.CSSProperties {
+  return {
+    display: "inline-block",
+    background: bg,
+    color,
+    padding: "2px 8px",
+    borderRadius: 5,
+    fontSize: 10,
+    fontWeight: 700,
+    letterSpacing: "0.1em",
+    textTransform: "uppercase",
+    marginBottom: 8,
+  };
 }

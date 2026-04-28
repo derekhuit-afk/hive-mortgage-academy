@@ -49,6 +49,32 @@ CREATE TABLE IF NOT EXISTS hma_certificates (
 );
 ALTER TABLE hma_certificates DISABLE ROW LEVEL SECURITY;
 
+-- ── Lesson content cache ─────────────────────────────────────────────
+-- One row per (module, lesson). Content authored by Derek's team and stored
+-- here so every student sees the same reviewed copy. Fallback AI generation
+-- writes to this same table on cache miss.
+CREATE TABLE IF NOT EXISTS hma_lesson_cache (
+  module_number int NOT NULL,
+  lesson_index int NOT NULL,
+  content text NOT NULL,
+  updated_at timestamptz DEFAULT now(),
+  PRIMARY KEY (module_number, lesson_index)
+);
+ALTER TABLE hma_lesson_cache DISABLE ROW LEVEL SECURITY;
+
+-- ── Tool data persistence ────────────────────────────────────────────
+-- Per-student JSON state for the interactive tools (business plan,
+-- pitch, fast-start, habits, etc.). One row per (student, tool) pair.
+-- localStorage is the source of truth; this is the cross-device sync.
+CREATE TABLE IF NOT EXISTS hma_tool_data (
+  student_id uuid NOT NULL,
+  tool_name text NOT NULL,
+  data jsonb NOT NULL,
+  updated_at timestamptz DEFAULT now(),
+  PRIMARY KEY (student_id, tool_name)
+);
+ALTER TABLE hma_tool_data DISABLE ROW LEVEL SECURITY;
+
 CREATE TABLE IF NOT EXISTS hma_applications (
   id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
   name text NOT NULL,

@@ -30,7 +30,7 @@ export default function ModulePage() {
       const res = await fetch("/api/ai-lesson", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ moduleTitle: mod.title, lessonTitle: lesson.title, moduleId: mod.id, lessonIndex }),
+        body: JSON.stringify({ moduleTitle: mod.title, lessonTitle: lesson.title, moduleNumber: mod.id, lessonIndex }),
       });
       const data = await res.json();
       setAiContent(prev => ({ ...prev, [lessonIndex]: data.content }));
