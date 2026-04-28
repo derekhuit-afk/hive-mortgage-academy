@@ -62,24 +62,43 @@ export const MODULES: Module[] = [
     id: 1,
     title: "Day 1 — You Passed. Now What?",
     subtitle: "The first 48 hours that define your career",
-    duration: "75 min",
+    duration: "95 min",
     badge: "Module 1",
     badgeColor: "#10B981",
     tier: "free",
     lessons: [
-      { title: "Your First 48 Hours as a Licensed LO", duration: "20 min", content: `Congratulations — you passed the NMLS exam. Here's the truth nobody tells you: the license is just a ticket. The real game starts now.
+      { title: "Your First 48 Hours as a Licensed LO", duration: "24 min", content: `Congratulations — you passed the NMLS exam. Here's the truth nobody tells you: the license is just a ticket. The real game starts now. The 48 hours after you pass are the moment most new LOs waste — they relax, celebrate, tell themselves they'll start "next week." Next week becomes next month. The momentum dies before it starts.
+
+What you do in the next 48 hours sets your trajectory for the next 90 days. What you do in the next 90 days sets the trajectory for your first year. And your first year, more than anything else, decides whether you ever build a real career in this business or quietly leave it.
 
 **Hour 1–4: Mindset Reset**
-You are no longer a student. You are a business owner who happens to work at a mortgage company. Every decision you make from this point forward either builds your pipeline or drains it. Most LOs flame out in 18 months because they treat origination like a job — show up, take inbound leads, complain about rates. The ones who last treat it like a business. They wake up thinking about their pipeline, their referral partners, and their next conversation. They don't wait for leads to be handed to them. They generate them.
+
+You are no longer a student. You are a business owner who happens to work at a mortgage company. Every decision you make from this point forward either builds your pipeline or drains it.
+
+Most LOs flame out in 18 months because they treat origination like a job — show up, take inbound leads, complain about rates. The ones who last treat it like a business. They wake up thinking about their pipeline, their referral partners, and their next conversation. They don't wait for leads to be handed to them. They generate them.
+
+The mindset shift is concrete: you are personally responsible for every dollar you'll ever earn in this career. Your company provides licensing, infrastructure, processing, and operations. They do not provide your business. You do.
 
 **Hour 5–12: Choose Your Platform**
+
 The first decision that matters is where you hang your license. You have three choices: retail bank, mortgage banker, or broker. Each has tradeoffs.
 
 Banks offer stability, salary support in some cases, brand recognition, and built-in lead flow from existing customers — but they restrict products, cap your comp, and often require you to push the bank's other services. Mortgage bankers give you more flexibility, broader product access, and better comp percentages, but you eat what you kill with less salary cushion. Brokers give maximum product range — you can shop 30+ wholesale lenders for the same borrower — but require more self-management, more compliance work, and zero brand-name recognition with your borrowers.
 
 There is no universally "right" answer. There is only the right answer for where you are in your career. New LOs with no book of business often do best at a mortgage banker that pairs decent salary support with real mentorship.
 
-**Hours 13–48: Your Non-Negotiable Setup List**
+**Hours 13–24: The First-Day-Income Reality**
+
+This is the conversation almost nobody has with new LOs and it kills careers. Mortgage commission is paid 30-60 days after closing. A loan you take in application today closes in 30-45 days. The commission check from that close hits 30-60 days later. That means a brand-new LO who closes their first deal in their second month doesn't see a real commission check until month 4 or 5.
+
+If you don't have 4-6 months of personal financial runway, you will make panic decisions. You will take any deal at any rate. You will undercut yourself with Realtors. You will quit just before momentum kicks in.
+
+Before you do anything else: open a dedicated savings account, calculate your minimum monthly expenses, and know exactly how many months you can survive without commission. If it's less than 6, have a plan — a side income, a spouse covering household, savings, or salary support negotiated upfront. The financial pressure on a new LO without runway is the single biggest predictor of failure.
+
+**Hours 25–36: Your Non-Negotiable Setup List**
+
+These need to be done in your first 48 hours. Not "this week." Now.
+
 1. Professional headshot — even phone-quality is fine to start, retake later
 2. LinkedIn profile updated with NMLS number in the headline
 3. Google Business Profile created under your name + "mortgage"
@@ -87,22 +106,53 @@ There is no universally "right" answer. There is only the right answer for where
 5. First five people called: family, close friends, former coworkers — not to ask for business, just to tell them what you're doing
 6. Email signature with NMLS, license states, and Equal Housing Lender disclosure
 7. A real calendar with morning blocks for outbound activity (calls, coffees, follow-ups)
+8. Your company's portal logins tested, the LOS opened, the CRM access confirmed (don't discover on Day 14 that you don't have access to the systems)
+9. Your business cards ordered with NMLS visible (overnight if needed; you should have them in hand within 5 days)
+10. Your first month's outbound activity calendar drafted: who you'll call, what days, what you'll say
+
+**Hours 37–48: The Day-One Mistakes Most LOs Make**
+
+Avoid these — they will set you back weeks.
+
+- **Spending money on tools you don't need yet.** Don't subscribe to a $2,400/year CRM in your first month. Don't buy paid leads in your first 60 days. Don't pay for elaborate websites or branding before you've closed a single loan. Spend money on tools only when you can show the existing tool is the bottleneck.
+- **Rebuilding what your company already provides.** Many companies have CRM, marketing automation, document collection, even content. Use what's there before building parallel systems. Your time is better spent on phone calls than on system selection.
+- **Studying instead of selling.** New LOs love to "study" — read books, watch YouTube, attend webinars. Reading about origination is not origination. The way you learn this business is doing it. Books and study come on the side, not in your prime calling hours.
+- **Telling everyone you'll "start ramping next week."** The two-week ramp is mythical. The right ramp is "I started today." Make the first phone call by Hour 24.
+- **Ignoring the legal/compliance setup.** Your NMLS number must be on every email, business card, ad, and social post. Set the email signature today. Update LinkedIn today. Compliance shortcuts on Day 1 become compliance findings on Day 90.
 
 **The 90-Day Truth**
+
 The LOs who survive Year 1 aren't the smartest ones. They're not the ones with the prettiest websites. They're the ones who treat Day 1 like a business launch, not a job start. They make 20 outbound touches per day. They show up to every Realtor open house in their farm area. They send handwritten notes after every meeting. They build before they need to harvest.
 
-Your first 48 hours sets the trajectory for your first 90 days. Your first 90 days sets the trajectory for your first year. And your first year, more than anything else, determines whether you ever build a real career in this business or quietly leave it.` },
+Your first 48 hours sets the trajectory for your first 90 days. Your first 90 days sets the trajectory for your first year. The work compounds — but only if you start now.` },
 
-      { title: "Choosing the Right Company to Hang Your License", duration: "18 min", content: `This decision will make or break your first year. Most new LOs make it wrong because they optimize for the wrong variable: comp percentage. Comp matters less than support, training, and product breadth in your first 12 months. You can earn 200 bps at a place where you close 4 loans a year, or 150 bps at a place where you close 24. Do the math.
+      { title: "Choosing the Right Company to Hang Your License", duration: "24 min", content: `This decision will make or break your first year. Most new LOs make it wrong because they optimize for the wrong variable: comp percentage. Comp matters less than support, training, and product breadth in your first 12 months. You can earn 200 bps at a place where you close 4 loans a year, or 150 bps at a place where you close 24. Do the math.
+
+**The Math Most New LOs Skip**
+
+Let's run real numbers. Two offers on the table:
+
+Shop A: 200 bps comp, no salary, weak training, you self-process, you'll likely close 6-10 loans in Year 1.
+Shop B: 150 bps comp, $40K salary cushion (recoverable draw), strong training and mentor, in-house processing, average new-LO Year-1 production is 18-24 loans.
+
+At Shop A: 8 loans × $400K avg loan size × 200 bps = $64,000 commission, no salary cushion, you covered your own processing time.
+At Shop B: 21 loans × $400K avg × 150 bps = $126,000 commission + the salary cushion in slow months when commission was thin.
+
+Shop B paid roughly twice as much in your first year, gave you better training, and didn't require you to spend half your time self-processing instead of selling. The 200 bps headline at Shop A was the wrong variable to optimize.
+
+This calculation applies to every comp comparison you'll see. Always model the actual likely production at each shop, not just the comp percentage. The shop where you'll close more loans almost always wins, even at lower comp.
 
 **What to Look For**
-- Training and mentorship — not a generic "training program," but an actual human mentor who picks up the phone when you have questions at 7pm on a Tuesday
-- Product diversity — can you do FHA, VA, USDA, Jumbo, Non-QM, bank statement, DSCR? A narrow product menu means you turn away deals you should have closed
-- Technology stack — does their LOS work or does it create friction? Does the CRM populate from the LOS automatically? Are pricing tools accessible mid-call or do you need to bug a desk?
-- Compensation structure — understand basis points (bps) vs. flat fee, comp on second-lien, comp on rate locks, and whether you get paid on broker-channel deals
-- Culture fit — do producers share leads when their bandwidth is full, or do they hoard? Are managers in production themselves or just management?
+
+- **Training and mentorship** — not a generic "training program," but an actual human mentor who picks up the phone when you have questions at 7pm on a Tuesday. The mentor relationship is worth more than any formal program.
+- **Product diversity** — can you do FHA, VA, USDA, Jumbo, Non-QM, bank statement, DSCR? A narrow product menu means you turn away deals you should have closed. Each declined deal is also a referral relationship damaged.
+- **Technology stack** — does their LOS work or does it create friction? Does the CRM populate from the LOS automatically? Are pricing tools accessible mid-call or do you need to bug a desk?
+- **Compensation structure** — understand basis points (bps) vs. flat fee, comp on second-lien, comp on rate locks, and whether you get paid on broker-channel deals.
+- **Culture fit** — do producers share leads when their bandwidth is full, or do they hoard? Are managers in production themselves or just management?
+- **State licensing alignment** — if you're licensed in 1 state and the shop only originates in 12 states that don't include yours, you can't produce. Ask for the specific list of states the shop is licensed in and active in.
 
 **Questions to Ask in Every Interview**
+
 1. "What does your average LO close in their first 12 months?" — if they dodge, walk away
 2. "Who would be my mentor or manager, and how often would we meet weekly?"
 3. "What's your pull-through rate from application to close?" — industry average is 65–75%; below 60% means a lot of deals die mid-process
@@ -110,23 +160,56 @@ Your first 48 hours sets the trajectory for your first 90 days. Your first 90 da
 5. "Can I see a sample LO comp plan in writing before I commit?"
 6. "What's your team's average days-to-close on a purchase? On a refi?"
 7. "What happens to my pipeline if I leave?"
+8. "Who handles processing and where are processors located? What's their loans-per-processor ratio?"
+9. "How long has the average LO at this branch been here?" — high turnover is a red flag
+10. "Can I talk to two current LOs at this shop, one new and one experienced, before I sign anything?"
 
 **Red Flags**
+
 - Any company that won't show you their average first-year production
 - Managers who only talk about comp and not about support
 - Companies with no in-house processing — you'll be self-processing your first 6 months and that will kill your pipeline
 - Anyone who says "just work your sphere" as a strategy
 - Promises of leads "as soon as you ramp up" with no specifics on volume, source, or quality
 - Branch managers who left their last shop because of "creative differences" — usually means a comp dispute or compliance issue
+- Comp plans that change unilaterally based on production tier with no written guarantee
+- A recruiting process that pressures you to sign before you've completed reference calls or seen the comp plan in writing
 
 **The Comp Trap**
+
 A comp plan paying 200 bps sounds great until you find out the company charges back 150 bps in branch overhead, that you don't get paid on the second lien on a piggyback, and that your "lead pool" is actually leads three other LOs already worked. Read every line of the comp plan. Get it in writing. Get the chargeback structure in writing. If they won't give it to you in writing, that's the answer.
 
-The right shop matches your stage. New LOs need salary cushion + heavy training. Producing LOs need maximum comp + minimum overhead. Pick the shop that fits where you are, not where you wish you were.` },
+Common chargeback line items to ask about:
+- Branch overhead (rent, utilities, branch admin) — sometimes split equally among LOs, sometimes proportional to production
+- Marketing fee allocations
+- Compliance training costs
+- LOS/technology fees
+- Insurance and licensing pass-throughs
+- "Pull-through penalty" on loans that don't close after committing branch resources
 
-      { title: "Setting Up Your Digital Presence", duration: "19 min", content: `Your digital presence is your 24/7 referral engine. Set it up once, right, and it works for you while you sleep. Skip it and you'll be cold-calling your way through Year 3.
+Each one of these can be reasonable in isolation. Stacked together, they can quietly drop your effective comp from 200 to 110 bps without you ever noticing in the headline.
+
+**W-2 vs 1099**
+
+Most LOs are W-2 employees, with some shops offering 1099 structures. W-2 means the company withholds taxes and pays employer-side payroll taxes, you usually have benefits, and your comp structure is regulated under the LO Compensation Rule. 1099 means you pay both halves of self-employment tax, you handle your own withholding, you usually don't have benefits, but you may have more flexibility on structure.
+
+For new LOs with no production track record, W-2 is usually safer. The salary support, benefits, and structure smooth the early income volatility. Once you're a producing LO with a stable book, the 1099 conversation can make sense.
+
+**The Career Stage Matrix**
+
+The right shop matches your stage. Use this as a rough framework:
+
+- **Brand new, no network** → Need salary cushion + heavy training + in-house processing. Optimize for survival in Year 1, not max comp.
+- **Brand new, has a network** (real estate or finance background) → Can sometimes go 1099 immediately at a shop with broad products and aggressive comp.
+- **Producing LO, 2+ years** → Need product breadth, technology that doesn't slow you down, and clean comp without surprise chargebacks.
+- **Top producer, 5+ years** → Optimize for max comp, geography flexibility, and infrastructure that scales (multiple processors, automation, recruiting potential).
+
+The right shop matches your stage. Pick the shop that fits where you are, not where you wish you were. The day you outgrow it, you can move.` },
+
+      { title: "Setting Up Your Digital Presence", duration: "23 min", content: `Your digital presence is your 24/7 referral engine. Set it up once, right, and it works for you while you sleep. Skip it and you'll be cold-calling your way through Year 3. Most new LOs spend hours on the wrong things (logos, slogans, business names) and ignore the things that actually move the needle.
 
 **LinkedIn (Priority #1)**
+
 LinkedIn is where Realtors, CPAs, financial advisors, legal professionals, HR managers, and past clients verify you exist before they refer. If your profile is empty or generic, you've already lost.
 
 - Headline: "Mortgage Loan Officer | NMLS #XXXXXX | Helping [your geography] families buy with confidence"
@@ -136,16 +219,46 @@ LinkedIn is where Realtors, CPAs, financial advisors, legal professionals, HR ma
 - Connect with every Realtor, CPA, financial advisor, and HR contact you've ever met within 30 days. Aim for 500+ connections in 90 days
 - Post twice a week minimum. Market updates, borrower education, behind-the-scenes "I just helped a family close on their first home" posts. Skip the rate posts (compliance) and skip the political posts (everything)
 
+**Writing LinkedIn Posts That Don't Sound Like Every Other LO**
+
+Most LO LinkedIn posts are identical: stock photo of a family in front of a house, generic "we just helped this family achieve their dream," a rates table, hashtags. Realtors scroll past these without reading. Yours need to be different.
+
+What works:
+- **Specific scenarios with the borrower's permission**: "Helped a teacher with 18% of her down payment from a state DPA program close on a $340K home in 28 days. Most LOs don't track DPA programs. I do."
+- **Market data with your interpretation**: "Anchorage purchase volume was down 12% in Q3 2025 vs Q3 2024. But here's what the data isn't showing — first-time buyer applications rose. Here's what that means for your sellers."
+- **Educational threads**: "5 things every first-time buyer asks me. The answers most LOs get wrong:" then list them clearly.
+- **Behind-the-scenes process**: "Today I had to rewrite a pre-approval letter at 6pm on a Friday because the seller's listing agent demanded a TBD letter format. Here's why and what borrowers should know."
+
+What doesn't work:
+- Generic "rates dropped today, call me" posts (compliance trap + nobody cares)
+- Stock-photo-and-quote inspirational posts ("Home is where the heart is")
+- Anything that sounds like marketing copy generated by a tool
+
 **Google Business Profile**
+
 Create a GBP under your name + "Mortgage Loan Officer" or "Mortgage Lender." Example: "Derek Huit - Mortgage Loan Officer." This is how borrowers searching "mortgage officer near me" find you before they find Zillow or Quicken. Add hours, phone, email, address (your office), photos, and ask every closed borrower to leave a Google review. Reviews are SEO gold.
 
+GBP also surfaces in Google Maps. When a Realtor texts a borrower "let me get you connected with Derek for the mortgage piece," and the borrower Googles your name, the first thing they see is your GBP card with star rating, photo, and contact info. A complete GBP with 20+ five-star reviews builds trust before you ever pick up the phone.
+
 **Facebook Business Page**
+
 Even if you hate social media. Borrowers research on Facebook. Set it up with your NMLS, photo, contact info, and link to your real website (or LinkedIn if you don't have one yet). Post once a week minimum. Boost market-update posts to your local zip codes for $5/post — cheapest local marketing on earth.
 
+Facebook is also where many sphere-of-influence connections happen. Old high school friends, former coworkers, family members of past clients — they're on Facebook, not LinkedIn. A consistent presence reminds them you exist.
+
 **Personal Website (Optional but High-Leverage)**
+
 A simple one-page site with your bio, NMLS, license states, contact form, and a "get pre-approved" link. Squarespace or Carrd works fine. The point isn't the design — it's controlling what shows up when someone Googles your name. Without a website, the top result might be your old Yelp review or a random news article.
 
+The site doesn't need to be elaborate. Five sections work for almost every LO:
+1. Hero: your name, photo, NMLS, "Mortgage Loan Officer serving [states]"
+2. About: 200 words on your background and approach
+3. Process: how you work with borrowers from application to close
+4. Reviews: pull 4-6 from Google
+5. Contact: phone, email, secure pre-qualification link
+
 **Email Signature**
+
 Most LOs have garbage email signatures. Yours should have:
 - Your name + NMLS number
 - Job title and company name
@@ -154,31 +267,100 @@ Most LOs have garbage email signatures. Yours should have:
 - Equal Housing Lender logo
 - Small line: "Pre-approval link: [URL]" — make it one click for any borrower or referral partner
 
+**Video Content (Underused Lever)**
+
+Most LOs avoid video. The ones who use it consistently dominate. You don't need to be polished. You need to be authentic and consistent.
+
+Three formats that work for new LOs:
+1. **45-second market updates** — "Here's what happened in the rate market this week and what it means for buyers in [your area]." Post weekly.
+2. **60-second borrower questions** — "This week a borrower asked me about [specific topic]. Here's the answer most LOs get wrong." Post 1-2x per week.
+3. **90-second deal stories** (with permission) — "Just closed a tough self-employed loan that three other LOs declined. Here's what I did differently."
+
+Phone camera is fine. Natural lighting from a window. Record in landscape if you'll cross-post to LinkedIn (vertical for Instagram/TikTok). Don't overthink it.
+
+**Reputation Management — Handling a Negative Review**
+
+Eventually a borrower will leave you a negative review. Sometimes you'll deserve it. Sometimes you won't. The rule: respond within 24 hours, professionally, no defensiveness, no naming specifics that could violate privacy.
+
+Template: "[Name], thank you for sharing your experience. I take this feedback seriously and would like the opportunity to address it directly. I'll reach out personally today. — [Your name], NMLS #XXXXXX"
+
+Future borrowers reading the response often draw more conclusions from your handling of criticism than from the criticism itself. A graceful response to a bad review can build more trust than three glowing reviews.
+
 **What NOT to Do**
+
 - Don't post interest rates publicly — it triggers Loan Estimate disclosure obligations and is a TILA/Reg Z trap
 - Don't guarantee approvals in any marketing — "guaranteed financing" language can trigger UDAAP enforcement
 - Don't connect your personal Facebook to your business page without a compliance review of your personal posts
 - Don't use stock photos of houses with rate quotes overlaid — it's the most common compliance violation in the industry
 - Don't post anything that compares your rates to a named competitor
+- Don't share specific borrower details (names, addresses, loan amounts) without explicit written consent — it's a GLBA privacy violation even if the borrower seems fine with it
 
 Spend a focused 4 hours setting all of this up in your first week. Then maintain it weekly. This is the foundation under everything else you'll do.` },
 
-      { title: "What Nobody Tells You About Your First Deal", duration: "18 min", content: `Your first deal will be messy. That's normal. Most experienced LOs will tell you their first close was painful, slow, and full of surprises. Here's how to survive it without losing the borrower, the Realtor, or your sanity.
+      { title: "What Nobody Tells You About Your First Deal", duration: "24 min", content: `Your first deal will be messy. That's normal. Most experienced LOs will tell you their first close was painful, slow, and full of surprises. Here's how to survive it without losing the borrower, the Realtor, or your sanity.
 
 **The Reality**
+
 Your first loan will take longer than it should. The borrower will go dark at the worst moment — usually right after the appraisal comes in. The appraisal will come in weird (low, with conditions, or with the appraiser asking for repairs you didn't expect). The processor will ask for documents you didn't know existed: a letter of explanation for a $300 deposit, a CPA letter for a self-employment side gig, a divorce decree page you didn't realize was missing.
 
 This isn't because you're new. This happens on every loan. It's just that experienced LOs have systems to absorb the chaos. You don't yet.
 
+**The Real Timeline of a First Loan**
+
+Knowing roughly what happens when keeps you ahead of borrower questions and prevents most panic moments.
+
+- **Day 0**: Application taken. LE issued within 3 business days.
+- **Day 1-3**: Initial document requests sent to borrower. Credit pulled. AUS run.
+- **Day 5-10**: Borrower returns initial docs. Processor reviews. Appraisal ordered.
+- **Day 10-15**: Title work ordered. Appraisal scheduled.
+- **Day 15-22**: Appraisal completed and reviewed. Underwriter issues conditional approval.
+- **Day 22-30**: Conditions cleared. Title comes back clean. Final underwriting review.
+- **Day 30-35**: Clear to Close (CTC) issued. Closing scheduled.
+- **Day 35-45**: Final CD delivered (3-business-day rule). Closing happens.
+
+This is a healthy timeline. Many loans run 45-60 days, some 60-90, especially if there are complications. Anything closing in under 21 days is a hero close — don't promise it casually.
+
 **How to Protect It**
+
 1. **Over-communicate with your borrower.** Text updates every 2–3 days minimum, even when nothing has changed. "Hey, just a quick check-in — appraisal is scheduled for Thursday, no action needed from you. Talk soon." This single habit prevents 80% of borrower panic.
+
 2. **Set conservative expectations on timeline.** Whatever your processor says is the close date, add 7–10 days when you tell the borrower and Realtor. Closing early is a hero move. Closing late breaks trust permanently.
+
 3. **Build a relationship with your processor.** Take them coffee. Learn their name. Know their kids' names. Processors determine your speed. A processor who likes you bumps your file to the top of the stack. A processor who's annoyed with you puts your file at the bottom.
+
 4. **Never stop the file from moving.** If you're waiting on a borrower document, call. Don't email. Email gets ignored for 3 days. A phone call gets you the doc by end of day. If the borrower won't pick up, text. If they won't text, call their Realtor and ask the Realtor to nudge.
+
 5. **Read every condition before you forward it.** Half the time the processor asks for something the borrower already provided. Don't be the LO who forwards a condition list and then has the borrower email you "I already sent that two weeks ago." Open the doc folder. Verify.
+
 6. **Know what you don't know.** When the borrower asks a question you can't answer, don't guess. Say "Great question — let me confirm with my processor and get back to you within 2 hours." Then actually do it within 2 hours.
 
+**The 5 Most Common Deal Killers (and How to Spot Them Early)**
+
+1. **Undisclosed debt or recent credit activity.** A borrower opens a new credit card during the process, takes out an auto loan, or finances furniture for the new home. This re-runs DTI and can blow the loan. Tell every borrower at application: "Until this loan closes, do not apply for any new credit, do not finance anything, do not change jobs, do not make large deposits without telling me first."
+
+2. **Source of funds problems.** A large deposit shows up on the bank statement that the borrower can't document. Common: cash from a parent (needs gift letter), a tax refund (needs documentation), a business deposit (needs source). Ask at application about every deposit over $500. Get gift letters the day they're needed, not a week later.
+
+3. **Employment changes.** Borrower changes jobs, takes leave, switches from W-2 to 1099, gets demoted. Verifications of Employment (VOE) happen multiple times during the loan. Ask at application and at every status call: "Anything change with your employment situation?"
+
+4. **Appraisal coming in low.** The appraisal comes in below the contract price. Options: borrower brings additional cash to close, seller drops price, deal renegotiates, deal cancels. Be ready with the conversation before the appraisal arrives — talk to the Realtor about what their seller would accept if it comes in low.
+
+5. **Title issues.** Liens, judgments, undisclosed heirs, easement disputes. Most title issues are resolvable but take time. The processor and title company handle most of it, but your job is to keep the borrower calm while it gets sorted and to set expectations early that title can add 5-10 days to closing.
+
+If you spot any of these in the first 10 days, address them immediately. The deals that die mid-process almost always had the warning signs in the first two weeks.
+
+**Handling Borrower Fears at Each Stage**
+
+The borrower's anxiety profile changes as the loan progresses. If you anticipate it, you can pre-empt it.
+
+- **Day 1-7 (post-application)**: "Did I qualify? Will my credit score hold up?" Reassure with the credit pull results and pre-approval status.
+- **Day 8-15 (document collection)**: "Why do they need so much paperwork?" Explain that this is standard and that you've reviewed every condition before sending it.
+- **Day 15-22 (appraisal)**: "What if the appraisal comes in low?" Walk through the options before the appraisal so they're not blindsided.
+- **Day 22-30 (underwriting)**: "Why is this taking so long?" Explain the underwriter's role and that conditions are normal.
+- **Day 30-35 (CTC)**: "Are we really going to close?" Confirm CTC issued and timeline for CD.
+- **Day 35-45 (closing)**: "What do I bring? What do I sign?" Walk through closing logistics 48 hours before.
+
 **Your First Close**
+
 When it closes, this is the moment most new LOs miss. Most of them celebrate, send a generic thank-you, and move on. Don't.
 
 Send a handwritten thank-you note. Not a card from the company — your personal handwriting on a real card you bought yourself. Include something specific from their deal ("I'll never forget the appraisal drama on this one — you handled it like a pro").
@@ -187,8 +369,22 @@ Take a photo of the key handoff or the closing table moment, with permission. Po
 
 Schedule a 30-day post-close call. Schedule a 90-day post-close call. Schedule a 1-year refi-watch reminder. Add the borrower to your monthly newsletter. Past clients are 25% of every top producer's pipeline by Year 3. The work to get them there starts on Day 1 of their first deal closing.
 
+**Building Your Personal Playbook**
+
+Your first 5 deals should be a structured learning project. After each one closes, sit down for 30 minutes and write:
+- What surprised you in this deal?
+- What conditions did the underwriter ask for that you didn't anticipate?
+- What questions did the borrower ask that you weren't prepared for?
+- What would you do differently next time?
+- What part of the process did you handle well that you should keep doing?
+
+After 5 deals, you have a personal playbook nobody else has. After 20, you have an unfair advantage over LOs who never wrote anything down. The LO who turns their first 20 deals into a personal playbook is the LO who hits $20M+ in production by Year 3 — because they're not making the same mistakes twice.
+
 **The Mindset**
-Your first deal is not about commission. It's about proving to yourself that you can run a transaction from application to close. Once you've done it once, you can do it 100 times. Treat it like a learning project. Take notes on every step. Write down what surprised you. Build a checklist for next time. The LO who turns their first 5 deals into a personal playbook is the LO who hits $10M in production by Year 2.` },
+
+Your first deal is not about commission. It's about proving to yourself that you can run a transaction from application to close. Once you've done it once, you can do it 100 times. Treat it like a learning project. Take notes on every step. Write down what surprised you. Build a checklist for next time.
+
+The commission on your first deal is not the point. The capability you're building is the point. The borrower who closes with you and refers you three times in the next 5 years is the point. Run the deal with that horizon in mind, and the rest follows.` },
     ],
     quiz: [
       { q: "The single most important variable when choosing your first mortgage company is:", options: ["Highest comp percentage", "Training quality and mentorship access", "Office location", "Brand name recognition"], answer: 1 },
@@ -205,7 +401,7 @@ Your first deal is not about commission. It's about proving to yourself that you
       { q: "When evaluating a comp plan offer, the most important detail to get in writing is:", options: ["The basis-point headline", "The full compensation structure: bps, branch chargebacks, lead-pool deductions, second-lien comp, and circumstances when comp is reduced or clawed back", "The benefits package", "The vacation policy"], answer: 1 },
       { q: "Which of these is a compliance red flag in mortgage advertising?", options: ["Posting an educational article about FHA loans", "Stating 'Guaranteed approval, no income verification needed!' in a Facebook ad", "Including your NMLS number on a flyer", "Showing the Equal Housing Lender logo"], answer: 1 },
       { q: "A new LO's daily activity goal in the first 90 days should focus primarily on:", options: ["Inbound phone time", "20+ outbound touches per day (calls, texts, coffees, open houses) to build the referral base", "Watching market news", "Studying for additional certifications"], answer: 1 },
-      { q: "The best way to track your pipeline as a new LO before you have a CRM budget is:", options: ["Memory only", "A simple Google Sheet with borrower name, status, last touch date, and next action", "Verbal updates to your manager", "Sticky notes on your monitor"], answer: 1 },
+      { q: "The most important financial preparation for a brand-new LO is:", options: ["Buying business cards and signage", "Having 4-6 months of personal financial runway, since first commission checks typically don't arrive until month 4-5", "Investing in paid lead programs", "Pre-paying for training programs"], answer: 1 },
     ],
   },
   {
