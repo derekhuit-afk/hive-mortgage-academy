@@ -27,11 +27,17 @@ export async function POST(req: NextRequest) {
         content: m.content,
       }));
 
+    // Fold SYSTEM into the conversation (Anthropic SDK system param failing on this deploy)
+    const seeded = [
+      { role: "user" as const, content: SYSTEM },
+      { role: "assistant" as const, content: "Understood. I'm ready to coach. What's on your mind?" },
+      ...formatted,
+    ];
+
     const response = await client.messages.create({
       model: "claude-sonnet-4-20250514",
       max_tokens: 600,
-      system: SYSTEM,
-      messages: formatted,
+      messages: seeded,
     });
 
     const content = response.content[0].type === "text" ? response.content[0].text : "";

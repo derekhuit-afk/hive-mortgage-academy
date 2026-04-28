@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing persona or history" }, { status: 400 });
     }
 
-    const system = `${SYSTEM_BASE}
+    const systemContext = `${SYSTEM_BASE}
 
 This role-play scenario:
 Title: "${scriptTitle}"
@@ -48,19 +48,25 @@ You are playing: ${persona}
 
 Begin in character on your first turn. Don't introduce yourself as an AI or break the fourth wall.`;
 
+    // Build messages with system folded into the first user turn
+    const messages = history.length === 0
+      ? [{ role: "user" as const, content: `${systemContext}\n\n[Begin role-play. The LO has just started the conversation. Open in character with a natural opening line.]` }]
+      : [
+          { role: "user" as const, content: `${systemContext}\n\n[The role-play conversation begins below. Stay in character.]` },
+          { role: "assistant" as const, content: "Understood. I'll stay in character throughout." },
+          ...history,
+        ];
+
     const response = await client.messages.create({
       model: "claude-sonnet-4-20250514",
       max_tokens: 600,
-      system,
-      messages: history.length === 0
-        ? [{ role: "user", content: "[Begin role-play. The LO has just started the conversation. Open in character.]" }]
-        : history,
+      messages,
     });
 
     const content = response.content[0].type === "text" ? response.content[0].text : "";
     return NextResponse.json({ content });
-  } catch (err) {
-    console.error("Role-play error:", err);
-    return NextResponse.json({ content: "" }, { status: 500 });
+  } catch (err: any) {
+    console.error("Role-play error:", err?.message || err, err?.status);
+    return NextResponse.json({ content: "", error: err?.message || "unknown" }, { status: 500 });
   }
 }

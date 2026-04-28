@@ -41,13 +41,12 @@ export async function POST(req: NextRequest) {
     const response = await client.messages.create({
       model: "claude-sonnet-4-20250514",
       max_tokens: 700,
-      system: SYSTEM,
-      messages: [{ role: "user", content: `Scenario:\n${scenario}\n\nGive me my response strategy.` }],
+      messages: [{ role: "user", content: `${SYSTEM}\n\n---\n\nScenario:\n${scenario}\n\nGive me my response strategy.` }],
     });
     const content = response.content[0].type === "text" ? response.content[0].text : "";
     return NextResponse.json({ content });
-  } catch (err) {
-    console.error("Objection AI error:", err);
-    return NextResponse.json({ content: "AI is having trouble right now. Try again in a moment." }, { status: 500 });
+  } catch (err: any) {
+    console.error("Objection AI error:", err?.message || err, err?.status);
+    return NextResponse.json({ content: "AI is having trouble right now. Try again in a moment.", error: err?.message }, { status: 500 });
   }
 }
