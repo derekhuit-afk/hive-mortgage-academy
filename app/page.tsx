@@ -44,8 +44,8 @@ function HomeContent() {
             </div>
           </div>
           <div style={{ display:"flex", gap:28, alignItems:"center" }} className="nav-links">
-            <a href="#for-you"    style={{ color:"var(--text-secondary)", fontSize:14, fontWeight:500, textDecoration:"none" }}>Who It's For</a>
-            <a href="#tools"      style={{ color:"var(--text-secondary)", fontSize:14, fontWeight:500, textDecoration:"none" }}>Tools</a>
+            <a href="#for-you"    style={{ color:"var(--text-secondary)", fontSize:14, fontWeight:500, textDecoration:"none" }}>Who It&apos;s For</a>
+            <a href="/tools"       style={{ color:"var(--text-secondary)", fontSize:14, fontWeight:500, textDecoration:"none" }}>Tools</a>
             <a href="#modules"    style={{ color:"var(--text-secondary)", fontSize:14, fontWeight:500, textDecoration:"none" }}>Curriculum</a>
             <a href="#pricing"    style={{ color:"var(--text-secondary)", fontSize:14, fontWeight:500, textDecoration:"none" }}>Pricing</a>
             <a href="/login"      style={{ color:"var(--text-secondary)", fontSize:14, fontWeight:500, textDecoration:"none" }}>Sign In</a>

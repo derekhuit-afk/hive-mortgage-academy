@@ -201,10 +201,10 @@ function Dashboard() {
               <div style={dashToolTitle}>Reading the Room</div>
               <div style={dashToolDesc}>Communication-style trainer (D/I/S/C) and recognition quiz.</div>
             </a>
-            <a href="/roleplay" style={dashTool}>
+            <a href="/scripts" style={dashTool}>
               <div style={dashToolBadge("rgba(245,166,35,0.18)", "var(--honey)")}>Practice</div>
-              <div style={dashToolTitle}>Borrower Role-Play</div>
-              <div style={dashToolDesc}>Practice on AI borrowers with end-of-session coach scoring.</div>
+              <div style={dashToolTitle}>Scripts & Role-Play</div>
+              <div style={dashToolDesc}>Curated scripts + AI role-play. Voice mode optional.</div>
             </a>
             <a href="/ai-derek" style={dashTool}>
               <div style={dashToolBadge("rgba(245,166,35,0.18)", "var(--honey)")}>Coach</div>

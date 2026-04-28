@@ -32,7 +32,7 @@ const SECTIONS: Section[] = [
       { href: "/objections", title: "Objection Handler",        blurb: "Curated objections by category, with multiple response styles. Search, filter, plus an AI fallback for long-tail scenarios.", status: "new", emoji: "🛡️" },
       { href: "/pitch",      title: "Elevator Pitch Builder",   blurb: "Five-piece guided template. Live word count and three tone variants.",                            status: "new", emoji: "🎯" },
       { href: "/disc",       title: "Reading the Room",         blurb: "Communication-style trainer (D/I/S/C). Recognition cues and how to adjust your delivery.",        status: "new", emoji: "👥" },
-      { href: "/roleplay",   title: "Borrower Role-Play",       blurb: "Practice on AI borrowers (skeptical, rate-shopper, self-employed, divorce). End-of-session scoring.", status: "new", emoji: "🎭" },
+      { href: "/scripts",   title: "Scripts & Role-Play",       blurb: "Curated script library plus AI role-play with built-in voice mode (browser-native). End-of-session feedback.", status: "new", emoji: "🎭" },
     ],
   },
   {

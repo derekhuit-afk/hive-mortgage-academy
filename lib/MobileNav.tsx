@@ -4,9 +4,18 @@ import { useState } from "react";
 type NavLink = { label: string; href: string; emoji: string };
 
 const TOOLS: NavLink[] = [
+  { label:"All Tools", href:"/tools", emoji:"🧰" },
   { label:"Command Center", href:"/command-center", emoji:"⚡" },
   { label:"Invite a Colleague", href:"/invite", emoji:"✉️" },
   { label:"Dashboard", href:"/dashboard", emoji:"🎓" },
+  { label:"Business Plan Builder", href:"/business-plan", emoji:"📊" },
+  { label:"Habit Tracker", href:"/habits", emoji:"✅" },
+  { label:"Fast Start Monday", href:"/fast-start", emoji:"🌅" },
+  { label:"Objection Handler", href:"/objections", emoji:"🛡️" },
+  { label:"Elevator Pitch", href:"/pitch", emoji:"🎯" },
+  { label:"Reading the Room (DISC)", href:"/disc", emoji:"👥" },
+  { label:"Scripts & Role-Play", href:"/scripts", emoji:"🎭" },
+  { label:"AI Derek", href:"/ai-derek", emoji:"🧠" },
   { label:"PaymentFirst™", href:"/payment-first", emoji:"💰" },
   { label:"SphereEngine™", href:"/sphere", emoji:"🌐" },
   { label:"AgentPartner™", href:"/agent-partner", emoji:"🤝" },
