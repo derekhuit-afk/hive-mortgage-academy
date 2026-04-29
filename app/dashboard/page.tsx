@@ -83,7 +83,7 @@ function Dashboard() {
           <div style={{ background: "linear-gradient(135deg,rgba(245,166,35,0.1),rgba(245,166,35,0.04))", border: "1px solid rgba(245,166,35,0.25)", borderRadius: 14, padding: "18px 22px", marginBottom: 20, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div>
               <div style={{ fontSize: 15, fontWeight: 700, color: "var(--honey)", marginBottom: 4 }}>Welcome to Hive Mortgage Academy, {student.name.split(" ")[0]}! 🐝</div>
-              <div style={{ fontSize: 13, color: "var(--text-secondary)" }}>All 12 modules and 11 LO tools are unlocked. The AI Coach is ready. Start with Module 1.</div>
+              <div style={{ fontSize: 13, color: "var(--text-secondary)" }}>All 12 modules and 7 LO tools are unlocked. The AI Coach is ready. Start with Module 1.</div>
             </div>
             <button onClick={() => setShowWelcome(false)} style={{ background: "none", border: "none", color: "var(--text-muted)", cursor: "pointer", fontSize: 20 }}>×</button>
           </div>
@@ -146,7 +146,7 @@ function Dashboard() {
             <a href="/apply" style={{ background: "var(--charcoal)", border: "1px solid rgba(245,166,35,0.35)", borderRadius: 14, padding: "18px 20px", textDecoration: "none" }}>
               <div style={{ fontSize: 11, color: "var(--honey)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 6 }}>🔓 Unlocked at Module 6</div>
               <div style={{ fontSize: 14, fontWeight: 700, color: "var(--text-primary)" }}>🏔️ Apply to Derek's Team</div>
-              <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 4 }}>Full Huit.AI platform from Day 1</div>
+              <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 4 }}>Mentorship-based career path with senior support</div>
             </a>
           ) : (
             <div style={{ background: "var(--charcoal)", border: "1px solid var(--border)", borderRadius: 14, padding: "18px 20px", opacity: 0.5 }}>

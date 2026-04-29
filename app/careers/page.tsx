@@ -82,7 +82,7 @@ export default function CareersPage() {
           <div style={{ background: "var(--charcoal)", border: "1px solid var(--border)", borderRadius: 16, padding: "28px 32px", marginBottom: 18 }}>
             <div style={{ fontSize: 12, fontWeight: 700, color: "var(--honey)", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 12 }}>Who You're Joining</div>
             <p style={{ fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.75, margin: 0 }}>
-              Derek Huit is a producing mortgage professional (NMLS #203980) with 18+ years in the industry and over $1 billion in career production. He runs an LO team that pairs senior-level mentorship with the full Huit.AI product suite — meaning you walk in on Day 1 with the technology, the playbook, and the support most LOs spend a decade trying to assemble.
+              Derek Huit is a producing mortgage professional (NMLS #203980) with 18+ years in the industry and over $1 billion in career production. He runs an LO team that pairs senior-level mentorship with a structured ramp — meaning you walk in on Day 1 with the playbook, the support, and the mentorship most LOs spend a decade trying to assemble.
             </p>
           </div>
           <div style={{ background: "var(--charcoal)", border: "1px solid var(--border)", borderRadius: 16, padding: "28px 32px", marginBottom: 18 }}>
@@ -100,10 +100,10 @@ export default function CareersPage() {
           <div style={{ background: "var(--charcoal)", border: "1px solid var(--border)", borderRadius: 16, padding: "28px 32px", marginBottom: 18 }}>
             <div style={{ fontSize: 12, fontWeight: 700, color: "var(--honey)", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 14 }}>What's Different</div>
             {[
-              ["Full Huit.AI platform from Day 1", "11 LO tools, AI Coach, CRM, pipeline tracker — already built. You don't reinvent."],
+              ["Senior mentorship from Day 1", "Direct access to Derek and the team. The playbook, the scripts, the systems — handed to you, not figured out alone."],
               ["Senior mentorship, not a call center", "Derek is in the trenches with the team. No KPI-by-Slack management style."],
               ["Production-first compensation", "Comp is built around closed loans. No quotas, no bait-and-switch overrides."],
-              ["Technology that compounds", "Past clients monitored for refi triggers, agents tracked, reviews automated — your book grows on autopilot."],
+              ["A real ramp, not sink-or-swim", "Past clients monitored for refi triggers, agents tracked, reviews automated — your book grows on a system, not on memory."],
               ["A path for new and experienced LOs", "If you're brand new with a license, we have a structured ramp. If you're producing, we have leverage to add."],
             ].map(([h, body]) => (
               <div key={h} style={{ display: "flex", gap: 14, alignItems: "flex-start", marginBottom: 14 }}>

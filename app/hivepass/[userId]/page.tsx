@@ -36,7 +36,7 @@ export default function PublicHivePassPage() {
           {cert.nmls_number && <div style={{ fontSize:13, color:"#888", marginBottom:16 }}>NMLS #{cert.nmls_number}</div>}
           <div style={{ fontSize:14, color:"#444", lineHeight:1.7, marginBottom:28, maxWidth:440, margin:"0 auto 28px" }}>has completed the Hive Mortgage Academy curriculum and demonstrated mastery of loan origination, borrower consultation, compliance, and the payment-first methodology.</div>
           <div style={{ display:"flex", justifyContent:"center", gap:28, padding:"18px 0", borderTop:"2px solid #D4881A", borderBottom:"2px solid #D4881A", marginBottom:24 }}>
-            {[["🗓️",String(year),"Completed"],["⬡","Huit.AI","Powered By"],["🏔️","Alaska","Built From"]].map(([icon,val,label]) => (
+            {[[" 🗓️",String(year),"Completed"],["✓","Verified","Credential"],["🏔️","Alaska","Built From"]].map(([icon,val,label]) => (
               <div key={label} style={{ textAlign:"center" }}>
                 <div style={{ fontSize:18, fontWeight:900, color:"#D4881A", fontFamily:"Georgia,serif" }}>{icon} {val}</div>
                 <div style={{ fontSize:10, color:"#999", textTransform:"uppercase", letterSpacing:"0.1em" }}>{label}</div>

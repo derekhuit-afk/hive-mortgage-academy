@@ -93,7 +93,7 @@ export default function EnrollPage() {
 
         <h1 style={{ fontSize: "clamp(26px,5vw,32px)", fontWeight: 900, margin: "12px 0 6px", lineHeight: 1.15, fontFamily: "'Playfair Display',serif" }}>Create your free account</h1>
         <p style={{ color: "var(--text-secondary)", fontSize: 14, lineHeight: 1.6, marginBottom: 28 }}>
-          All 12 modules. All 11 LO tools. Unlimited AI Coach. No credit card. Free forever.
+          All 12 modules. All 7 LO tools. Unlimited AI Coach. No credit card. Free forever.
         </p>
 
         <form onSubmit={submit} noValidate>

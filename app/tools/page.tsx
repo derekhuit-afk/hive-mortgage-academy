@@ -42,35 +42,6 @@ const SECTIONS: Section[] = [
       { href: "/ai-derek", title: "AI Derek", blurb: "Mindset, accountability, and business-strategy coach. Refuses regulatory and product questions by design — those go to a real Derek call.", status: "new", emoji: "🧠" },
     ],
   },
-  {
-    title: "Pipeline & CRM",
-    blurb: "The systems that catch what your memory can't.",
-    tools: [
-      { href: "/sphere",         title: "SphereEngine",   blurb: "Score and track your sphere of influence. Family, friends, past clients, and warm leads.",  status: "existing", emoji: "🌐" },
-      { href: "/agent-partner",  title: "AgentPartner",   blurb: "Realtor and partner CRM. Track relationships from cold to active.",                          status: "existing", emoji: "🤝" },
-      { href: "/loantrack",      title: "LoanTrack",      blurb: "Active loan pipeline. Status, conditions, and next-actions for every file.",                  status: "existing", emoji: "📁" },
-      { href: "/review-loop",    title: "ReviewLoop",     blurb: "Post-close cadence. 30-60-90 touchpoints, review asks, and referral capture.",               status: "existing", emoji: "🔁" },
-      { href: "/equity-pulse",   title: "EquityPulse",    blurb: "Past-client equity watch. Surface refi candidates as rates and home values move.",            status: "existing", emoji: "💎" },
-    ],
-  },
-  {
-    title: "Borrower-Facing",
-    blurb: "Tools you use with borrowers, not on them.",
-    tools: [
-      { href: "/payment-first", title: "PaymentFirst Consultation", blurb: "Walk borrowers from max qualification to comfortable payment.",         status: "existing", emoji: "💵" },
-      { href: "/credit-path",   title: "CreditPath",                blurb: "90-day credit improvement roadmap by score band.",                       status: "existing", emoji: "📈" },
-      { href: "/readyscore",    title: "ReadyScore",                blurb: "Borrower readiness assessment.",                                         status: "existing", emoji: "🎯" },
-    ],
-  },
-  {
-    title: "Career",
-    blurb: "For LOs deciding what comes next.",
-    tools: [
-      { href: "/launchkit",      title: "LO LaunchKit",   blurb: "Onboarding kit for new LOs starting with Derek's team.",                    status: "existing", emoji: "🚀" },
-      { href: "/command-center", title: "Command Center", blurb: "Mission-control view across your active relationships and pipeline.",        status: "existing", emoji: "🎛️" },
-      { href: "/hivepass",       title: "HivePass",       blurb: "Graduate-only credential and recognition for completers of the curriculum.", status: "existing", emoji: "🏆" },
-    ],
-  },
 ];
 
 export default function ToolsIndexPage() {

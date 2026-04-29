@@ -15,7 +15,7 @@ const TIER_LABEL: Record<string,string> = {
   free: "Hive Mortgage Academy — Free Training",
 };
 const TIER_ACCESS: Record<string,string> = {
-  free: "All 12 modules and 11 LO tools fully unlocked.",
+  free: "All 12 modules and 7 LO tools fully unlocked.",
 };
 const MODULE_NAMES: Record<number,string> = {
   1:"Day 1 — You Passed. Now What?", 2:"Understanding Loan Products",
@@ -46,7 +46,7 @@ const footer = () => `
   <hr style="border:none;border-top:1px solid #1E1E24;margin:24px 0">
   <p style="color:#4B5563;font-size:12px;margin:0 0 8px">Hive Mortgage Academy · Built from Alaska · <a href="${BASE_URL}" style="color:#F5A623">${BASE_URL}</a></p>
   <p style="color:#374151;font-size:10px;line-height:1.6;margin:0 0 4px">For educational purposes only. Not affiliated with or required by any employer. Individual results vary. Content does not constitute legal, financial, or compliance advice.</p>
-  <p style="color:#374151;font-size:10px;line-height:1.6;margin:0">Instructor: Derek Huit · NMLS #203980 · Licensed in AK, WA, MT · Equal Housing Opportunity</p>`;
+  <p style="color:#374151;font-size:10px;line-height:1.6;margin:0">Instructor: Derek Huit · NMLS #203980 · Licensed in AK, GA, IL, IN, MI, MT, OK, TX, WA · Equal Housing Opportunity</p>`;
 
 const btn = (text: string, href: string) =>
   `<div style="text-align:center;margin:24px 0"><a href="${href}" style="display:inline-block;background:linear-gradient(135deg,#F5A623,#D4881A);color:#0A0A0B;padding:14px 32px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none">${text}</a></div>`;
@@ -195,7 +195,7 @@ export async function sendHivePassEmail({ name, email, nmls, certNumber, student
           </div>
           <p style="color:#94A3B8;font-size:13px;line-height:1.7;margin:0 0 16px">Share your public badge link on LinkedIn, in your email signature, and with every Realtor you meet. It signals you were trained the right way.</p>
           ${btn("Share My HivePass™ →", badgeUrl)}
-          <p style="color:#94A3B8;font-size:13px;line-height:1.7;margin:16px 0 0">Ready to take the next step? <a href="${BASE_URL}/apply" style="color:#F5A623;font-weight:700">Apply to join Derek's team</a> and get the full Huit.AI platform from Day 1.</p>
+          <p style="color:#94A3B8;font-size:13px;line-height:1.7;margin:16px 0 0">Ready to take the next step? <a href="${BASE_URL}/apply" style="color:#F5A623;font-weight:700">Apply to join Derek's team</a> for senior mentorship and a structured ramp.</p>
         `)}`,
     });
   } catch (err) { console.error("HivePass email failed:", err); }
@@ -250,7 +250,7 @@ export async function sendApplicationConfirmEmail({ name, email, market, experie
             <p style="color:#F5A623;font-size:13px;font-weight:700;margin:0 0 10px">What happens next:</p>
             <p style="color:#94A3B8;font-size:13px;margin:0 0 7px">1. Derek reviews your application</p>
             <p style="color:#94A3B8;font-size:13px;margin:0 0 7px">2. You receive a calendar link for a 30-minute call</p>
-            <p style="color:#94A3B8;font-size:13px;margin:0">3. If it's a fit, you get a detailed onboarding plan with full Huit.AI platform access from Day 1</p>
+            <p style="color:#94A3B8;font-size:13px;margin:0">3. If it&apos;s a fit, you get a detailed onboarding plan with senior mentorship from Day 1</p>
           </div>
           ${market || experience ? `<p style="color:#94A3B8;font-size:13px;line-height:1.7;margin:0 0 16px">We have your details on file${market ? ` — ${market}` : ""}${experience ? `, ${experience}` : ""}.</p>` : ""}
           <p style="color:#CBD5E1;font-size:14px;line-height:1.7;margin:0 0 4px">In the meantime, keep working your Academy curriculum. The LOs Derek chooses are always the ones who show up.</p>

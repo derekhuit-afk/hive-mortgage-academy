@@ -4,16 +4,13 @@ import { useSearchParams } from "next/navigation";
 import { MODULES } from "@/lib/curriculum";
 
 const TOOLS = [
-  { emoji:"💰", name:"PaymentFirst™",   desc:"Present monthly payment before qualification — designed to help LOs lead better borrower conversations and reduce late-stage fallout" },
-  { emoji:"🌐", name:"SphereEngine™",   desc:"Score + prioritize your first 100 contacts. AI-written outreach scripts for each one" },
-  { emoji:"🤝", name:"AgentPartner™",   desc:"Agent pipeline tracker + AI pitch generator. Build referral partnerships systematically" },
-  { emoji:"📍", name:"LoanTrack™",      desc:"Milestone tracker with live borrower portal. Realtors and borrowers see progress in real time" },
-  { emoji:"⭐", name:"ReviewLoop™",     desc:"Automated post-close review sequence designed to increase Google review volume through timely, consistent follow-up" },
-  { emoji:"🎯", name:"ReadyScore™",     desc:"Branded borrower assessment link. 0–100 readiness score + AI action plan" },
-  { emoji:"📈", name:"EquityPulse™",    desc:"Track past client equity. Auto-flag refi and HELOC candidates. AI annual review message" },
-  { emoji:"🎯", name:"CreditPath™",     desc:"Specific paydown plan for credit-challenged borrowers. They come back ready to close" },
-  { emoji:"🚀", name:"LO LaunchKit™",   desc:"AI-generated 90-day business plan. Specific targets, specific actions, specific timeline" },
-  { emoji:"⚡", name:"Command Center",  desc:"Intelligence hub — cross-tool priorities, live stats, and today's action items in one view" },
+  { emoji:"📊", name:"Business Plan Builder",   desc:"Reverse-engineer your annual income goal into the daily activity required. Includes a what-if projector for scenario modeling." },
+  { emoji:"🌅", name:"Fast Start Monday",       desc:"Six-step Monday morning kickoff that turns your plan numbers into a focused week." },
+  { emoji:"✅", name:"Habit Tracker",            desc:"Daily check-ins on the activity targets your business plan generated. Streaks that compound." },
+  { emoji:"🎯", name:"Elevator Pitch Builder",  desc:"Five guided fields produce three pitch variants — warm, professional, direct." },
+  { emoji:"🛡️", name:"Objection Handler",       desc:"67 borrower and partner objections with responses that work, plus AI for novel scenarios." },
+  { emoji:"🎭", name:"Scripts &amp; Role-Play",  desc:"21 mortgage scripts by scenario with built-in voice role-play and end-of-session feedback." },
+  { emoji:"🧠", name:"AI Coach",                 desc:"On-demand coaching trained on Derek's playbook. Mindset, accountability, business strategy." },
 ];
 
 function HomeContent() {
@@ -107,8 +104,8 @@ function HomeContent() {
 
               <div style={{ display:"flex", gap:20, flexWrap:"wrap" }}>
                 {(audience==="new"
-                  ? [["✓","6 free modules, no credit card"],["✓","Unlimited AI Coach"],["✓","11 LO production tools included"]]
-                  : [["✓","11 tools for your active pipeline"],["✓","Referral, agent & refi systems"],["✓","Built on $1B+ in real production"]]
+                  ? [["✓","6 free modules, no credit card"],["✓","Unlimited AI Coach"],["✓","7 LO production tools included"]]
+                  : [["✓","Built on $1B+ in real production"],["✓","Referral, agent & refi systems"],["✓","Direct path to Derek's mortgage team"]]
                 ).map(([icon,text],i) => (
                   <div key={i} style={{ display:"flex", alignItems:"center", gap:6 }}>
                     <span style={{ color:"#10B981", fontWeight:700, fontSize:13 }}>{icon}</span>
@@ -125,7 +122,7 @@ function HomeContent() {
                 {[
                   ["🎓","12 Modules","From Day 1 through advanced production strategies"],
                   ["🤖","AI Mortgage Coach","24/7 — trained on $1B+ in real deals"],
-                  ["⚡","11 Production Tools","The stack serious LOs run their business on"],
+                  ["⚡","7 Production Tools","Plan, practice, and execute — built into the curriculum"],
                   ["🏔️","HivePass™ Certificate","Verifiable credential when you graduate"],
                 ].map(([icon,title,sub],i) => (
                   <div key={i} style={{ display:"flex", alignItems:"center", gap:14, padding:"11px 0", borderBottom: i < 3 ? "1px solid var(--border)" : "none" }}>
@@ -176,14 +173,13 @@ function HomeContent() {
                 I started in mortgage with no contacts, no pipeline, and no real training — just a license and the assumption that I'd figure it out. Most of the first year was expensive trial and error that nobody should have to repeat.
               </p>
               <p style={{ fontSize:16, color:"var(--text-secondary)", lineHeight:1.8, marginBottom:28 }}>
-                Eighteen years later, I've closed over <strong style={{ color:"var(--honey)" }}>$1 billion in career production</strong>, built an AI platform used by loan officers nationwide, and spent the last several years putting everything I learned — the hard way — into a curriculum that actually works. This academy is what I wish existed in Year 1.
+                Eighteen years later, I've closed over <strong style={{ color:"var(--honey)" }}>$1 billion in career production</strong> and spent the last several years putting everything I learned — the hard way — into a curriculum that actually works. This academy is what I wish existed in Year 1.
               </p>
               <div className="creds-grid">
                 {[
                   ["18+ Years","Mortgage origination experience"],
                   ["$1B+","Career production volume"],
                   ["NMLS #203980","Licensed in 9 states (AK · GA · IL · IN · MI · MT · OK · TX · WA)"],
-                  ["Huit.AI","Founder & CEO — 50-product AI platform"],
                   ["12,000+","LinkedIn followers · Built from Alaska"],
                 ].map(([stat,label]) => (
                   <div key={stat} style={{ background:"var(--charcoal)", border:"1px solid var(--border)", borderRadius:12, padding:"14px 18px" }}>
@@ -202,7 +198,7 @@ function HomeContent() {
         <div style={{ maxWidth:1100, margin:"0 auto" }}>
           <div style={{ textAlign:"center", marginBottom:56 }}>
             <div style={{ fontSize:11, color:"var(--honey)", fontWeight:700, letterSpacing:"0.2em", textTransform:"uppercase", marginBottom:14 }}>Who This Is For</div>
-            <h2 style={{ fontFamily:"'Playfair Display',serif", fontSize:"clamp(28px,4vw,48px)", fontWeight:900, color:"var(--text-primary)", lineHeight:1.1, marginBottom:14 }}>Two Paths.<br />One Platform.</h2>
+            <h2 style={{ fontFamily:"'Playfair Display',serif", fontSize:"clamp(28px,4vw,48px)", fontWeight:900, color:"var(--text-primary)", lineHeight:1.1, marginBottom:14 }}>Two Paths.<br />One Curriculum.</h2>
             <p style={{ color:"var(--text-secondary)", fontSize:16, maxWidth:480, margin:"0 auto" }}>Whether you're building from zero or breaking through a ceiling you've hit — this is built for both.</p>
           </div>
           <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:24 }} className="paths-grid">
@@ -258,14 +254,14 @@ function HomeContent() {
         </div>
       </section>
 
-      {/* 11 TOOLS */}
+      {/* TOOLKIT */}
       <section id="tools" style={{ padding:"100px 24px", background:"var(--charcoal)" }}>
         <div style={{ maxWidth:1200, margin:"0 auto" }}>
           <div style={{ textAlign:"center", marginBottom:56 }}>
             <div style={{ fontSize:11, color:"var(--honey)", fontWeight:700, letterSpacing:"0.2em", textTransform:"uppercase", marginBottom:14 }}>Included With Every Account</div>
-            <h2 style={{ fontFamily:"'Playfair Display',serif", fontSize:"clamp(28px,4vw,48px)", fontWeight:900, color:"var(--text-primary)", lineHeight:1.1, marginBottom:14 }}>11 Production Tools.<br />Built Into the Platform.</h2>
+            <h2 style={{ fontFamily:"'Playfair Display',serif", fontSize:"clamp(28px,4vw,48px)", fontWeight:900, color:"var(--text-primary)", lineHeight:1.1, marginBottom:14 }}>7 Production Tools.<br />Built Into the Curriculum.</h2>
             <p style={{ color:"var(--text-secondary)", fontSize:16, maxWidth:560, margin:"0 auto" }}>
-              This isn't just training. Every student gets access to the actual tools serious loan officers run their business on — from your first borrower call to post-close review automation.
+              This isn&apos;t just training. Every student gets the tools to plan, practice, and execute — from your business plan math through your scripts and role-play practice.
             </p>
           </div>
           <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:16 }} className="tools-grid">
@@ -281,7 +277,7 @@ function HomeContent() {
           </div>
           <style>{`@media(max-width:1024px){.tools-grid{grid-template-columns:repeat(2,1fr)!important}}@media(max-width:600px){.tools-grid{grid-template-columns:1fr!important}}`}</style>
           <div style={{ textAlign:"center", marginTop:36 }}>
-            <a href="/enroll" style={{ background:"linear-gradient(135deg,#F5A623,#D4881A)", color:"#0A0A0B", padding:"15px 32px", borderRadius:10, fontSize:15, fontWeight:700, textDecoration:"none", display:"inline-block" }}>Access All 11 Tools Free →</a>
+            <a href="/enroll" style={{ background:"linear-gradient(135deg,#F5A623,#D4881A)", color:"#0A0A0B", padding:"15px 32px", borderRadius:10, fontSize:15, fontWeight:700, textDecoration:"none", display:"inline-block" }}>Access All 7 Tools Free →</a>
           </div>
         </div>
       </section>
@@ -328,8 +324,8 @@ function HomeContent() {
             },
             {
               id:"07", tier:"Module", tcolor:"#3B82F6", title:"CRM + Tech Stack for New LOs",
-              lessons:["Why Your Tech Stack Is Your Pipeline","The Huit.AI Platform — What LOs on the Platform Get","Automating Follow-Up Without Losing the Human Touch","Your Daily Operating Rhythm"],
-              deliverables:["A time-blocked daily operating schedule built around your pipeline","Your follow-up automation sequence configured and running","The Huit.AI Command Center set up with your active contacts"],
+              lessons:["Why Your Tech Stack Is Your Pipeline","The Tech Stack — What Top LOs Use and Why","Automating Follow-Up Without Losing the Human Touch","Your Daily Operating Rhythm"],
+              deliverables:["A time-blocked daily operating schedule built around your pipeline","Your follow-up automation sequence configured and running","Your command-center view set up with your active contacts"],
             },
             {
               id:"08", tier:"Module", tcolor:"#3B82F6", title:"Moving the Loan: App to Clear to Close",
@@ -349,11 +345,11 @@ function HomeContent() {
             {
               id:"11", tier:"Module", tcolor:"#8B5CF6", title:"Post-Closing: Reviews, Referrals & Refi Watch",
               lessons:["The 30-60-90 Day Post-Close System","Getting Reviews That Actually Build Your Pipeline","The Referral Ask — Without Feeling Awkward","Predictive Refi — Watching Your Past Clients"],
-              deliverables:["Your ReviewLoop™ 3-stage post-close sequence — configured and ready to run","The referral ask script — natural, specific, and effective in any conversation","Your EquityPulse™ past-client database with automatic refi watch alerts"],
+              deliverables:["A 3-stage post-close review sequence — configured and ready to run","The referral ask script — natural, specific, and effective in any conversation","Your past-client database with automatic refi-watch criteria"],
             },
             {
               id:"12", tier:"Module", tcolor:"#F5A623", title:"Building a $1M+/Year Mortgage Business",
-              lessons:["The Math of a Million-Dollar Mortgage Career","The Huit.AI Platform Advantage — What Top LOs Use","Building Your Personal Brand at Scale","The Long Game — Why the Best LOs Never Stop Learning"],
+              lessons:["The Math of a Million-Dollar Mortgage Career","Your Tech Stack Advantage — What Top LOs Use","Building Your Personal Brand at Scale","The Long Game — Why the Best LOs Never Stop Learning"],
               deliverables:["A $1M production plan with monthly unit targets and a specific marketing budget","Your personal brand strategy — content pillars, posting cadence, platform priority","Your HivePass™ credential — earned, verifiable, ready to share on LinkedIn"],
             },
           ].map((mod) => (
@@ -502,13 +498,13 @@ function HomeContent() {
           <div style={{ fontSize:11, color:"#10B981", fontWeight:700, letterSpacing:"0.2em", textTransform:"uppercase", marginBottom:14 }}>Pricing</div>
           <h2 style={{ fontFamily:"'Playfair Display',serif", fontSize:"clamp(28px,4vw,48px)", fontWeight:900, color:"var(--text-primary)", marginBottom:16, lineHeight:1.15 }}>Free. Forever.<br/>No Credit Card. No Catch.</h2>
           <p style={{ color:"var(--text-secondary)", fontSize:17, lineHeight:1.7, marginBottom:32, maxWidth:560, margin:"0 auto 32px" }}>
-            All 12 modules. All 11 LO tools. Unlimited AI Coach. Mobile + desktop. No paywall, no upgrade prompts, no payment surface — because the goal isn't to sell you a course. The goal is to find sharp loan officers who want to build a real career on Derek Huit's team.
+            All 12 modules. All 7 LO tools. Unlimited AI Coach. Mobile + desktop. No paywall, no upgrade prompts, no payment surface — because the goal isn&apos;t to sell you a course. The goal is to find sharp loan officers who want to build a real career on Derek Huit&apos;s team.
           </p>
           <div style={{ background:"var(--obsidian)", border:"1px solid rgba(16,185,129,0.25)", borderRadius:20, padding:"28px 32px", maxWidth:520, margin:"0 auto 28px", textAlign:"left" }}>
-            <div style={{ fontSize:11, fontWeight:700, color:"#10B981", letterSpacing:"0.2em", textTransform:"uppercase", marginBottom:14 }}>What's Included</div>
+            <div style={{ fontSize:11, fontWeight:700, color:"#10B981", letterSpacing:"0.2em", textTransform:"uppercase", marginBottom:14 }}>What&apos;s Included</div>
             {[
               "All 12 modules — Day 1 LO basics through $1M+/year mortgage business",
-              "All 11 LO tools — pipeline tracker, sphere CRM, agent partner intel, equity pulse, and more",
+              "All 7 LO tools — business plan builder, habit tracker, scripts, role-play, and more",
               "Unlimited AI Coach — built from $1B+ in production experience",
               "Module completion certificates + HivePass™ graduation credential",
               "Direct path to apply to Derek Huit's team after Module 6",
@@ -530,7 +526,7 @@ function HomeContent() {
           <div style={{ fontSize:48, marginBottom:16 }}>🏔️</div>
           <h2 style={{ fontFamily:"'Playfair Display',serif", fontSize:"clamp(26px,4vw,42px)", fontWeight:900, color:"var(--text-primary)", marginBottom:16, lineHeight:1.15 }}>Ready to Build a Career,<br />Not Just Close Loans?</h2>
           <p style={{ fontSize:17, color:"var(--text-secondary)", lineHeight:1.7, marginBottom:32, maxWidth:520, margin:"0 auto 32px" }}>
-            The top performers who go through this curriculum get a direct line to Derek Huit's mortgage team — with the full Huit.AI platform from Day 1 and a structure built around real production, not quotas.
+            The top performers who go through this curriculum get a direct line to Derek Huit&apos;s mortgage team — senior mentorship, a structured ramp, and a comp structure built around real production, not quotas.
           </p>
           <a href="/careers" style={{ background:"linear-gradient(135deg,#F5A623,#D4881A)", color:"#0A0A0B", padding:"16px 36px", borderRadius:12, fontSize:16, fontWeight:700, textDecoration:"none", display:"inline-block" }}>See Career Openings →</a>
           <p style={{ fontSize:12, color:"var(--text-muted)", marginTop:16 }}>Complete Module 6 inside the curriculum to unlock the team application path</p>
@@ -547,14 +543,10 @@ function HomeContent() {
                 <div style={{ fontFamily:"'Playfair Display',serif", fontWeight:700, fontSize:15, color:"var(--text-primary)" }}>Hive Mortgage Academy</div>
               </div>
               <p style={{ fontSize:13, color:"var(--text-muted)", lineHeight:1.7, maxWidth:340, marginBottom:12 }}>Training, tools, and AI coaching for loan officers at every stage. Built from 18+ years and $1B+ in career mortgage production.*</p>
-              <p style={{ fontSize:11, color:"#374151", lineHeight:1.6, maxWidth:340, marginBottom:16 }}>Instructor: Derek Huit · NMLS #203980 · Licensed in AK, WA, MT</p>
-              <div style={{ display:"inline-flex", alignItems:"center", gap:6, background:"var(--muted)", borderRadius:8, padding:"6px 12px", border:"1px solid var(--border)" }}>
-                <span style={{ fontSize:11, color:"var(--text-muted)" }}>Powered by</span>
-                <span style={{ fontSize:11, color:"var(--text-secondary)", fontWeight:600 }}>⬡ Huit.AI</span>
-              </div>
+              <p style={{ fontSize:11, color:"#374151", lineHeight:1.6, maxWidth:340 }}>Instructor: Derek Huit · NMLS #203980 · Licensed in AK, GA, IL, IN, MI, MT, OK, TX, WA</p>
             </div>
             <div>
-              <div style={{ fontSize:11, fontWeight:700, color:"var(--honey)", letterSpacing:"0.15em", textTransform:"uppercase", marginBottom:16 }}>Platform</div>
+              <div style={{ fontSize:11, fontWeight:700, color:"var(--honey)", letterSpacing:"0.15em", textTransform:"uppercase", marginBottom:16 }}>Academy</div>
               {["Curriculum","Tools","Pricing","Enroll Free","Sign In","Careers"].map(link => (
                 <a key={link} href={link==="Enroll Free"?"/enroll":link==="Sign In"?"/login":link==="Tools"?"#tools":link==="Curriculum"?"#modules":link==="Careers"?"/careers":"#pricing"} style={{ display:"block", fontSize:13, color:"var(--text-muted)", textDecoration:"none", marginBottom:10 }}>{link}</a>
               ))}
@@ -563,7 +555,6 @@ function HomeContent() {
               <div style={{ fontSize:11, fontWeight:700, color:"var(--honey)", letterSpacing:"0.15em", textTransform:"uppercase", marginBottom:16 }}>Contact</div>
               <a href="mailto:derekhuit@gmail.com" style={{ fontSize:13, color:"var(--text-muted)", textDecoration:"none", display:"block", marginBottom:10 }}>derekhuit@gmail.com</a>
               <div style={{ fontSize:13, color:"var(--text-muted)", marginBottom:10 }}>Anchorage, Alaska</div>
-              <a href="https://huit.ai" target="_blank" rel="noopener noreferrer" style={{ fontSize:13, color:"var(--honey)", textDecoration:"none" }}>huit.ai →</a>
             </div>
           </div>
           <div id="legal" style={{ marginTop:40, paddingTop:28, borderTop:"1px solid var(--border)" }}>

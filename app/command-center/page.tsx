@@ -255,7 +255,7 @@ export default function CommandCenterPage() {
 
             {/* TOOL GRID */}
             <div>
-              <h2 style={{ fontFamily:"'Playfair Display',serif", fontSize:18, fontWeight:900, color:"var(--text-primary)", marginBottom:14 }}>Your Platform — 11 Tools</h2>
+              <h2 style={{ fontFamily:"'Playfair Display',serif", fontSize:18, fontWeight:900, color:"var(--text-primary)", marginBottom:14 }}>Your Pipeline Tools</h2>
               <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:12 }} className="tool-grid">
                 {TOOLS.map(tool=>(
                   <a key={tool.name} href={tool.href} style={{ background:"var(--charcoal)", border:"1px solid var(--border)", borderRadius:14, padding:"18px 16px", textDecoration:"none", display:"block", transition:"border-color 0.2s" }}

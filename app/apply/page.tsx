@@ -46,12 +46,12 @@ export default function ApplyPage() {
           </div>
           <h1 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(30px,5vw,44px)", fontWeight: 900, color: "var(--text-primary)", lineHeight: 1.1, marginBottom: 16 }}>Apply to Join<br /><span style={{ background: "linear-gradient(135deg,#F5A623,#FFC85C)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Derek Huit's Team</span></h1>
           <p style={{ fontSize: 16, color: "var(--text-secondary)", lineHeight: 1.7 }}>
-            LOs on this team get the full Huit.AI platform from Day 1 — 50 products, AI automation, and the systems that make the difference between surviving Year 1 and building a career. Derek reviews every application personally.
+            Senior mentorship, a structured ramp, and a comp structure built around real production. Derek reviews every application personally.
           </p>
         </div>
 
         <div style={{ display: "flex", gap: 16, marginBottom: 40 }}>
-          {[["📍","Nationwide","All licensed states welcome"],["⬡","Full Platform","All 50 Huit.AI products"],["🏔️","Direct Access","Built from Alaska mentorship"]].map(([icon,title,sub]) => (
+          {[["📍","Nationwide","All licensed states welcome"],["🤝","Direct Mentorship","From Derek and the team"],["🏔️","Built from Alaska","Real production, no quotas"]].map(([icon,title,sub]) => (
             <div key={title} style={{ flex: 1, background: "var(--charcoal)", border: "1px solid var(--border)", borderRadius: 12, padding: "14px 16px", textAlign: "center" }}>
               <div style={{ fontSize: 20, marginBottom: 4 }}>{icon}</div>
               <div style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)", marginBottom: 2 }}>{title}</div>

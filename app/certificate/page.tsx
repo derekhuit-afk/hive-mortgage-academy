@@ -86,7 +86,7 @@ export default function CertificatePage() {
               <div style={{ width: 44, height: 44, background: "linear-gradient(135deg,#F5A623,#D4881A)", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>🐝</div>
               <div>
                 <div className="font-display" style={{ fontSize: 18, fontWeight: 700, color: "var(--text-primary)" }}>Hive Mortgage Academy</div>
-                <div style={{ fontSize: 10, color: "var(--honey)", letterSpacing: "0.2em", textTransform: "uppercase" }}>Powered by Huit.AI</div>
+                <div style={{ fontSize: 10, color: "var(--honey)", letterSpacing: "0.2em", textTransform: "uppercase" }}>Hive Mortgage Academy</div>
               </div>
             </div>
 

@@ -74,7 +74,7 @@ export default function GraduationPage() {
           <div style={{ fontSize:14, color:"var(--text-secondary)", lineHeight:1.7, marginBottom:28, maxWidth:480, margin:"0 auto 28px" }}>has completed the Hive Mortgage Academy curriculum and demonstrated mastery of loan origination, borrower consultation, compliance, and the payment-first methodology.</div>
           {certNumber && <div style={{ fontSize:12, color:"var(--text-muted)", marginBottom:20 }}>Certificate {certNumber} · {new Date().getFullYear()}</div>}
           <div style={{ display:"flex", justifyContent:"center", gap:32, padding:"20px 0", borderTop:"1px solid var(--border)", borderBottom:"1px solid var(--border)", marginBottom:24 }}>
-            {[["⬡ Huit.AI","Platform"],["🏔️","Built from Alaska"],["✓ Verified",`${tierLimit} Modules`]].map(([v,l])=>(<div key={l} style={{ textAlign:"center" }}><div style={{ fontSize:16, fontWeight:900, color:"var(--honey)", fontFamily:"'Playfair Display',serif" }}>{v}</div><div style={{ fontSize:10, color:"var(--text-muted)", textTransform:"uppercase", letterSpacing:"0.1em" }}>{l}</div></div>))}
+            {[["🎓","Curriculum"],["🏔️","Built from Alaska"],["✓ Verified",`${tierLimit} Modules`]].map(([v,l])=>(<div key={l} style={{ textAlign:"center" }}><div style={{ fontSize:16, fontWeight:900, color:"var(--honey)", fontFamily:"'Playfair Display',serif" }}>{v}</div><div style={{ fontSize:10, color:"var(--text-muted)", textTransform:"uppercase", letterSpacing:"0.1em" }}>{l}</div></div>))}
           </div>
           <div style={{ display:"flex", gap:12, justifyContent:"center", flexWrap:"wrap" }}>
             <button onClick={() => window.print()} style={{ background:"var(--slate)", border:"1px solid var(--border)", color:"var(--text-primary)", padding:"10px 20px", borderRadius:8, fontSize:13, fontWeight:600, cursor:"pointer" }}>🖨️ Print Certificate</button>
@@ -85,7 +85,7 @@ export default function GraduationPage() {
           <h2 style={{ fontFamily:"'Playfair Display',serif", fontSize:"clamp(22px,4vw,32px)", fontWeight:900, color:"var(--text-primary)", marginBottom:12 }}>You've Earned It. Now Choose Your Path.</h2>
         </div>
         <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:16 }} className="cta-grid">
-          {[{ icon:"🏔️", title:"Join Derek's Team", desc:"Apply to join Derek Huit's team. Full Huit.AI platform from Day 1.", cta:"Apply Now →", href:"/apply", color:"#F5A623" },
+          {[{ icon:"🏔️", title:"Join Derek's Team", desc:"Apply to join Derek Huit's mortgage team. Senior mentorship and a structured ramp.", cta:"Apply Now →", href:"/apply", color:"#F5A623" },
             { icon:"📅", title:"Book a Strategy Call", desc:"Not ready to commit? Book a free 30-minute call with Derek first.", cta:"Book a Call →", href:"https://calendly.com/derekhuit", color:"#3B82F6" },
             { icon:"💼", title:"View Career Openings", desc:"See where Derek's team is hiring and what we're looking for.", cta:"See Roles →", href:"/careers", color:"#10B981" }].map(c=>(
             <div key={c.title} style={{ background:"var(--charcoal)", border:`1px solid ${c.color}30`, borderRadius:16, padding:"20px 18px", textAlign:"center" }}>

@@ -1803,7 +1803,7 @@ A real tech stack is not a luxury. It's the only way to keep all of this from co
 - Tracks Realtor referral activity so you know who's producing
 - Flags pipeline risk (loans that haven't moved in 7 days, conditions outstanding too long)
 
-The Huit.AI ecosystem has CRMEX as the dedicated mortgage CRM. CRMEX integrates with the rest of the Huit.AI stack (APEX for recruiting intelligence, AskAlaskaMortgage.ai for HMDA data, ContentLoop for marketing automation). LOs working under Derek's team get access. For LOs not on the team, alternative mortgage CRMs include Surefire, Velocify, BNTouch, and Top of Mind. Pick one that matches your volume and budget.
+A "real CRM" for mortgage looks like one of two things: (1) the CRM your company provides, or (2) a mortgage-specific CRM you license yourself. Mortgage-specific CRMs in the market include Surefire, Velocify, BNTouch, and Top of Mind. Generic CRMs like HubSpot or Salesforce can work but require heavy customization to handle mortgage workflows out of the box. Pick one that matches your volume and budget — the brand matters less than how disciplined you are about using it.
 
 **The First-Year Tech Reality**
 You don't need every tool on Day 1. You need:
@@ -1818,7 +1818,7 @@ You don't need every tool on Day 1. You need:
 That's it for Month 1. As volume grows, layer in marketing automation (Month 4–6), past-client tracking (Month 6–9), and predictive refi watch (Month 9–12). Don't subscribe to tools you can't use yet.
 
 **The Build-Your-Own Trap**
-Some new LOs spend Month 1 building elaborate spreadsheets and Notion databases. Wrong move. The hours spent building custom systems are hours not spent calling Realtors. Use the CRM your company provides — for LOs on Derek Huit's mortgage team that's CRMEX, the Huit.AI mortgage-specific CRM that's built for this work. Every minute building from scratch is a minute not selling.
+Some new LOs spend Month 1 building elaborate spreadsheets and Notion databases. Wrong move. The hours spent building custom systems are hours not spent calling Realtors. Use the CRM your company provides, or pick a mortgage-specific one off the shelf and stop tinkering. Every minute building from scratch is a minute not selling.
 
 **The "Tech Replaces Calls" Myth**
 The best tech stack in the industry can't replace 20 outbound calls a day. CRMs and automation amplify your activity; they don't substitute for it. The LO who has zero tech but makes 50 calls a day will outproduce the LO who has perfect tech but makes 5 calls a day.
@@ -1834,57 +1834,58 @@ Week 12: Refi watch enabled — triggers when rates drop 0.5% below current loan
 
 By Day 90 your tech is doing 50% of the relationship maintenance work for you. Your job becomes high-value: conversations, advice, decisions. The CRM handles the rest.` },
 
-      { title: "The Huit.AI Platform — What LOs on the Platform Get", duration: "19 min", content: `Most LOs work with mismatched tools that don't talk to each other. They use one system for CRM, another for marketing, another for pre-approval letters, another for past-client tracking. Each tool charges its own subscription. Data lives in silos. Nothing connects.
+      { title: "Your Tech Stack — What Top LOs Use and Why", duration: "19 min", content: `Most LOs work with mismatched tools that don't talk to each other. They use one system for CRM, another for marketing, another for pre-approval letters, another for past-client tracking. Each tool charges its own subscription. Data lives in silos. Nothing connects. The result: an LO who is "tech-equipped" but spends two hours a day moving information between systems by hand.
 
-The Huit.AI platform was built to solve that. It's a portfolio of integrated AI-powered tools designed specifically for mortgage and real estate professionals — built by people who do this for a living, not by tech teams guessing at what LOs need.
+This lesson is about what a real LO tech stack actually needs to do — not which products to buy. The categories below are the jobs an LO has to get done; the brand names that fill each category change every two years anyway.
 
-**What's in the Platform**
+**The Six Jobs an LO Tech Stack Has to Do**
 
-**CRMEX (CRM Intelligence Platform)** — the mortgage CRM hub. Contact management, pipeline visualization, automated follow-up cadences, behavioral prediction (which past clients are most likely to refer or refi), Realtor partnership tracking. Replaces 4–6 separate tools.
+**1. Contact + relationship management (CRM)** — every borrower, past client, Realtor, and partner in one place. Pipeline visualization. Automated follow-up cadences. Notes on every conversation. Without this, your memory IS your system, and your memory is unreliable past about 50 active relationships.
 
-**APEX Intelligence Engine** — recruiting and competitive intelligence. Patent-pending TLS (Transition Likelihood Score), STDA (Sponsorship Transition Data Analytics), and SCF (Sponsor Compatibility Forecast) algorithms. NMLS-integrated territory scans. Used by managers to identify producing LOs in their geography. Most LOs don't need APEX directly, but if you're recruited by a manager using APEX, you'll know.
+**2. Loan origination + pricing (LOS + PPE)** — your company provides this. Encompass, Empower, Byte, MeridianLink — whatever your shop runs on. Master it. The LO who knows the LOS shortcuts closes loans 20% faster than the LO who fights it.
 
-**AskAlaskaMortgage.ai** — live HMDA market data covering 2017–2024 (7 full years of public mortgage data). Lookup tool that shows lending volume by lender, geography, product, and demographic. Used by LOs and Realtors to identify market opportunities and benchmark performance.
+**3. Document collection + secure transmission** — borrowers send you sensitive financial documents. Your company likely provides a borrower portal. If not, BlueSage, Floify, and similar mortgage-specific tools fill this gap. Email-only document collection is a compliance risk and a customer experience failure.
 
-**ContentLoop** — AI-powered content generation for LOs. Produces market updates, social media posts, borrower education content, and Realtor-facing email drafts. Connects to a brand voice trained on the LO's persona.
+**4. Marketing + content** — newsletters, social posts, market updates, borrower education. The DIY route is Canva + ChatGPT + a mailing-list tool (Mailchimp, Constant Contact, ActiveCampaign). The done-for-you route is mortgage-specific content services that produce branded, compliance-aware drafts. Either works; consistency matters more than polish.
 
-**HyperLoan AI** — autonomous agent platform for advanced LOs. Handles routine borrower communication, document collection prompts, condition-clearing workflows. Six tiers from base to enterprise.
+**5. Past-client monitoring + refi watch** — when rates drop, when home values appreciate enough to drop PMI, when a HELOC opportunity opens. The job is to surface the opportunity automatically and prompt you to call. Some mortgage CRMs do this natively; some specialized tools do it better. Without it, you'll forget about clients who close more than 18 months ago.
 
-**FoundHer Grants** — grants platform serving underrepresented founders. Adjacent to mortgage but useful for LOs who serve borrowers running businesses. 3,200+ grants in the database.
-
-**GOVEX** — government-backed lending intelligence and opportunity matching.
-
-**AutoPilot** — autonomous nightly improvement engine that ships product updates and platform enhancements continuously, so the LO using the platform on Tuesday isn't using the same product they used in January.
+**6. Realtor + partner intelligence** — who's referring you, who used to and stopped, who closed a deal in your zone last month and might be open to a partnership. This is the hardest category to fill — most CRMs handle it weakly. The substitute is a disciplined manual log.
 
 **The Integration Story**
-What makes the platform different is that everything connects. Pull a borrower into CRMEX, and:
-- Their HMDA history (if available) flows in from AskAlaskaMortgage.ai
-- ContentLoop generates a personalized welcome email in your brand voice
-- HyperLoan AI starts a document collection conversation
-- The pipeline view shows the deal alongside your other 25 active files
+
+What separates a good stack from a great one isn't the individual tools — it's whether they talk to each other. Pull a borrower into your CRM, and ideally:
+- Their contact info flows into the LOS automatically
+- Pre-approval triggers a borrower-facing welcome sequence
+- Document requests go out via the secure portal, not over email
+- The pipeline view updates in real time as the loan moves
 - When the loan closes, the post-close cadence triggers automatically
-- 18 months later, the predictive refi engine flags them when rates drop or equity changes
+- 18 months later, the refi-watch system flags them when rates drop or equity changes
 
 Without integration, every step requires manual setup. With integration, the system runs itself. You focus on the relationship.
 
-**Who Gets Access**
-LOs on Derek Huit's team get full platform access at no charge. The platform is the team's competitive moat — it's why production-per-LO on the team runs higher than industry average.
+**The First-Year Tech Reality**
 
-LOs not on the team can subscribe to individual platform tools (CRMEX, ContentLoop, etc.) at retail pricing. Pricing tiers exist from STARTER ($625/mo) up to DOMINATE ($4,125/mo). Most independent LOs start with CRMEX + ContentLoop and add tools as they scale.
+You don't need every category on Day 1. You need:
+- Whatever CRM your company provides (use it, don't fight it)
+- Your LOS account fully set up
+- Pricing engine access
+- AUS access
+- A clean email signature with NMLS, Equal Housing Lender, contact info
+- A pre-approval document template
+- A document collection workflow (could be your LOS portal or a secure platform)
+
+That's it for Month 1. As volume grows, layer in marketing automation (Month 4–6), past-client tracking (Month 6–9), and refi watch (Month 9–12). Don't subscribe to tools you can't use yet.
 
 **The Honest Tradeoff**
-You don't need the Huit.AI platform to be a successful LO. You can build a great career on company-provided tools alone. The platform exists to give an edge — a 20–30% productivity multiplier — to LOs who want to scale beyond what manual systems allow.
 
-If you're closing 1–2 loans a month, you don't need it. If you're closing 5–10, it pays for itself. If you're closing 15+, you'd be cooked without it.
+A loaded tech stack can give an LO a 20–30% productivity edge — at scale. If you're closing 1–2 loans a month, you don't need it; the tools cost more than they save you. If you're closing 5–10, an integrated stack pays for itself. If you're closing 15+, you'd be cooked without it.
 
-**The Recruiting Pitch (Be Honest About It)**
-Derek's team uses the platform to recruit producing LOs. The platform isn't bait — it's a real productivity tool. But the team's value proposition combines: experienced mentorship + the platform + a proven pipeline-building methodology. LOs who join get all three. LOs who don't can still build great careers; they just won't have the same toolkit.
+Match your stack to your volume. Add capability as activity demands it. Don't buy software hoping it will create activity.
 
-If you're considering joining the team after this curriculum, you'll see the platform up close. If you're not, what you're learning here works on any tech stack.
-
-**What to Use If You're NOT on the Platform**
-- CRM: Surefire, BNTouch, Top of Mind, Velocify
-- Content: ContentLoop tier subscription, or Canva + ChatGPT for DIY
+**What to Use If You're Building Independently**
+- CRM: Surefire, BNTouch, Top of Mind, Velocify, or whatever your company supplies
+- Content: Canva + ChatGPT for DIY, or a mortgage-specific content service
 - Document management: your LOS portal, or BlueSage / Floify
 - Marketing automation: Mailchimp, Constant Contact, ActiveCampaign
 - Pricing & AUS: provided by your company
@@ -1892,7 +1893,8 @@ If you're considering joining the team after this curriculum, you'll see the pla
 The principles in this curriculum apply to whatever stack you use. The systems matter more than the brand names.
 
 **The Real Lesson**
-Whatever platform you use, learn it deeply. The LO who masters their CRM closes more loans than the LO who has a fancier CRM and never opens it. Tool mastery beats tool selection.` },
+
+Whatever platform you use, learn it deeply. The LO who masters their CRM closes more loans than the LO who has a fancier CRM and never opens it. Tool mastery beats tool selection. Every time.` },
 
       { title: "Automating Follow-Up Without Losing the Human Touch", duration: "18 min", content: `The mortgage industry is famous for two extremes: LOs who never follow up at all, and LOs who automate every interaction so thoroughly that borrowers feel spammed by a robot. Neither works. The right approach is a system where automation handles the low-value reminders so you can spend your time on the high-value conversations.
 
@@ -2076,7 +2078,7 @@ The early career advantage in mortgage is not market, product, or company. It's 
       { q: "Behavioral prediction tools in a mortgage CRM are used to:", options: ["Set interest rates", "Identify which past clients are most likely to refinance, refer, or buy again based on rate movement and equity changes", "Pull credit without consent", "Automate underwriting"], answer: 1 },
       { q: "Which type of LO interaction should NOT be automated?", options: ["Day-after-close thank-you email", "Initial pre-approval consultation, complex scenario discussions, and conversations during high-stress moments", "Birthday email", "Monthly market newsletter"], answer: 1 },
       { q: "Under TCPA (Telephone Consumer Protection Act), text-message marketing requires:", options: ["No consent at all", "Explicit prior opt-in consent — penalties for unsolicited marketing texts can be substantial per message", "Only company approval", "Consent only for first message"], answer: 1 },
-      { q: "Which Huit.AI product is the primary mortgage CRM in the ecosystem?", options: ["APEX", "CRMEX", "ContentLoop", "FoundHer Grants"], answer: 1 },
+      { q: "What's the most important thing about an LO's CRM?", options: ["The brand name on the dashboard", "The depth of mastery — using it daily, with discipline", "How many features it has", "Whether it integrates with social media"], answer: 1 },
       { q: "A daily 'morning pipeline review' should focus on:", options: ["Reading industry news", "Reviewing every active deal, identifying the next action and owner, and writing the 3-5 must-do items for today", "Checking email", "Updating your social media"], answer: 1 },
       { q: "The recommended target for outbound human touches per day for a producing LO is approximately:", options: ["1-3", "5-8", "20+", "100+"], answer: 2 },
       { q: "Most LOs find that the highest-yield time of day for outbound calls and texts is:", options: ["Late evening", "Mornings — calls and texts get more responses then than any other time of day", "Lunch break", "Late night"], answer: 1 },
@@ -3233,7 +3235,7 @@ That last one — the year-end equity statement — is one of the highest-conver
 
 **Automating Without Losing the Human Touch**
 
-The 30-60-90 can absolutely be automated through a CRM. CRMEX is built specifically for mortgage post-close cadences and can trigger the touchpoints automatically. But understand what should and shouldn't be automated:
+The 30-60-90 can absolutely be automated through a CRM. Most mortgage-specific CRMs are built for post-close cadences and can trigger the touchpoints automatically. But understand what should and shouldn't be automated:
 
 - **Automate**: scheduling reminders, drafting the templates, queueing the year-end equity statement.
 - **Do not automate**: the 30-day call (it must be voice), the handwritten card (it must be handwritten), the personalization in any individual message.
@@ -3523,9 +3525,9 @@ When you spot one, reach out personally. Not with a refi pitch. With a check-in.
 
 That's the right touch. The refi conversation, if appropriate, comes later in the conversation if they raise it.
 
-**Tools That Help (And the Huit.AI Advantage)**
+**Tools That Help (And the Systems Approach)**
 
-Tracking 200+ past clients manually for three triggers across multiple data points is past the limit of what most LOs can do without a system. The Huit.AI platform has a feature specifically built for this — PredictiveRefiEngine — which monitors your past client data and surfaces refi opportunities automatically based on rate movement, equity changes, and integrated public-record data. CRMEX manages the touchpoint cadence around it.
+Tracking 200+ past clients manually for three triggers across multiple data points is past the limit of what most LOs can do without a system. Mortgage-specific CRMs and refi-monitoring services exist for this reason — they monitor your past client data and surface refi opportunities automatically based on rate movement, equity changes, and integrated public-record data. Whatever tool you use, the job is the same: turn manual watching into automatic flagging, then handle the touchpoint cadence around it.
 
 You don't need that platform to do this work; a disciplined LO with a spreadsheet and a weekly review can absolutely run predictive refi manually. But beyond about 100 past clients, manual tracking starts breaking down, and the deals you miss become significant.
 
@@ -3555,13 +3557,13 @@ By year 5, predictive refi alone is producing 8-15 closed loans per year for a d
       { q: "The break-even formula on a refinance is:", options: ["Total loan amount ÷ new rate", "Total closing costs ÷ monthly payment savings — yielding the months until the refi pays for itself", "Old rate minus new rate", "Origination fee × 12"], answer: 1 },
       { q: "Which of the following is a refi trigger most LOs MISS?", options: ["Rate drops", "Equity position changes (LTV crossing PMI removal threshold, FHA-to-Conv eligibility, cash-out availability) discovered through quarterly LTV recalculation", "Borrower asks", "Their loan goes into delinquency"], answer: 1 },
       { q: "When rates drop, the LO who wins the refi is the one who:", options: ["Has the lowest rate", "Calls past clients first within 24 hours with their specific numbers, before competing LOs cold-call them", "Sends the longest email", "Posts the best social content"], answer: 1 },
-      { q: "PredictiveRefiEngine in the Huit.AI platform:", options: ["Originates refinance loans automatically", "Monitors past client data, rate movement, and equity changes to surface refi opportunities automatically before competitors reach the borrower", "Replaces the LO's role in refi conversations", "Pulls credit without borrower consent"], answer: 1 },
+      { q: "An automated refi-watch system in your CRM should:", options: ["Originate refinance loans automatically without LO involvement", "Monitor past client data, rate movement, and equity changes to surface refi opportunities automatically before competitors reach the borrower", "Replace the LO's role in refi conversations", "Pull credit without borrower consent"], answer: 1 },
     ],
   },
   {
     id: 12,
     title: "Building a $1M/Year Mortgage Business",
-    subtitle: "The math, the mindset, and the Huit.AI advantage",
+    subtitle: "The math, the mindset, and the systems advantage",
     duration: "100 min",
     badge: "Module 12",
     badgeColor: "#F5A623",
@@ -3645,7 +3647,7 @@ Here's what's freeing about running these numbers: $1M in commission income is n
 The LOs who hit $1M consistently are not smarter. They are more disciplined. They run the math weekly, they track their pipeline, they protect their database, they build relationships that compound, and they don't quit when one year is slow.
 
 Your job in your first three years is not to hit $1M. Your job is to build the systems that produce $1M in years 4-7. If you do that work now, the income shows up later, exactly as the math predicts.` },
-      { title: "The Huit.AI Platform Advantage — What Top LOs Use", duration: "25 min", content: `The single biggest leverage point for an LO trying to scale is the technology they use to run their business. The Huit.AI platform was built specifically because most LO software is built for someone else: the company, the back office, the compliance team. The platform exists to give the loan officer the same tools that, until now, only large institutions could afford. This lesson covers what's in the platform, what each component does, and how it changes the math from the prior lesson.
+      { title: "Your Tech Stack Advantage — What Top LOs Use", duration: "25 min", content: `The single biggest leverage point for an LO trying to scale is the systems they use to run their business. Most LO software is built for someone else: the company, the back office, the compliance team. The LOs who break $1M build (or buy into) a stack that's built for their job — managing 500+ relationships at the touch quality of someone working 100. This lesson covers the categories of tools that produce that result, why each matters, and how the stack changes the math from the prior lesson.
 
 **The Problem With Standard LO Tooling**
 
@@ -3658,99 +3660,91 @@ Most LOs at most companies use a stack that looks like this:
 - Various paid lead sources
 
 This stack has fundamental gaps:
-- **Past client tracking** is fragile (a spreadsheet doesn't surface refi opportunities)
+- **Past client tracking** is fragile — a spreadsheet doesn't surface refi opportunities
 - **Referral partner relationship management** is manual or nonexistent
-- **Recruiting intelligence** doesn't exist
+- **Recruiting and territory intelligence** doesn't exist
 - **Predictive analytics** for refis or product fit doesn't exist
 - **Automated content generation** that's compliant doesn't exist
 - **Cross-product intelligence** — knowing how your activity feeds into pipeline — is hidden in spreadsheets
 
-The Huit.AI platform fills all of this. Each component is designed for a specific job an LO actually does.
+Top producers fill these gaps. Here are the categories that matter, and what to look for in each.
 
-**CRMEX — The LO Operating System**
+**1. The CRM (your operating system)**
 
-CRMEX is the central nervous system. It tracks:
-- Every borrower from lead to closing to post-close (5+ year horizon)
+Your CRM has to track:
+- Every borrower from lead to closing to post-close (a 5+ year horizon)
 - Every Realtor and partner relationship with last-touch dates and historical referrals
 - Every lead source with conversion rates so you know what's actually working
 - Every touchpoint scheduled, completed, and missed
 - Pipeline economics — what stage each loan is in and the projected close timing
 
-CRMEX is mortgage-specific. Generic CRMs (HubSpot, Salesforce) require massive customization to track mortgage workflows. CRMEX comes with the mortgage-specific objects, fields, and reports out of the box. For an LO, this means starting from running on day one rather than building a system for 6 months.
+A mortgage-specific CRM is preferable. Generic CRMs (HubSpot, Salesforce) require massive customization to track mortgage workflows. A mortgage-specific CRM comes with the right objects, fields, and reports out of the box. For an LO, that means starting from running on day one rather than building a system for 6 months. Look at Surefire, Velocify, BNTouch, Top of Mind, or whatever your company has standardized on.
 
-CRMEX is the internal CRM for LOs at Huit.AI. We do not recommend external alternatives.
+**2. Recruiting + territory intelligence**
 
-**APEX — Recruiting Intelligence**
+For an LO building a team or evaluating a market, NMLS-integrated territory intelligence tools surface other LOs in your geography by production volume, license states, and historical patterns. They predict who's transition-ready and reveal which Realtors and brokerages are underserved. Even a solo LO not yet recruiting gets value: knowing the competitive landscape changes how you target partners and explain your differentiation.
 
-APEX is the platform's recruiting and territory intelligence engine. For an LO building a team or evaluating a market, APEX uses NMLS-integrated data with patent-pending TLS (Territory-Loan-Score), STDA, and SCF algorithms to:
-- Surface other LOs in your geography by production volume, license states, and historical patterns
-- Predict which LOs are most likely transition-ready
-- Score territory penetration and competitive landscape
-- Generate recruiting outreach intelligence
+**3. Autonomous loan workflow**
 
-For a solo LO not yet recruiting, APEX still produces value: it shows you the competitive landscape of your market, identifies gaps in coverage, and reveals which Realtors and brokerages are underserved.
-
-**HyperLoan AI — Autonomous Loan Workflow**
-
-HyperLoan AI is the autonomous workflow engine. For an LO, the most relevant components:
-- Initial document collection automation (the system requests, organizes, and tracks initial conditions while you focus on borrower conversation)
+Workflow automation tools handle:
+- Initial document collection (the system requests, organizes, and tracks initial conditions while you focus on borrower conversation)
 - Real-time loan status communication to borrowers and Realtors (cuts down "what's the update" calls dramatically)
-- Pull-through prediction (predicts which active loans are at risk based on real signals so you can intervene)
-- Autonomous condition tracking (flags conditions that have been outstanding longer than expected so they don't fall through the cracks)
+- Pull-through prediction (flags active loans at risk based on real signals so you can intervene)
+- Autonomous condition tracking (flags conditions outstanding longer than expected)
 
-HyperLoan AI is what reduces the time you spend per loan from 25-30 hours to 12-18 hours, freeing you to take on more applications without breaking.
+Done right, this reduces the time you spend per loan from 25-30 hours to 12-18 hours, freeing you to take on more applications without breaking.
 
-**ContentLoop — AI Content Generation**
+**4. Compliant content generation**
 
-ContentLoop generates compliant LO content at scale. It produces:
+A content engine produces:
 - Social media posts with required disclosures pre-included
 - Borrower educational content tailored to specific scenarios
 - Realtor-facing market update emails
 - Year-end equity statements for past clients
 - Listing presentations and co-marketing materials
 
-The content generated through ContentLoop is built with mortgage compliance baked in (NMLS, EHL, triggering term handling), but you should always run anything you publish through your own company's compliance review. ContentLoop drafts; humans approve.
+Whatever tool you use — purpose-built mortgage content services or DIY with ChatGPT and a compliance review — the content has to be compliance-aware (NMLS, EHL, triggering term handling). Drafts get generated; humans approve.
 
-**AskAlaskaMortgage.ai-Style Live Market Data**
+**5. Live market data**
 
-For LOs serving any of the 9 licensed states (AK, GA, IL, IN, MI, MT, OK, TX, WA), the platform integrates HMDA data spanning 2017-2024 (7 years). This produces real, citable market intelligence — actual lender-by-lender approval rates, average rates, denial reasons, demographic patterns. When you walk into a Realtor meeting with real HMDA-derived data instead of generic talking points, the conversation changes.
+For LOs serving any geography, integrated HMDA data (the public mortgage data the federal government publishes annually) gives real, citable market intelligence — actual lender-by-lender approval rates, average rates, denial reasons, demographic patterns. When you walk into a Realtor meeting with real HMDA-derived data instead of generic talking points, the conversation changes. Tools exist that surface this; you can also pull HMDA directly from the CFPB and analyze it yourself.
 
-**FoundHerGrants and Niche Tools**
+**6. Niche-program awareness**
 
-For LOs specializing in any underserved buyer demographic, FoundHerGrants (3,200+ tracked grants) gives access to grant programs that competitor LOs don't know exist. Even if you don't specialize in this niche, knowing the platform has it changes how you handle a borrower with a tight down-payment situation — there's likely a grant for them.
+For LOs specializing in any underserved buyer demographic, knowing the grant programs, down-payment-assistance programs, and niche product programs that competitor LOs don't know exist is real leverage. There are 3,200+ tracked grants in the U.S. alone. Whether you use a service or build your own database, this knowledge changes how you handle a borrower with a tight down-payment situation.
 
-**The AutoPilot Engine**
+**7. The autonomous improvement layer**
 
-AutoPilot is the autonomous improvement engine that runs across the entire ecosystem nightly, identifying issues, opportunities, and optimizations in your business. For an LO, this surfaces things like:
-- Past clients you haven't touched in over 90 days
+The best stacks include something that runs across the whole system nightly, surfacing things like:
+- Past clients you haven't touched in 90+ days
 - Refi candidates you haven't reached out to
 - Realtor relationships at risk of going cold
 - Pipeline loans that are running unusually slowly
 
-AutoPilot is what catches the things you would otherwise miss because you're busy working on what's in front of you.
+This is what catches the things you would otherwise miss because you're busy working on what's in front of you.
 
 **What This Stack Enables**
 
-Pulling together everything above: an LO running on the Huit.AI platform can manage 500+ active relationships at the touch quality of a top producer working a 100-relationship book. The platform isn't replacing the relationship work — it's making sure the work scales without the cracks where deals fall through.
+Pulling together everything above: an LO running a connected stack like this can manage 500+ active relationships at the touch quality of a top producer working a 100-relationship book. The stack doesn't replace the relationship work — it makes sure the work scales without the cracks where deals fall through.
 
-In practical terms, a year-3 LO using this stack consistently can produce at the level of a year-7 LO using standard tooling. That difference, applied over a career, is the difference between a $400K and a $1.2M practice.
+In practical terms, a year-3 LO using this kind of stack consistently can produce at the level of a year-7 LO using standard tooling. That difference, applied over a career, is the difference between a $400K and a $1.2M practice.
 
 **What Top LOs Actually Use**
 
-When we look at the top producers across our LO network, the consistent stack is:
-- CRMEX as primary CRM (always)
-- HyperLoan AI for active loan workflow
-- ContentLoop for weekly social and email
-- APEX for territory intelligence (especially when expanding markets)
-- AutoPilot watching everything
+When we look at the top producers across the industry, the consistent pattern is the same regardless of brand names:
+- A mortgage-specific CRM as the primary system
+- Workflow automation for active loan operations
+- A content engine running weekly social and email
+- Territory intelligence (especially when expanding markets)
+- An always-on layer watching for missed opportunities
 
-The non-top producers we onboard usually arrive with: 4-6 disconnected tools, manual spreadsheets, no past-client system, no recruiting intelligence, and no content engine. The first 90 days of platform onboarding for them is mostly about consolidating onto a single connected system. The production change in the following 12 months is consistently in the 30-60% range.
+The non-top producers usually have: 4-6 disconnected tools, manual spreadsheets, no past-client system, no recruiting intelligence, and no content engine. The biggest production change in their first 12 months of consolidating onto a connected system is consistently in the 30-60% range.
 
 **For New LOs**
 
-If you're new and joining Derek Huit's mortgage team, the platform is part of what you're getting access to from day one. You don't need to build any of this yourself. Your job is to learn the workflows, plug into the systems, and let them compound your activity. Every relationship you log goes into the engine that will, three years from now, surface refi opportunities, referral asks, and partner moments you would have missed completely without it.
+If you're new, focus on mastering whatever your company provides first. Don't try to assemble the full stack on Day 1 — you don't have the volume to justify it, and the time you'd spend setting it up is time better spent calling Realtors. Layer in capability as your activity demands it. By Year 2-3, when your relationships hit 200+ and your pipeline runs 15+ active loans, the connected stack becomes the unfair advantage.
 
-The platform is the unfair advantage. Use it deliberately.` },
+The systems are the unfair advantage. Use them deliberately.` },
       { title: "Building Your Personal Brand at Scale", duration: "25 min", content: `Personal brand isn't a logo, a color scheme, or a tagline. It's the answer to the question "what is this LO known for?" If borrowers and Realtors can't answer that in one sentence, you don't have a personal brand. You have a name. The LOs who build personal brands at scale don't dominate by spending more on marketing — they dominate by being so consistently associated with one specific thing that their market thinks of them first whenever that thing comes up.
 
 **What "Personal Brand" Actually Means**
@@ -3813,7 +3807,7 @@ The repeating channels:
 
 2. **Realtor and partner conversations** — Every conversation with a Realtor reinforces or dilutes your brand. If you say "I do everything for everyone," you're forgettable. If you say "I specialize in first-time buyers, but I can handle most things if you need it," you're memorable.
 
-3. **Content drops with substance** — Monthly market reports, quarterly product deep-dives, guides for borrowers, scenario walkthroughs. ContentLoop on the Huit.AI platform can draft these; you finalize and personalize. The point is to be the LO who produces real intellectual property in your niche.
+3. **Content drops with substance** — Monthly market reports, quarterly product deep-dives, guides for borrowers, scenario walkthroughs. AI tools can draft these (ChatGPT, Claude, or mortgage-specific content services); you finalize and personalize. The point is to be the LO who produces real intellectual property in your niche.
 
 4. **Speaking and presenting** — At Realtor offices, professional groups, employer brown-bags, niche-specific events. 30 minutes of presentation in front of 20 right people beats 5,000 social impressions.
 
@@ -3963,9 +3957,9 @@ You finished the curriculum. Most don't. The fact that you got to this lesson me
       { q: "At a $400K average loan size, $100M in funded volume requires approximately how many closed loans per year?", options: ["50", "100", "150", "250"], answer: 3 },
       { q: "If a LO needs 21 closed loans per month and runs a 70% application-to-close pull-through, applications per month must be approximately:", options: ["10", "15", "30", "60"], answer: 2 },
       { q: "Most new LOs who reach $1M/year commission do so:", options: ["In year 1", "In year 2", "In years 5-7 typically (sometimes faster if they bring an existing network)", "Only with paid leads"], answer: 2 },
-      { q: "The internal CRM recommended in this curriculum for LOs is:", options: ["GoHighLevel", "Salesforce", "CRMEX (the internal Huit.AI mortgage CRM)", "HubSpot"], answer: 2 },
-      { q: "PredictiveRefiEngine and APEX in the Huit.AI platform are designed to:", options: ["Originate loans automatically without LO involvement", "Surface refi opportunities and recruiting/territory intelligence the LO would otherwise miss", "Replace the LO's role entirely", "Compete with the GSEs"], answer: 1 },
-      { q: "The HMDA data integrated into the Huit.AI platform spans:", options: ["The current calendar year only", "2017-2024 (7 years) for the 9 licensed states (AK, GA, IL, IN, MI, MT, OK, TX, WA)", "Only Alaska", "1990-present"], answer: 1 },
+      { q: "The most important thing about an LO's CRM at Year 3 and beyond is:", options: ["The brand name on the dashboard", "Whether it's mortgage-specific and used with daily discipline", "How many features it has", "Whether it integrates with social media"], answer: 1 },
+      { q: "An automated refi-watch + territory-intelligence tech stack is designed to:", options: ["Originate loans automatically without LO involvement", "Surface refi opportunities and competitive/territory intelligence the LO would otherwise miss", "Replace the LO's role entirely", "Compete with the GSEs"], answer: 1 },
+      { q: "HMDA (Home Mortgage Disclosure Act) data is:", options: ["Available only to large banks", "Public mortgage data published annually by the federal government, citable as real market intelligence in Realtor and borrower conversations", "Only available for the current calendar year", "Restricted by the CFPB to industry insiders"], answer: 1 },
       { q: "A strong personal brand for an LO is best characterized as:", options: ["Having the lowest rate in the market", "Being so consistently associated with one specific niche or differentiator that the market thinks of you first when that comes up", "Having the most followers on social media", "Being known by everyone for everything"], answer: 1 },
       { q: "Among the three brand positions (niche expert / process differentiator / thought leadership), the one specifically NOT recommended is:", options: ["Niche product or borrower expertise", "Process or experience differentiation", "Thought leadership through content", "Lowest-rate brand — someone is always cheaper, and rate-based brands are unsustainable"], answer: 3 },
       { q: "If you ask 10 people in the industry 'what is [your name] known for?' and get 10 different vague answers, this means:", options: ["You have a strong, complex brand", "You don't have a brand yet — you have a name without associations", "Your brand is too narrow", "You should change your name"], answer: 1 },

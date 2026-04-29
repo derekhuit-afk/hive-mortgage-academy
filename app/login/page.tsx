@@ -57,7 +57,7 @@ export default function LoginPage() {
             <a href="/enroll" style={{ fontSize:13, color:"var(--honey)", fontWeight:600, textDecoration:"none" }}>Enroll Now →</a>
           </div>
         </div>
-        <div style={{ textAlign:"center", marginTop:20 }}><span style={{ fontSize:11, color:"var(--text-muted)" }}>Powered by ⬡ Huit.AI</span></div>
+        <div style={{ textAlign:"center", marginTop:20 }}><span style={{ fontSize:11, color:"var(--text-muted)" }}>Hive Mortgage Academy · Free LO training</span></div>
       </div>
     </main>
   );

@@ -180,7 +180,7 @@ export default function QuizPage() {
                   Most new LOs never get here. You've covered the full foundation — product knowledge, borrower conversations, PaymentFirst, and credit. That puts you ahead of 90% of the people who started where you did.
                 </p>
                 <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7, marginBottom: 20 }}>
-                  For the first time, there's now a path available to you — the option to apply to Derek Huit's mortgage team. LOs on this team get the full Huit.AI platform from Day 1. No ramp-up guessing. No figuring it out alone.
+                  For the first time, there&apos;s now a path available to you — the option to apply to Derek Huit&apos;s mortgage team. LOs on this team get senior mentorship, a structured ramp, and the playbook handed to them. No ramp-up guessing. No figuring it out alone.
                 </p>
                 <p style={{ fontSize: 13, color: "var(--text-muted)", lineHeight: 1.7, marginBottom: 20 }}>
                   There's no pressure and no deadline. Keep going through the curriculum. But if you're ready to have the conversation, the door is open.

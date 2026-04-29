@@ -265,7 +265,7 @@ export default function LaunchKitPage() {
                 <div style={{ marginTop: 20, background: "rgba(245,166,35,0.05)", border: "1px solid rgba(245,166,35,0.2)", borderRadius: 14, padding: "18px 22px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
                   <div>
                     <div style={{ fontSize: 13, fontWeight: 700, color: "var(--honey)", marginBottom: 3 }}>Ready to execute this plan on Derek's team?</div>
-                    <div style={{ fontSize: 12, color: "var(--text-secondary)" }}>Join and get the full Huit.AI platform behind your 90-day launch.</div>
+                    <div style={{ fontSize: 12, color: "var(--text-secondary)" }}>Join and get senior mentorship behind your 90-day launch.</div>
                   </div>
 
                 </div>
