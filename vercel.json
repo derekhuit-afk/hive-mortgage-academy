@@ -1,8 +1,5 @@
 {
-  "headers": [
-    { "source": "/(.*)", "headers": [
-      { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" },
-      { "key": "Cache-Control", "value": "no-store, max-age=0" }
-    ]}
-  ]
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next"
 }
