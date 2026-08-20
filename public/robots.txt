@@ -1,5 +1,2 @@
 User-agent: *
-Allow: /
-Disallow: /dashboard/
-Disallow: /api/
-Sitemap: https://hivemortgageacademy.com/sitemap.xml
+Disallow: /
