@@ -317,7 +317,7 @@ export default function Home() {
             <span className="text-slate-400 text-sm">Hive Mortgage Academy</span>
           </div>
           <div className="text-slate-500 text-xs text-center">
-            Derek Huit · NMLS #203980 · Cardinal Financial Company, LP · NMLS #66247 · Equal Housing Lender
+            Hive Mortgage Academy is an educational product of Huitai LLC. Educational content only — not a loan solicitation, offer to lend, or credit advice. Not affiliated with or endorsed by any lender, employer, or regulatory body. Verify all guidelines against current agency and investor requirements before applying them to a live file.
           </div>
           <div className="flex items-center gap-4 text-slate-500 text-xs">
             <Link href="/dashboard" className="hover:text-slate-300 transition-colors">Modules</Link>
